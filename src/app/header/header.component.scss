@@ -7,25 +7,30 @@
     left: 0px;
     top: 0px;
     background-color: #bba3a2;
+    
+    ul {
+        list-style: none;
+        position: static;
+        left: 0px;
+        top: 0px;
+        margin: 0px;
+        padding: 0px;
+        margin-right: 10px;
+        
+        #logo {
+            padding-left: 20px;
+            padding-right: 80px;
+        
+        }
+        
+        li {
+            display: inline-block;
+            font-size: 20px;
+            margin: 1px;
+            padding: 0px 40px 0px 0px;
+        }
+    }
+
 }
 
-#nav-bar ul {
-    list-style: none;
-    position: static;
-    left: 0px;
-    top: 0px;
-    margin: 0px;
-    padding: 0px;
-}
 
-#logo {
-    padding-left: 20px;
-    padding-right: 40px;
-
-}
-
-#nav-bar li {
-    display: inline-block;
-    font-size: 20px;
-    margin: 1px;
-}
