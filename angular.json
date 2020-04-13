@@ -124,5 +124,10 @@
   "defaultProject": "bookstoreProject",
   "cli": {
     "analytics": "be139338-86d7-4016-b2a5-d8075e00a0c5"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
   }
 }

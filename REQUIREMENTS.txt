@@ -5,7 +5,10 @@ Different roles in the website:
 	- Admin
 
 Basic features:
-	- Should be able to search products by 
+	- Should be able to search products by Title or other available details.
+	- Should have a wishlist.
+	- Should be able to update account information.
+
 Purchasing books:
 	- Should be able to do CRUD methods in the cart.
 	- Should be able to input payment methods.
