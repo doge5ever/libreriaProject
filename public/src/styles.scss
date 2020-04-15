@@ -13,3 +13,32 @@ body {
     margin: 0px;
     padding: 0px;
 }
+
+#breadcrumbs {
+    margin: 30px auto 10px 30px;
+    font-size: 15px;
+}
+
+.main-divider {
+    margin: 50px 80px 20px 80px;
+    border-top: 1pt solid lightgray;
+  }
+
+.centering {
+    text-align: center;
+}
+
+table.display {
+  border-collapse: collapse;
+  width: 100%;
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+}

@@ -1,14 +1,196 @@
+<div class="main-divider"></div>
 <div id="grid">
-  <div id="result">
+  <div id="filter">
+    <form #filterForm="ngForm" (ngSubmit)="onClickSubmit(filterForm.value)">
+      <p>Filter by:</p>
+      <div id="Tag">
+        <p>Tag</p>
+        <select name="tag" ngModel>
+          <option selected>Tag</option>
+          <option>Tag 1</option>
+          <option>Tag 2</option>
+          <option>Tag 3</option>
+        </select>
+      </div>
+      <div id="rating">
+        <p>Rating:</p>
+        <tr>
+          <td><input type="radio" name="rating" value="5" ngModel></td>
+          <td><img src="../../assets/icons/five_star.png"><span> & up</span></td>
+        </tr>
+        <tr>
+          <td><input type="radio" name="rating" value="4" ngModel></td>
+          <td><img src="../../assets/icons/four_star.png"><span> & up</span></td>
+        </tr>
+        <tr>
+          <td><input type="radio" name="rating" value="3" ngModel></td>
+          <td><img src="../../assets/icons/three_star.png"><span> & up</span></td>
+        </tr>
+        <tr>
+          <td><input type="radio" name="rating" value="2" ngModel></td>
+          <td><img src="../../assets/icons/two_star.png"><span> & up</span></td>
+        </tr>
+        <tr>
+          <td><input type="radio" name="rating" value="1" ngModel></td>
+          <td><img src="../../assets/icons/one_star.png"><span> & up</span></td>
+        </tr>
+      </div>
+      <div id="price">
+        <p>Price:</p>
+        <tr>
+          <td>
+            <input type="radio" name="price" value="greaterThan" (click)="clearField('greaterThan')" ngModel>
+          </td>
+          <td>
+            Greater than <input type="text" name="greaterThanValue"  [(ngModel)]="greaterThanValue" ngModel>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="radio" name="price" value="lessThan" (click)="clearField('lessThan')" ngModel>
+          </td>
+          <td>
+            Less than <input type="text" name="lessThanValue" [(ngModel)]="lessThanValue" ngModel>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="radio" name="price" value="inBetween" (click)="clearField('inBetween')" ngModel>
+          </td>
+          <td>
+            In Between <input type="text" name="inBetweenValue1" [(ngModel)]="inBetweenValue1" ngModel> & <input type="text" name="inBetweenValue2" [(ngModel)]="inBetweenValue2" ngModel>
+          </td>
+        </tr>
+      </div>
+      <input type="submit" value="Filter Results">
+    </form>
+  </div>
+  <div id="content">
     <span id="keywords-display">
-      Displaying the results for "{{keywords}}".
+      Displaying the results for <b>"{{keywords}}"</b>.
     </span>
     <p id="matches">Found x matches.</p>
-  </div>
-  <div id="filter">
-  This is the filter div.
-  </div>
-  <div id="search-results">
-  This is the search div.
+    <div id="result">
+      <div class="item">
+        <div class="container-img">
+          <a routerLink="/book/1"><img src="../../assets/mock_items/1.jpg"></a>
+        </div>
+        <div class="container-text">
+          <a routerLink=""><p class="title">This Is The Title</p></a>
+          <img class="rating" src="../../assets/icons/five_star.png">
+          <p class="price">{{99.99 | currency}}</p>
+          <p class="availability">In stock (99 available)</p>
+          <input class="cart" type="button" value="Add to Cart">
+        </div>  
+      </div>
+      <div class="item">
+        <div class="container-img">
+          <a routerLink=""><img src="../../assets/mock_items/2.jpg"></a>
+        </div>
+        <div class="container-text">
+          <a routerLink=""><p class="title">This Is The Title</p></a>
+          <img class="rating" src="../../assets/icons/five_star.png">
+          <p class="price">{{99.99 | currency}}</p>
+          <p class="availability">In stock (99 available)</p>
+          <input class="cart" type="button" value="Add to Cart">
+        </div>  
+      </div>
+      <div class="item">
+        <div class="container-img">
+          <a routerLink=""><img src="../../assets/mock_items/3.jpg"></a>
+        </div>
+        <div class="container-text">
+          <a routerLink=""><p class="title">This Is The Title</p></a>
+          <img class="rating" src="../../assets/icons/five_star.png">
+          <p class="price">{{99.99 | currency}}</p>
+          <p class="availability">In stock (99 available)</p>
+          <input class="cart" type="button" value="Add to Cart">
+        </div>  
+      </div>
+      <div class="item">
+        <div class="container-img">
+          <a routerLink=""><img src="../../assets/mock_items/4.jpg"></a>
+        </div>
+        <div class="container-text">
+          <a routerLink=""><p class="title">This Is The Title</p></a>
+          <img class="rating" src="../../assets/icons/five_star.png">
+          <p class="price">{{99.99 | currency}}</p>
+          <p class="availability">In stock (99 available)</p>
+          <input class="cart" type="button" value="Add to Cart">
+        </div>  
+      </div>
+      <div class="item">
+        <div class="container-img">
+          <a routerLink=""><img src="../../assets/mock_items/5.jpg"></a>
+        </div>
+        <div class="container-text">
+          <a routerLink=""><p class="title">This Is The Title</p></a>
+          <img class="rating" src="../../assets/icons/five_star.png">
+          <p class="price">{{99.99 | currency}}</p>
+          <p class="availability">In stock (99 available)</p>
+          <input class="cart" type="button" value="Add to Cart">
+        </div>  
+      </div>
+      <!-- <div class="item">
+        <div class="container-img">
+          <a routerLink=""><img src="../../assets/mock_items/6.jpg"></a>
+        </div>
+        <div class="container-text">
+          <a routerLink=""><p class="title">This Is The Title</p></a>
+          <img class="rating" src="../../assets/icons/five_star.png">
+          <p class="price">{{99.99 | currency}}</p>
+          <p class="availability">In stock (99 available)</p>
+          <input class="cart" type="button" value="Add to Cart">
+        </div>  
+      </div>
+      <div class="item">
+        <div class="container-img">
+          <a routerLink=""><img src="../../assets/mock_items/7.jpg"></a>
+        </div>
+        <div class="container-text">
+          <a routerLink=""><p class="title">This Is The Title</p></a>
+          <img class="rating" src="../../assets/icons/five_star.png">
+          <p class="price">{{99.99 | currency}}</p>
+          <p class="availability">In stock (99 available)</p>
+          <input class="cart" type="button" value="Add to Cart">
+        </div>  
+      </div>
+      <div class="item">
+        <div class="container-img">
+          <a routerLink=""><img src="../../assets/mock_items/8.jpg"></a>
+        </div>
+        <div class="container-text">
+          <a routerLink=""><p class="title">This Is The Title</p></a>
+          <img class="rating" src="../../assets/icons/five_star.png">
+          <p class="price">{{99.99 | currency}}</p>
+          <p class="availability">In stock (99 available)</p>
+          <input class="cart" type="button" value="Add to Cart">
+        </div>  
+      </div>
+      <div class="item">
+        <div class="container-img">
+          <a routerLink=""><img src="../../assets/mock_items/9.jpg"></a>
+        </div>
+        <div class="container-text">
+          <a routerLink=""><p class="title">This Is The Title</p></a>
+          <img class="rating" src="../../assets/icons/five_star.png">
+          <p class="price">{{99.99 | currency}}</p>
+          <p class="availability">In stock (99 available)</p>
+          <input class="cart" type="button" value="Add to Cart">
+        </div>  
+      </div>
+      <div class="item">
+        <div class="container-img">
+          <a routerLink=""><img src="../../assets/mock_items/10.jpg"></a>
+        </div>
+        <div class="container-text">
+          <a routerLink=""><p class="title">This Is The Title</p></a>
+          <img class="rating" src="../../assets/icons/five_star.png">
+          <p class="price">{{99.99 | currency}}</p>
+          <p class="availability">In stock (99 available)</p>
+          <input class="cart" type="button" value="Add to Cart">
+        </div>  
+      </div> -->
+    </div>
   </div>
 </div>

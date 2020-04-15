@@ -8,14 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  keywords;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
   onClickSubmit = (form) => {
-    this.keywords = form.keywords
-    this.router.navigate(['/search'], {queryParams: {keywords: this.keywords}});
+    this.router.navigate(['/search', form.keywords]);
   }
 }

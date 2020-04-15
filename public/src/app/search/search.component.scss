@@ -1,0 +1,123 @@
+#content {
+  padding: 20px 20px 0px 20px;
+
+  #keywords-display {
+    font-size: 22px;
+  }
+
+  #matches {
+    margin-top: 6px;
+    margin-bottom: 40px;
+  }
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: 300px auto;
+  align-items: flex-start;
+
+  #filter {
+    padding: 20px 20px 20px 15px;
+    background: lightgray;
+    margin: 10px 20px 40px 0px;
+    box-shadow: 1pt 1pt  rgba(0,0,0,0.5);
+    
+    form {
+      > p {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 22px;
+      }
+      
+      select {
+        margin-left: 12px;
+        padding: 2px 5px;
+        width: 120px;
+      }
+
+      div {
+        p {
+          margin-top: 16px;
+          margin-bottom: 16px;
+        }
+
+        tr td {
+          input {
+            width: 15px;
+            height: 15px;
+          }
+
+          img {
+            height: 15px;
+          }
+
+          input {          
+            &[type="radio"] {
+              margin: 0px 12px;
+            }
+
+            &[type="text"] {
+              width: 40px;
+            }
+          }
+        }
+      }
+    
+    input[type="submit"] {
+      margin-top: 20px;
+      font-size: 15px;
+    }
+    } 
+  }
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 150px auto;
+  padding-bottom: 15px;
+  margin-right: 140px;
+  margin-bottom: 40px;
+  border-bottom: 1pt solid lightgray;
+  justify-items: flex-start;
+
+  .container-img {
+    width: 150px;
+    text-align: center;
+    a img {
+      height: 200px;  
+    }
+  }
+
+  .container-text {
+    margin-left: 10px;
+    
+    .title {
+      font-size: 25px;
+      margin: 10px 0px 10px 0px;
+    }
+
+    .rating {
+      height: 25px;
+    }
+    
+    .price {
+      font-size: 20px;
+      margin: 0px;
+    }
+
+    .availability {
+      font-size: 15px;
+      margin: 25px 0px 0px 0px;
+    }
+
+    .cart {
+      margin-top: 8px;
+      height: 35px;
+      background-color: gold;
+      border-style: none;
+      border-radius: 3px;
+      font-size: 18px;
+      box-shadow: 1pt 1pt rgba(0,0,0,0.5);
+    }
+  }
+}

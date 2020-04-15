@@ -1,0 +1,72 @@
+#container-head {
+  display: grid;
+  grid-template-columns: 300px 500px;
+  margin: 20px auto;
+  width: 800px;
+  #container-img {
+    width: 300px;
+    text-align: center;
+    
+    #book-cover {
+      height: 400px;
+    }
+  }
+  #container-text {
+    text-align: left;
+    margin-left: 25px;
+    #title {
+      margin: 10px 0px 15px 0px;
+      font-size: 40px;
+    }
+  }
+}
+
+.section {
+  padding: 0px 100px;
+  width: 600px;
+  margin: 80px auto;
+
+  .sub-header {
+    overflow: hidden;
+    text-align: left;
+
+
+    &:before {
+      right: 0.5em;
+      margin-left: -50%;
+
+      background-color: rgba(0,0,0,0.5);
+      content: "";
+      display: inline-block;
+      height: 1px;
+      position: relative;
+      vertical-align: middle;
+      width: 50%;
+    }
+    
+    &:after {
+      left: 0.5em;
+      margin-right: -50%;
+      
+      background-color: rgba(0,0,0,0.5);
+      content: "";
+      display: inline-block;
+      height: 1px;
+      position: relative;
+      vertical-align: middle;
+      width: 50%;
+    }
+  }
+}
+
+#product-information {
+  table.display {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+
+    td:first-child {
+      font-weight: 900;
+    }
+  }
+}
