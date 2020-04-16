@@ -10,9 +10,12 @@ module.exports = function(app) {
     booksController.getBooks(req, res);
     })
 
+  
+    
   app.get('/api/seed-database', (req, res) => {
     databaseSeedController.seedDatabase(req, res);
-    })  
+    })
+
     // revise?
     // app.all("*", (req, res, next) => {
     //     console.log(__dirname + "../../../public/dist/public/index.html")
