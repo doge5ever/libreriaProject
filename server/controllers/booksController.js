@@ -3,8 +3,21 @@ const mongoose = require('mongoose');
 const Book = mongoose.model('Book');
 
 module.exports = {
+  getSingleBook: (req, res) => {
+    console.log('Received the product ID:', req.params.product_id)
+    Book
+      .findOne({product_id: req.params.product_id})
+      .then((doc) => {
+        console.log("Sent data.")
+        res.json(doc)
+    })
+    .catch((err) => {
+      console.log(err)
+    });
+  },
+
   getBooks: (req, res) => {
-    console.log('Received the following parameters:', req.query)
+    console.log('Received the following query parameters:', req.query)
     if (req.query.random) {
       projectParams = {};
       if (req.query.select) {
@@ -17,7 +30,6 @@ module.exports = {
       } else {
         projectParams['nonExistentField'] = 0;
       }
-      console.log(projectParams);
       Book
       .aggregate(
         [
@@ -35,6 +47,7 @@ module.exports = {
       searchInFields = ['title'];
       keywords = req.query.keywords ? req.query.keywords.split(' ') : ['.'];
       sort = "titleAlpha"
+
       searchQueryParams = [];
       sortParams = [];
 

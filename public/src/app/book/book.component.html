@@ -4,25 +4,23 @@
   >>
   <a routerLink="">Tag</a>
   >>
-  <a>Book</a>
+  <a>{{book.title}}</a>
 </div>
 <div id="container-head">
   <div id="container-img">
-    <img id="book-cover" src="../../assets/mock_items/1.jpg">
+    <img id="book-cover" src="../../assets/book_covers/{{book.UPC}}.jpg">
   </div>
   <div id="container-text">
-    <p id="title">Title is here</p>
-    <img id="rating" src="../../assets/icons/five_star.png">
-    <p id="UPC">UPC</p>
-    <p id="price_USD">$20.22</p>
-    <p id="availability">In stock (99 available)</p>
-    <p id="tag">Tag</p>
+    <p id="title">{{book.title}}</p>
+    <img id="rating" src="../../assets/icons/star_{{book.rating}}.png">
+    <p id="price_USD">{{book.price_USD | currency}}</p>
+    <p id="availability">In stock ({{book.availability}} available)</p>
+    <p id="tag">{{book.tag}}</p>
   </div>
 </div>
 <div id="product-description" class="section">
     <h1 class="sub-header">Description</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rutrum augue vel massa malesuada blandit. Suspendisse ac urna risus. Donec gravida condimentum rhoncus. Praesent vel ex et risus porttitor blandit. Morbi ut ornare elit. Vivamus non mattis mi, vel tempus enim. Aliquam volutpat mattis metus, ut convallis lacus vehicula ac. Morbi blandit nec urna id gravida. In feugiat fringilla consequat. Sed in erat in nulla sagittis tempus sit amet sit amet nisl. Suspendisse eget mi fermentum, tincidunt nisi sit amet, venenatis est. Praesent vitae lacus interdum, imperdiet enim sit amet, auctor ligula. In viverra efficitur ante, quis facilisis augue fringilla et. Maecenas tincidunt risus sit amet sodales convallis.
-    Mauris sed nisi at lacus pretium sollicitudin. Aenean vehicula ipsum blandit enim elementum, quis tincidunt metus lobortis. Praesent molestie condimentum risus, blandit mollis arcu tincidunt vel. Fusce at erat in odio facilisis auctor. Aliquam id placerat mi, et condimentum enim. Quisque ut quam volutpat, euismod diam eget, porta leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tristique sem a justo pulvinar interdum. Nulla tristique interdum sapien, ut congue lorem semper eget. </p>
+  <p>{{book.product_desc}}</p>
 </div>
 
 <div id="product-information" class="section">
@@ -30,23 +28,23 @@
   <table class="display">
     <tr>
       <td>Rating</td>
-      <td><img id="rating" src="../../assets/icons/five_star.png"></td>
+      <td><img id="rating" src="../../assets/icons/star_{{book.rating}}.png"></td>
     </tr>
     <tr>
       <td>UPC</td>
-      <td>q4tgvwfe</td>
+      <td>{{book.UPC}}</td>
     </tr>
     <tr>
       <td>Price</td>
-      <td>$20.22</td>
+      <td>{{book.price_USD | currency}}</td>
     </tr>
     <tr>
       <td>Availability</td>
-      <td>99 available</td>
+      <td>In stock ({{book.availability}} available)</td>
     </tr>
     <tr>
       <td>Tag</td>
-      <td>Tag</td>
+      <td>{{book.tag}}</td>
     </tr>
   </table>
 </div>

@@ -36,33 +36,19 @@
 <div class="card">
   <h1>Some books you might like</h1>
   <table class="catalog">
-    <!-- <tr>
-      <td class="catalog-img">
-        <a routerLink="">
-          <img src="../../assets/landing/you_might_like/1.jpg">
-        </a>
-      </td>
-      <td class="catalog-text">
-        <a routerLink="">
-          <span class="title">The Unwanteds: Island of Dragons</span>
-        </a>
-        <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean convallis orci magna, non maximus orci ullamcorper vel. Quisque a pellentesque nisl. Curabitur rhoncus mi sit amet ligula laoreet, ac varius diam laoreet. Mauris quis elit imperdiet tortor egestas vulputate placerat eu mauris. Vivamus sollicitudin nisi at eros consectetur tincidunt. Morbi vel egestas turpis, vitae congue metus.</p>
-      </td>
-    </tr> -->
     <tr *ngFor="let book of booksYouMightLike">
       <td class="catalog-img">
-        <a routerLink="[book, book.product_id]">
-          <img src="../../assets/">
+        <a [routerLink]="['book', book.product_id]">
+          <img src="../../assets/book_covers/{{book.UPC}}.jpg">
         </a>
       </td>
       <td class="catalog-text">
-        <a routerLink="">
-          <span class="title">The Unwanteds: Island of Dragons</span>
+        <a [routerLink]="['book', book.product_id]">
+          <span class="title">{{book.title}}</span>
         </a>
-        <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean convallis orci magna, non maximus orci ullamcorper vel. Quisque a pellentesque nisl. Curabitur rhoncus mi sit amet ligula laoreet, ac varius diam laoreet. Mauris quis elit imperdiet tortor egestas vulputate placerat eu mauris. Vivamus sollicitudin nisi at eros consectetur tincidunt. Morbi vel egestas turpis, vitae congue metus.</p>
+        <p class="description">{{book.product_desc}}</p>
       </td>
     </tr>
     
   </table>
-  <input type="button" (click) = "getRandomPicks()">
 </div>

@@ -5,7 +5,10 @@ const path = require('path');
 
 module.exports = function(app) {
 
-    // BOOK ROUTES
+  // BOOK ROUTES
+  app.get('/api/single-book/:product_id', (req, res) => {
+    booksController.getSingleBook(req, res);
+    })
   app.get('/api/books', (req, res) => {
     booksController.getBooks(req, res);
     })
