@@ -16,6 +16,10 @@ module.exports = function(app) {
     databaseSeedController.seedDatabase(req, res);
     })
 
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
     // revise?
     // app.all("*", (req, res, next) => {
     //     console.log(__dirname + "../../../public/dist/public/index.html")

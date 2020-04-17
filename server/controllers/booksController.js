@@ -4,12 +4,30 @@ const Book = mongoose.model('Book');
 
 module.exports = {
   getBooks: (req, res) => {
+    console.log('Received the following parameters:', req.query)
     if (req.query.random) {
+      projectParams = {};
+      if (req.query.select) {
+        if (Array.isArray(req.query.select)) { 
+          req.query.select.forEach((field) => {
+            projectParams[field] = 1;
+        })} else {
+          projectParams = {[req.query.select]: 1}
+        }          
+      } else {
+        projectParams['nonExistentField'] = 0;
+      }
+      console.log(projectParams);
       Book
       .aggregate(
-        [{ $sample: { size: +req.query.length } }])
-      .then((docs) => 
-        res.json(docs))
+        [
+          { $sample: { size: +req.query.length } },
+          { $project: projectParams }
+        ])
+      .then((docs) => {
+        console.log('Sent data');
+        res.json(docs)
+      })
       .catch((err) => {
         console.log(err)
       });
@@ -17,7 +35,6 @@ module.exports = {
       searchInFields = ['title'];
       keywords = req.query.keywords ? req.query.keywords.split(' ') : ['.'];
       sort = "titleAlpha"
-      selectFields = ['title', 'rating', 'price']
       searchQueryParams = [];
       sortParams = [];
 
@@ -44,7 +61,7 @@ module.exports = {
             $gte: req.query.min ? +req.query.min : 0,
             $lte: req.query.max ? +req.query.max : Number.MAX_VALUE,
           },
-        }, selectFields)
+        }, req.query.select)
         .sort(sortParams)
         .limit(+req.query.length)
         .then((docs) => {
