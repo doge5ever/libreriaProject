@@ -38,15 +38,15 @@
   <table class="catalog">
     <tr *ngFor="let book of booksYouMightLike">
       <td class="catalog-img">
-        <a [routerLink]="['book', book.product_id]">
-          <img src="../../assets/book_covers/{{book.UPC}}.jpg">
+        <a [routerLink]="['book', book['product_id']]">
+          <img src="../../assets/book_covers/{{book['UPC']}}.jpg">
         </a>
       </td>
       <td class="catalog-text">
-        <a [routerLink]="['book', book.product_id]">
-          <span class="title">{{book.title}}</span>
+        <a [routerLink]="['book', book['product_id']]">
+          <span class="title">{{book['title']}}</span>
         </a>
-        <p class="description">{{book.product_desc}}</p>
+        <p class="description">{{book['product_desc']}}</p>
       </td>
     </tr>
     

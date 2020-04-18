@@ -16,7 +16,7 @@ export class SearchComponent implements OnInit {
   noOfResults;
   pageNumber;
   totalPages;
-  readonly noOfIndices = 7;
+  readonly pageIndexSize = 7;
   pageIndices;
   greaterThanValue;
   lessThanValue;
@@ -47,18 +47,20 @@ export class SearchComponent implements OnInit {
       this.noOfResults = results['total'];
       this.pageNumber = results['page'];
       this.totalPages = results['pages'];
-      this.pageIndices = this.generateIndices(this.pageNumber, this.totalPages, this.noOfIndices);
+      this.pageIndices = this.generateIndices(this.pageNumber, this.totalPages, this.pageIndexSize);
       })
     }
 
-    readonly generateIndices = (pageNumber, totalPages, noOfIndices) => {
-      let wingSize = (noOfIndices-1)/2;
-      if (pageNumber <= wingSize) {
-        return [...Array(noOfIndices).keys()].map(elt => elt+1);
+    readonly generateIndices = (pageNumber, totalPages, pageIndexSize) => {
+      let wingSize = (pageIndexSize-1)/2;
+      if (pageIndexSize > totalPages) {
+        return [...Array(totalPages).keys()].map(elt => elt+1)
+      } else if (pageNumber <= wingSize) {
+        return [...Array(pageIndexSize).keys()].map(elt => elt+1);
       } else if (pageNumber >= totalPages - wingSize) {
-        return [...Array(noOfIndices).keys()].map(elt => elt+totalPages-noOfIndices+1);
+        return [...Array(pageIndexSize).keys()].map(elt => elt+totalPages-pageIndexSize+1);
       } else {
-        return [...Array(noOfIndices).keys()].map(elt => elt+pageNumber-wingSize+1)
+        return [...Array(pageIndexSize).keys()].map(elt => elt+pageNumber-wingSize+1)
       }
     };
 

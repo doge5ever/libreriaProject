@@ -30,15 +30,17 @@ module.exports = {
       } else {
         projectParams['nonExistentField'] = 0;
       }
+      console.log(projectParams)
       Book
       .aggregate(
         [
           { $sample: { size: +req.query.limit } },
-          { $project: projectParams }
+          // { $project: projectParams }
         ])
-      .then((docs) => {
+      .then((result) => {
+        res.json(result);
         console.log('Sent data');
-        res.json(docs)
+        console.log(result)
       })
       .catch((err) => {
         console.log(err)
