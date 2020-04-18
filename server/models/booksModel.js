@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
 
 module.exports = function() {
     var bookSchema = new mongoose.Schema({
@@ -10,7 +11,10 @@ module.exports = function() {
         price_USD: { type: Number, required: [true, 'Price cannot be blank'] },
         availability: { type: Number },
         product_id: { type: Number, unique: true, required: [true, 'Product ID cannot blank'] }
-    }, {timestamps: true });
-
+    }, 
+    {
+        // timestamps: true 
+    });
+    bookSchema.plugin(mongoosePaginate);
     mongoose.model('Book', bookSchema);
 }

@@ -16,19 +16,19 @@
         <p>Rating:</p>
         <tr>
           <td><input type="radio" name="rating" value="5" ngModel></td>
-          <td><img src="../../assets/icons/star_1.png"><span> & up</span></td>
+          <td><img src="../../assets/icons/star_5.png"><span> & up</span></td>
         </tr>
         <tr>
           <td><input type="radio" name="rating" value="4" ngModel></td>
-          <td><img src="../../assets/icons/star_1.png"><span> & up</span></td>
+          <td><img src="../../assets/icons/star_4.png"><span> & up</span></td>
         </tr>
         <tr>
           <td><input type="radio" name="rating" value="3" ngModel></td>
-          <td><img src="../../assets/icons/star_1.png"><span> & up</span></td>
+          <td><img src="../../assets/icons/star_3.png"><span> & up</span></td>
         </tr>
         <tr>
           <td><input type="radio" name="rating" value="2" ngModel></td>
-          <td><img src="../../assets/icons/star_1.png"><span> & up</span></td>
+          <td><img src="../../assets/icons/star_2.png"><span> & up</span></td>
         </tr>
         <tr>
           <td><input type="radio" name="rating" value="1" ngModel></td>
@@ -69,128 +69,26 @@
     <span id="keywords-display">
       Displaying the results for <b>"{{keywords}}"</b>.
     </span>
-    <p id="matches">Found x matches.</p>
-    <div id="result">
+    <p id="matches">Found {{noOfResults}} matches.</p>
+    <div id="result" *ngFor="let book of searchResults">
+      {{book}}
       <div class="item">
         <div class="container-img">
-          <a routerLink="/book/1"><img src="../../assets/mock_items/1.jpg"></a>
+          <a routerLink="/book/{{book['product_id']}}"><img src="../../assets/book_covers/{{book['UPC']}}.jpg"></a>
         </div>
         <div class="container-text">
-          <a routerLink=""><p class="title">This Is The Title</p></a>
-          <img class="rating" src="../../assets/icons/star_1.png">
-          <p class="price">{{99.99 | currency}}</p>
-          <p class="availability">In stock (99 available)</p>
+          <a routerLink="/book/{{book['product_id']}}"><p class="title">{{book['title']}}</p></a>
+          <img class="rating" src="../../assets/icons/star_{{book['rating']}}.png">
+          <p class="price">{{book['price_USD'] | currency}}</p>
+          <p class="availability">In stock ({{book['availability']}} available)</p>
           <input class="cart" type="button" value="Add to Cart">
         </div>  
       </div>
-      <div class="item">
-        <div class="container-img">
-          <a routerLink=""><img src="../../assets/mock_items/2.jpg"></a>
-        </div>
-        <div class="container-text">
-          <a routerLink=""><p class="title">This Is The Title</p></a>
-          <img class="rating" src="../../assets/icons/star_5.png">
-          <p class="price">{{99.99 | currency}}</p>
-          <p class="availability">In stock (99 available)</p>
-          <input class="cart" type="button" value="Add to Cart">
-        </div>  
-      </div>
-      <div class="item">
-        <div class="container-img">
-          <a routerLink=""><img src="../../assets/mock_items/3.jpg"></a>
-        </div>
-        <div class="container-text">
-          <a routerLink=""><p class="title">This Is The Title</p></a>
-          <img class="rating" src="../../assets/icons/star_5.png">
-          <p class="price">{{99.99 | currency}}</p>
-          <p class="availability">In stock (99 available)</p>
-          <input class="cart" type="button" value="Add to Cart">
-        </div>  
-      </div>
-      <div class="item">
-        <div class="container-img">
-          <a routerLink=""><img src="../../assets/mock_items/4.jpg"></a>
-        </div>
-        <div class="container-text">
-          <a routerLink=""><p class="title">This Is The Title</p></a>
-          <img class="rating" src="../../assets/icons/star_5.png">
-          <p class="price">{{99.99 | currency}}</p>
-          <p class="availability">In stock (99 available)</p>
-          <input class="cart" type="button" value="Add to Cart">
-        </div>  
-      </div>
-      <div class="item">
-        <div class="container-img">
-          <a routerLink=""><img src="../../assets/mock_items/5.jpg"></a>
-        </div>
-        <div class="container-text">
-          <a routerLink=""><p class="title">This Is The Title</p></a>
-          <img class="rating" src="../../assets/icons/star_5.png">
-          <p class="price">{{99.99 | currency}}</p>
-          <p class="availability">In stock (99 available)</p>
-          <input class="cart" type="button" value="Add to Cart">
-        </div>  
-      </div>
-      <!-- <div class="item">
-        <div class="container-img">
-          <a routerLink=""><img src="../../assets/mock_items/6.jpg"></a>
-        </div>
-        <div class="container-text">
-          <a routerLink=""><p class="title">This Is The Title</p></a>
-          <img class="rating" src="../../assets/icons/star_5.png">
-          <p class="price">{{99.99 | currency}}</p>
-          <p class="availability">In stock (99 available)</p>
-          <input class="cart" type="button" value="Add to Cart">
-        </div>  
-      </div>
-      <div class="item">
-        <div class="container-img">
-          <a routerLink=""><img src="../../assets/mock_items/7.jpg"></a>
-        </div>
-        <div class="container-text">
-          <a routerLink=""><p class="title">This Is The Title</p></a>
-          <img class="rating" src="../../assets/icons/star_5.png">
-          <p class="price">{{99.99 | currency}}</p>
-          <p class="availability">In stock (99 available)</p>
-          <input class="cart" type="button" value="Add to Cart">
-        </div>  
-      </div>
-      <div class="item">
-        <div class="container-img">
-          <a routerLink=""><img src="../../assets/mock_items/8.jpg"></a>
-        </div>
-        <div class="container-text">
-          <a routerLink=""><p class="title">This Is The Title</p></a>
-          <img class="rating" src="../../assets/icons/star_5.png">
-          <p class="price">{{99.99 | currency}}</p>
-          <p class="availability">In stock (99 available)</p>
-          <input class="cart" type="button" value="Add to Cart">
-        </div>  
-      </div>
-      <div class="item">
-        <div class="container-img">
-          <a routerLink=""><img src="../../assets/mock_items/9.jpg"></a>
-        </div>
-        <div class="container-text">
-          <a routerLink=""><p class="title">This Is The Title</p></a>
-          <img class="rating" src="../../assets/icons/star_5.png">
-          <p class="price">{{99.99 | currency}}</p>
-          <p class="availability">In stock (99 available)</p>
-          <input class="cart" type="button" value="Add to Cart">
-        </div>  
-      </div>
-      <div class="item">
-        <div class="container-img">
-          <a routerLink=""><img src="../../assets/mock_items/10.jpg"></a>
-        </div>
-        <div class="container-text">
-          <a routerLink=""><p class="title">This Is The Title</p></a>
-          <img class="rating" src="../../assets/icons/star_5.png">
-          <p class="price">{{99.99 | currency}}</p>
-          <p class="availability">In stock (99 available)</p>
-          <input class="cart" type="button" value="Add to Cart">
-        </div>  
-      </div> -->
     </div>
   </div>
+</div>
+<div class="pagination">
+  <!-- <span class="page-number" *ngFor="let pageNumber of [...Array(totalPages).keys()]">
+    <a routerLink="search" [queryParams]="{page: pageNumber+1}">{{{pageNumber+1}}}</a> 
+  </span>  -->
 </div>

@@ -23,8 +23,8 @@ export class BookComponent implements OnInit {
     this.route.params
       .subscribe((params) => {
         this.product_id = params.product_id;
-      });    
-    console.log(this.ROOT_URL + 'api/single-book/' + this.product_id)
+      });
+
     this.http.get(this.ROOT_URL + 'api/single-book/' + this.product_id)
       .subscribe((doc) => {
         this.book = doc

@@ -1,28 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { HttpClient, HttpParams} from '@angular/common/http';
+
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  keywords;
+  private ROOT_URL = "http://localhost:8000/";
+  keywords: string;
+  searchResults: Object;
+  noOfResults;
+  page;
+  totalPages;
   greaterThanValue;
   lessThanValue;
   inBetweenValue1;
   inBetweenValue2;
+  readonly resultsPerPage = '5';
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
     ) { }
 
   ngOnInit(): void {    
+
     this.route.params
       .subscribe(params => {
         this.keywords = params.keywords;
+        this.page = params.page;
     });
+
+    let params = new HttpParams()
+      .set('keywords', this.keywords)
+      .set('limit', this.resultsPerPage)
+      .set('page', this.page? this.page : '1')
+      .set('select', 'title')
+      .set('select', 'UPC')
+      .append('select','rating')
+      .append('select', 'price_USD')
+      .append('select', 'availability')
+
+    this.http.get(this.ROOT_URL + 'api/books', {params: params}).subscribe((results) => {
+      this.searchResults = results['docs'];
+      this.noOfResults = results['total'];
+      this.page = results['page'];
+      this.totalPages = results['pages'];
+    })
+    
   }
 
   clearField = (option) => {
