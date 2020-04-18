@@ -37,10 +37,9 @@ module.exports = {
           { $sample: { size: +req.query.limit } },
           // { $project: projectParams }
         ])
-      .then((result) => {
-        res.json(result);
-        console.log('Sent data');
-        console.log(result)
+      .then((output) => {
+        res.json(output);
+        console.log(`Found ${output.total} matches for ${req.query.keywords}. Sent data.`);
       })
       .catch((err) => {
         console.log(err)
@@ -85,34 +84,13 @@ module.exports = {
         })
         .then((output) => {
           res.json(output)
-          console.log("Sent data.")
-          console.log(output)
+          console.log(`Found ${output.total} matches for '${req.query.keywords}'. Sent data.`)
         })
         .catch((err) => {
           console.log(err)
         });
       }
 
-      // Book
-      //   .find({
-      //     $or: searchQueryParams,
-      //     rating: {$gte: req.query.rating ? req.query.rating : 1},
-      //     price_USD: {
-      //       $gte: req.query.min ? +req.query.min : 0,
-      //       $lte: req.query.max ? +req.query.max : Number.MAX_VALUE,
-      //     },
-      //   }, req.query.select)
-      //   .sort(sortParams)
-      //   // 
-      //   .limit(+req.query.length)
-      //   .then((docs) => {
-      //     console.log("Sent data.")
-      //     res.json(docs)
-      //   })
-      //   .catch((err) => {
-      //     console.log(err)
-      //   });
-      // }
     }
   }
 

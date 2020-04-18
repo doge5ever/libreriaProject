@@ -42,3 +42,13 @@ table.display {
     background-color: #dddddd;
   }
 }
+
+.pagination {
+  text-align: center;
+  margin: 30px 0px;
+
+  .page-number {
+    font-size: 20px;
+    margin: 0px 5px;
+  }
+}

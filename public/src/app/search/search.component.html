@@ -69,7 +69,9 @@
     <span id="keywords-display">
       Displaying the results for <b>"{{keywords}}"</b>.
     </span>
-    <p id="matches">Found {{noOfResults}} matches.</p>
+    <p id="matches" *ngIf="noOfResults==0">No matches found.</p>
+    <p id="matches" *ngIf="noOfResults==1">Found {{noOfResults}} match.</p>
+    <p id="matches" *ngIf="noOfResults>1">Found {{noOfResults}} matches.</p>
     <div id="result" *ngFor="let book of searchResults">
       <div class="item">
         <div class="container-img">
@@ -87,7 +89,10 @@
   </div>
 </div>
 <div class="pagination">
-  <span class="page-number" *ngFor="let pageNumber of pageIndices">
-    <a [routerLink]="['/search', keywords]" [queryParams]="{page: pageNumber}">{{pageNumber}}</a> 
-  </span> 
+  <a *ngIf="pageNumber > 1" class="page-number" [routerLink]="['/search', keywords]" [queryParams]="{page: 1}"><<</a>
+  <a *ngIf="pageNumber > 1" class="page-number" [routerLink]="['/search', keywords]" [queryParams]="{page: pageNumber-1}"><</a>  
+  <a *ngFor="let page of pageIndices" class="page-number" [routerLink]="['/search', keywords]" [queryParams]="{page: page}">{{page}}</a>
+  <a *ngIf="pageNumber < totalPages" class="page-number" [routerLink]="['/search', keywords]" [queryParams]="{page: pageNumber+1}">></a>
+  <a *ngIf="pageNumber < totalPages" class="page-number" [routerLink]="['/search', keywords]" [queryParams]="{page: totalPages}">>></a>
+ 
 </div>
