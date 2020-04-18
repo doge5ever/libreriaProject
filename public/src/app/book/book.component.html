@@ -2,25 +2,25 @@
 <div id="breadcrumbs">
   <a routerLink="">Home</a>
   >>
-  <a routerLink="">{{book.tag}}</a>
+  <a routerLink="">{{book['tag']}}</a>
   >>
-  <a>{{book.title}}</a>
+  <a>{{book['title']}}</a>
 </div>
 <div id="container-head">
   <div id="container-img">
-    <img id="book-cover" src="../../assets/book_covers/{{book.UPC}}.jpg">
+    <img id="book-cover" src="../../assets/book_covers/{{book['UPC']}}.jpg">
   </div>
   <div id="container-text">
-    <p id="title">{{book.title}}</p>
-    <img id="rating" src="../../assets/icons/star_{{book.rating}}.png">
-    <p id="price_USD">{{book.price_USD | currency}}</p>
-    <p id="availability">In stock ({{book.availability}} available)</p>
-    <p id="tag">{{book.tag}}</p>
+    <p id="title">{{book['title']}}</p>
+    <img id="rating" src="../../assets/icons/star_{{book['rating']}}.png">
+    <p id="price_USD">{{book['price_USD'] | currency}}</p>
+    <p id="availability">In stock ({{book['availability']}} available)</p>
+    <p id="tag">{{book['tag']}}</p>
   </div>
 </div>
 <div id="product-description" class="section">
     <h1 class="sub-header">Description</h1>
-  <p>{{book.product_desc}}</p>
+  <p>{{book['product_desc']}}</p>
 </div>
 
 <div id="product-information" class="section">
@@ -28,23 +28,23 @@
   <table class="display">
     <tr>
       <td>Rating</td>
-      <td><img id="rating" src="../../assets/icons/star_{{book.rating}}.png"></td>
+      <td><img id="rating" src="../../assets/icons/star_{{book['rating']}}.png"></td>
     </tr>
     <tr>
       <td>UPC</td>
-      <td>{{book.UPC}}</td>
+      <td>{{book['UPC']}}</td>
     </tr>
     <tr>
       <td>Price</td>
-      <td>{{book.price_USD | currency}}</td>
+      <td>{{book['price_USD'] | currency}}</td>
     </tr>
     <tr>
       <td>Availability</td>
-      <td>In stock ({{book.availability}} available)</td>
+      <td>In stock ({{book['availability']}} available)</td>
     </tr>
     <tr>
       <td>Tag</td>
-      <td>{{book.tag}}</td>
+      <td>{{book['tag']}}</td>
     </tr>
   </table>
 </div>
