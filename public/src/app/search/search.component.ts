@@ -21,6 +21,7 @@ export class SearchComponent implements OnInit {
   inBetweenValue2;
   
   qParams;
+  fixedqParams;
   results;
 
   updateqParams = (params) => {
@@ -37,10 +38,10 @@ export class SearchComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     ) {
-      this.qParams = {
+      this.qParams = {};
+      this.fixedqParams = {
         limit: 5,
-        deselect: 'product_desc'
-      };
+        deselect: 'product_desc'};
       this.results = {};
      }
 
@@ -56,8 +57,9 @@ export class SearchComponent implements OnInit {
 
   queryDatabase = () => {
     let params = new HttpParams()
-    Object.keys(this.qParams).forEach((paramKey) => {
-      let paramVal = this.qParams[paramKey];
+    let allParams = Object.assign({}, this.qParams, this.fixedqParams);
+    Object.keys(allParams).forEach((paramKey) => {
+      let paramVal = allParams[paramKey];
       if (Array.isArray(paramVal)) {
         paramVal.forEach((arrayVal) => {
           params = params.append(paramKey, arrayVal);
