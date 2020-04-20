@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { RandombooksService } from '../randombooks.service';
 
 @Component({
   selector: 'app-landing',
@@ -7,24 +7,19 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
-  private ROOT_URL = "http://localhost:8000/";
   booksYouMightLike; 
 
-  constructor(private http: HttpClient) {
-    this.getRandomPicks();
+  constructor(
+    private randomService: RandombooksService
+  ) {
+    randomService.randomPicks
+      .subscribe((results) => {
+        this.booksYouMightLike = results
+      });
   }
 
   ngOnInit(): void {
     window.scroll(0,0)
-  }
-
-  getRandomPicks = () => {
-    let params = new HttpParams()
-      .set('random', 'true')
-      .set('limit', '5')
-    this.http.get(this.ROOT_URL + 'api/books', {params: params}).subscribe((data) => {
-      this.booksYouMightLike = data;
-    })
   }
 }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-search',
@@ -9,8 +9,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  private ROOT_URL = "http://localhost:8000/";
-
   readonly pageIndexSize = 7;
   pageIndices;
 
@@ -21,27 +19,17 @@ export class SearchComponent implements OnInit {
   inBetweenValue2;
   
   qParams;
-  fixedqParams;
+  readonly fixedqParams = {
+    limit: 5,
+    deselect: 'product_desc'};
   results;
-
-  updateqParams = (params) => {
-    this.qParams.keywords = params.keywords;    
-    this.qParams.page = params.page ? params.page : 1 ;
-    this.qParams.tag = params.tag;
-    this.qParams.rating = params.rating;
-    this.qParams.minPrice = params.minPrice;
-    this.qParams.maxPrice = params.maxPrice;
-  }
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient,
+    private http: HttpService
     ) {
       this.qParams = {};
-      this.fixedqParams = {
-        limit: 5,
-        deselect: 'product_desc'};
       this.results = {};
      }
 
@@ -54,23 +42,17 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  queryDatabase = () => {
-    let params = new HttpParams()
-    let allParams = Object.assign({}, this.qParams, this.fixedqParams);
-    Object.keys(allParams).forEach((paramKey) => {
-      let paramVal = allParams[paramKey];
-      if (Array.isArray(paramVal)) {
-        paramVal.forEach((arrayVal) => {
-          params = params.append(paramKey, arrayVal);
-        })
-      } else {
-        if (paramVal) {
-          params = params.set(paramKey, paramVal);
-        }
-      }
-    })
+  updateqParams = (params) => {
+    this.qParams.keywords = params.keywords;    
+    this.qParams.page = params.page ? params.page : 1 ;
+    this.qParams.tag = params.tag;
+    this.qParams.rating = params.rating;
+    this.qParams.minPrice = params.minPrice;
+    this.qParams.maxPrice = params.maxPrice;
+  }
 
-    this.http.get(this.ROOT_URL + 'api/books', {params: params})
+  queryDatabase = () => {
+    this.http.getBooks(Object.assign({}, this.qParams, this.fixedqParams))
       .subscribe((results) => {
         this.results = results;
         this.pageIndices = this.generateIndices(this.results.page, this.results.pages, this.pageIndexSize);
@@ -110,20 +92,21 @@ export class SearchComponent implements OnInit {
   }
 
   onClickSubmit = (form) => {
-    this.qParams.tag = form.tag;
-    this.qParams.rating = form.rating;
+    console.log(form.value)
+    this.qParams.tag = form.value.tag;
+    this.qParams.rating = form.value.rating;
     switch (form.price) {
       case "greaterThan":
-        this.qParams.minPrice = form.greaterThanValue ? form.greaterThanValue : undefined;
+        this.qParams.minPrice = form.value.greaterThanValue ? form.value.greaterThanValue : undefined;
         this.qParams.maxPrice = undefined;
         break;
       case "lessThan":
         this.qParams.minPrice = undefined;
-        this.qParams.maxPrice = form.lessThanValue ? form.lessThanValue : undefined;
+        this.qParams.maxPrice = form.value.lessThanValue ? form.value.lessThanValue : undefined;
         break;
       case "inBetween":
-        this.qParams.minPrice = form.inBetweenValue1 ? form.inBetweenValue1 : undefined;
-        this.qParams.maxPrice = form.inBetweenValue2 ? form.inBetweenValue2 : undefined;
+        this.qParams.minPrice = form.value.inBetweenValue1 ? form.value.inBetweenValue1 : undefined;
+        this.qParams.maxPrice = form.value.inBetweenValue2 ? form.value.inBetweenValue2 : undefined;
     }
     this.router.navigate(['/search'], {
       queryParams: Object.assign({}, this.qParams, {page: 1}),
