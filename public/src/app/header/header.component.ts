@@ -14,6 +14,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onClickSubmit = (form) => {
-    this.router.navigate(['/search', form.keywords]);
+    this.router.navigate(['/search'], {queryParams: {keywords: form.keywords}});
   }
 }

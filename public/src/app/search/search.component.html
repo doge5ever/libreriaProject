@@ -6,10 +6,10 @@
       <div id="Tag">
         <p>Tag</p>
         <select name="tag" ngModel>
-          <option selected>Tag</option>
-          <option>Tag 1</option>
-          <option>Tag 2</option>
-          <option>Tag 3</option>
+          <option selected>Select Tag</option>
+          <option>Poetry</option>
+          <option>Music</option>
+          <option>Science Fiction</option>
         </select>
       </div>
       <div id="rating">
@@ -67,12 +67,13 @@
   </div>
   <div id="content">
     <span id="keywords-display">
-      Displaying the results for <b>"{{keywords}}"</b>.
+      Displaying the results for <b>"{{qParams.keywords}}"</b>.
     </span>
-    <p id="matches" *ngIf="noOfResults==0">No matches found.</p>
-    <p id="matches" *ngIf="noOfResults==1">Found {{noOfResults}} match.</p>
-    <p id="matches" *ngIf="noOfResults>1">Found {{noOfResults}} matches.</p>
-    <div id="result" *ngFor="let book of searchResults">
+    <p id="matches" *ngIf="results.total == 0">No matches found.</p>
+    <p id="matches" *ngIf="results.total == 1">Found {{results.total}} match.</p>
+    <p id="matches" *ngIf="results.total > 1">Found {{results.total}} matches.</p>
+    
+    <div id="result" *ngFor="let book of results.docs">
       <div class="item">
         <div class="container-img">
           <a [routerLink]="['/book', book['product_id']]"><img src="../../assets/book_covers/{{book['UPC']}}.jpg"></a>
@@ -89,10 +90,9 @@
   </div>
 </div>
 <div class="pagination">
-  <a *ngIf="pageNumber > 1" class="page-number" [routerLink]="['/search', keywords]" [queryParams]="{page: 1}"><<</a>
-  <a *ngIf="pageNumber > 1" class="page-number" [routerLink]="['/search', keywords]" [queryParams]="{page: pageNumber-1}"><</a>  
-  <a *ngFor="let page of pageIndices" class="page-number" [routerLink]="['/search', keywords]" [queryParams]="{page: page}">{{page}}</a>
-  <a *ngIf="pageNumber < totalPages" class="page-number" [routerLink]="['/search', keywords]" [queryParams]="{page: pageNumber+1}">></a>
-  <a *ngIf="pageNumber < totalPages" class="page-number" [routerLink]="['/search', keywords]" [queryParams]="{page: totalPages}">>></a>
- 
+  <a *ngIf="qParams.page > 1" class="page-number" [routerLink]="['/search']" [queryParams]="navigateParams('first')"><<</a>
+  <a *ngIf="qParams.page > 1" class="page-number" [routerLink]="['/search']" [queryParams]="navigateParams('previous')"><</a>  
+  <a *ngFor="let page of pageIndices" class="page-number" [routerLink]="['/search']" [queryParams]="navigateParams(page)">{{page}}</a>
+  <a *ngIf="qParams.page < results.pages" class="page-number" [routerLink]="['/search']" [queryParams]="navigateParams('next')">></a>
+  <a *ngIf="qParams.page < results.pages" class="page-number" [routerLink]="['/search']" [queryParams]="navigateParams('last')">>></a>
 </div>
