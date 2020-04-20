@@ -106,8 +106,8 @@ module.exports = {
           tag: req.query.tag ? req.query.tag : /./,
           rating: {$gte: req.query.rating ? +req.query.rating : 1},
           price_USD: {
-            $gte: req.query.priceMin ? +req.query.priceMin : 0,
-            $lte: req.query.priceMax ? req.query.priceMax : Number.MAX_VALUE,
+            $gte: req.query.minPrice ? +req.query.minPrice : 0,
+            $lte: req.query.maxPrice ? +req.query.maxPrice : Number.MAX_VALUE,
           },
         }, {
           select: selectString,

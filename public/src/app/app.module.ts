@@ -12,6 +12,8 @@ import { SearchComponent } from './search/search.component';
 import { BookComponent } from './book/book.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
+import { HttpService } from './http.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,9 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     HttpClientModule,   
     FormsModule
   ],
-  providers: [],
+  providers: [
+    HttpService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

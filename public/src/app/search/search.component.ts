@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit {
   readonly pageIndexSize = 7;
   pageIndices;
 
-  // FILTER FORM VALUES
+  // TWO-WAY BINDED FILTER FORM VALUES
   greaterThanValue;
   lessThanValue;
   inBetweenValue1;
@@ -48,7 +48,6 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {    
     this.route.queryParams
       .subscribe(params => {
-        console.log("This is the params: ", params)
         this.updateqParams(params);
         this.queryDatabase();
         window.scroll(0,0)
@@ -71,10 +70,11 @@ export class SearchComponent implements OnInit {
       }
     })
 
-    this.http.get(this.ROOT_URL + 'api/books', {params: params}).subscribe((results) => {
-    this.results = results;
-    this.pageIndices = this.generateIndices(this.results.page, this.results.pages, this.pageIndexSize);
-    })
+    this.http.get(this.ROOT_URL + 'api/books', {params: params})
+      .subscribe((results) => {
+        this.results = results;
+        this.pageIndices = this.generateIndices(this.results.page, this.results.pages, this.pageIndexSize);
+      })
   }
 
   readonly generateIndices = (page, totalPages, pageIndexSize) => {
@@ -114,24 +114,21 @@ export class SearchComponent implements OnInit {
     this.qParams.rating = form.rating;
     switch (form.price) {
       case "greaterThan":
-        this.qParams.minPrice = form.greaterThanValue;
+        this.qParams.minPrice = form.greaterThanValue ? form.greaterThanValue : undefined;
+        this.qParams.maxPrice = undefined;
         break;
       case "lessThan":
-        this.qParams.maxPrice = form.lessThanValue;
+        this.qParams.minPrice = undefined;
+        this.qParams.maxPrice = form.lessThanValue ? form.lessThanValue : undefined;
         break;
       case "inBetween":
-        this.qParams.minPrice = form.inBetweenValue1;
-        this.qParams.maxPrice = form.inBetweenValue2;
+        this.qParams.minPrice = form.inBetweenValue1 ? form.inBetweenValue1 : undefined;
+        this.qParams.maxPrice = form.inBetweenValue2 ? form.inBetweenValue2 : undefined;
     }
     this.router.navigate(['/search'], {
-      queryParams: this.qParams,
+      queryParams: Object.assign({}, this.qParams, {page: 1}),
     });
-    console.log(this.results)
-    console.log(`Filter values sent:
-    minPrice: ${this.qParams.minPrice}
-    maxPrice: ${this.qParams.maxPrice}
-    tag: ${this.qParams.tag}
-    rating: ${this.qParams.rating}`)
+    form.reset();
   }
 
   navigateParams = (input) => {

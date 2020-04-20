@@ -18,12 +18,10 @@ export class LandingComponent implements OnInit {
     window.scroll(0,0)
   }
 
-
   getRandomPicks = () => {
     let params = new HttpParams()
       .set('random', 'true')
       .set('limit', '5')
-
     this.http.get(this.ROOT_URL + 'api/books', {params: params}).subscribe((data) => {
       this.booksYouMightLike = data;
     })
