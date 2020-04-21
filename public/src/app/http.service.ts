@@ -11,10 +11,19 @@ export class HttpService {
     private http: HttpClient
   ) { }
 
+
+  getSingleBook = (product_id) => {
+    return this.http.get(this.ROOT_URL + 'api/single-book/' + product_id);
+  }
+
   getBooks = (params) => {
     return this.http.get(this.ROOT_URL + 'api/books', {params: this.parseParams(params)});
   }
 
+  paginateBooks = (params) => {
+    return this.http.get(this.ROOT_URL + 'api/paginate-books', {params: this.parseParams(params)});
+  }
+  
   getRandomPicks = (params) => {
     return this.http.get(this.ROOT_URL + 'api/books', {params: this.parseParams(params)});
   }

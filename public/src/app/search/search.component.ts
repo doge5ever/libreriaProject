@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         this.updateqParams(params);
-        this.http.getBooks(Object.assign({}, this.qParams, this.fixedqParams))
+        this.http.paginateBooks(Object.assign({}, this.qParams, this.fixedqParams))
           .subscribe((results) => {
             this.results = results;
             this.pageIndices = this.generateIndices(this.results.page, this.results.pages, this.pageIndexSize);

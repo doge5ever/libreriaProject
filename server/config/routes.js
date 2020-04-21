@@ -13,18 +13,19 @@ module.exports = function(app) {
   // BOOK ROUTES
   app.get('/api/single-book/:product_id', (req, res) => {
     booksController.getSingleBook(req, res);
-    })
-  app.get('/api/books', (req, res) => {
-    booksController.paginateBooks(req, res);
-    })
-
-  app.get('/api/cart', (req, res) => {
-    cartController.getBooks(req, res);
   })
-    
+  
+  app.get('/api/books', (req, res) => {
+    booksController.getBooks(req, res);
+  })
+      
+  app.get('/api/paginate-books', (req, res) => {
+    booksController.paginateBooks(req, res);
+  })
+  
   app.get('/api/seed-database', (req, res) => {
     databaseSeedController.seedDatabase(req, res);
-    })
+  })
 
 
     // revise?

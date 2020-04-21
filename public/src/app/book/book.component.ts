@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpService } from '../http.service';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class BookComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpService
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class BookComponent implements OnInit {
         this.product_id = params.product_id;
       });
 
-    this.http.get(this.ROOT_URL + 'api/single-book/' + this.product_id)
+    this.http.getSingleBook(this.product_id)
       .subscribe((doc) => {
         this.book = doc
       })
