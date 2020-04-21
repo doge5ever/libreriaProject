@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { HttpService } from '../http.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-search',
@@ -27,7 +28,8 @@ export class SearchComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpService
+    private http: HttpService,
+    private cartService: CartService
     ) {
       this.qParams = {};
       this.results = {};
@@ -87,6 +89,10 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  addToCart = (id) => {
+    this.cartService.addToCart(id);
+  }
+  
   onClickSubmit = (form) => {
     this.qParams.tag = form.value.tag;
     this.qParams.rating = form.value.rating;

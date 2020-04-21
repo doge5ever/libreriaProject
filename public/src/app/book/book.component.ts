@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../http.service';
+import { CartService } from '../cart.service';
 
 
 @Component({
@@ -14,7 +15,8 @@ export class BookComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpService
+    private http: HttpService,
+    private cartservice: CartService
   ) {}
 
   ngOnInit(): void {
@@ -28,5 +30,9 @@ export class BookComponent implements OnInit {
       .subscribe((doc) => {
         this.book = doc
       })
+  }
+
+  addToCart = (id) => {
+    this.cartservice.addToCart(id);
   }
 }

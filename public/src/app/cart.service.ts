@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +12,20 @@ export class CartService {
   ) { }
 
   addToCart(id) {
-    this.itemsId.push(id);
+    if (this.itemsId.includes(id)) {
+      alert("This item is already in the cart.");
+    } else {
+      this.itemsId.push(id);
+      alert("Added item to your cart!");
+      console.log(this.itemsId);
+    }
   }
 
   getItemsId() {
     return this.itemsId;
   }
 
-  clearCart(id) {
+  clearCart() {
     this.itemsId = [];
   }
 }

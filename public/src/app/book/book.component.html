@@ -15,7 +15,8 @@
     <img id="rating" src="../../assets/icons/star_{{book['rating']}}.png">
     <p id="price_USD">{{book['price_USD'] | currency}}</p>
     <p id="availability">In stock ({{book['availability']}} available)</p>
-    <p id="tag">{{book['tag']}}</p>
+    <p id="tag">Tag: {{book['tag']}}</p>
+    <input class="cart" type="button" value="Add to Cart" (click)="addToCart(book.product_id)">
   </div>
 </div>
 <div id="product-description" class="section">

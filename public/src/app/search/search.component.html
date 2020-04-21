@@ -83,7 +83,7 @@
           <img class="rating" src="../../assets/icons/star_{{book['rating']}}.png">
           <p class="price">{{book['price_USD'] | currency}}</p>
           <p class="availability">In stock ({{book['availability']}} available)</p>
-          <input class="cart" type="button" value="Add to Cart">
+          <input class="cart" type="button" value="Add to Cart" (click)="addToCart(book.product_id)">
         </div>  
       </div>
     </div>
