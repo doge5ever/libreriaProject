@@ -42,6 +42,7 @@ export class SearchComponent implements OnInit {
         Object.keys(params).forEach((key) => {
           this.qParams[key] = params[key];
         });
+        this.qParams.page = this.qParams.page ? this.qParams.page : 1;
 
         this.http.paginateBooks(Object.assign({}, this.qParams, this.fixedqParams))
           .subscribe((results) => {
