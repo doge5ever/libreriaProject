@@ -121,13 +121,13 @@ export class SearchComponent implements OnInit {
       case 'first':
         return Object.assign({}, this.qParams, {page: 1})
       case 'previous':
-        return Object.assign({}, this.qParams, {page: this.qParams.page-1})
+        return Object.assign({}, this.qParams, {page: +this.qParams.page-1})
       case 'next':
-        return Object.assign({}, this.qParams, {page: this.qParams.page+1})
+        return Object.assign({}, this.qParams, {page: +this.qParams.page+1})
       case 'last':
-        return Object.assign({}, this.qParams, {page: this.results.pages})
+        return Object.assign({}, this.qParams, {page: +this.results.pages})
       default:
-        return Object.assign({}, this.qParams, {page: input})
+        return Object.assign({}, this.qParams, {page: +input})
     }
   }
 }
