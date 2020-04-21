@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../cart.service';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-cart',
@@ -6,8 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  items;
 
-  constructor() { }
+  constructor(
+    cartService: CartService,
+    private http: HttpService
+  ) {
+    let params = {
+      product_id: cartService.getItemsId(),
+      deselect: 'product_desc'
+    };
+
+    http.getBooks(params)
+      .subscribe((results)=>{
+        this.items = results;
+      });
+  }
 
   ngOnInit(): void {
   }

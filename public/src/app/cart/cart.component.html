@@ -1,1 +1,12 @@
-<p>cart works!</p>
+<h1>Your Shopping Cart</h1>
+<div class="cart-empty" *ngIf="items.length === 0">
+  <h2>Your cart is currently empty.</h2>
+</div>
+<div class="cart-not-empty">
+  <h2>Items in your cart</h2>
+  <ol>
+    <li *ngFor="let item of items">
+      <h3>{{item.title}}</h3>
+    </li>
+  </ol>
+</div>

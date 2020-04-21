@@ -29,7 +29,7 @@ export class HttpService {
   }
 
   getItemsCart = (params) => {
-    return this.http.get(this.ROOT_URL + 'api/cart', {params: this.parseParams(params)});
+    return this.http.get(this.ROOT_URL + 'api/books', {params: this.parseParams(params)});
   }
 
   private parseParams = (params) => {

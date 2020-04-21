@@ -1,29 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  items = [];
+  itemsId = [69, 420];
 
   constructor(
     private http: HttpService
   ) { }
 
   addToCart(id) {
-    this.items.push(id);
+    this.itemsId.push(id);
   }
 
-  getItems(id) {
-    let params = {
-      select: [],
-      product_id: this.items
-    }
-    return this.http.getItemsCart(params);
+  getItemsId() {
+    return this.itemsId;
   }
 
   clearCart(id) {
-    this.items = [];
+    this.itemsId = [];
   }
 }

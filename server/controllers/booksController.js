@@ -14,16 +14,15 @@ module.exports = {
           console.log('Product not found. Sent data.')
         }
         res.json(doc)
-    })
-    .catch((err) => {
-      console.log(err)
-    });
+      })
+      .catch((err) => {
+        console.log(err)
+      });
   },
 
   getBooks: (req, res) => {
     console.log('Received the following query parameters:', req.query)
 
-    // FIX THE SELECTION IN THE RANDOM TO STREAMLINE CODE: https://mongoosejs.com/docs/api/aggregate.html#aggregate_Aggregate-project.
     if (req.query.random) {
       projectParams = {};
       if (req.query.select) {
@@ -38,20 +37,28 @@ module.exports = {
       }
       console.log(projectParams)
       Book
-      .aggregate(
-        [
-          { $sample: { size: +req.query.limit } },
-          { $project: projectParams }
-        ])
-      .then((output) => {
-        res.json(output);
-        console.log(`Found ${output.total} matches for ${req.query.keywords}. Sent data.`);
-      })
-      .catch((err) => {
-        console.log(err)
-      });
+        .aggregate(
+          [
+            { $sample: { size: +req.query.limit } },
+            { $project: projectParams }
+          ])
+        .then((output) => {
+          res.json(output);
+          console.log(`Found ${output.total} matches for ${req.query.keywords}. Sent data.`);
+        })
+        .catch((err) => {
+          console.log(err)
+        });
     } else {
-    
+      Book
+        .find({product_id: { $in: req.query.product_id} })
+        .then((output) => {
+          res.json(output);
+          console.log(`Found matches. Sent data.`)
+        })
+        .catch((err) => {
+          console.log(err)
+        });
     }
   },
     
@@ -73,7 +80,7 @@ module.exports = {
       })
       .then((output) => {
         res.json(output)
-        console.log('THIS IS THE QUERY', req.query)
+        console.log('Received the following query parameters: ', req.query)
         console.log(`Found ${output.total} matches for '${req.query.keywords}'. Sent data.`)
       })
       .catch((err) => {
@@ -81,7 +88,6 @@ module.exports = {
       });
     },
   }
-
 
 parseKeywords = (params) => {
   searchInFields = ['title'];
