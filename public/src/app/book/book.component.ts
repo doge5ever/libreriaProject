@@ -9,7 +9,6 @@ import { HttpService } from '../http.service';
   styleUrls: ['./book.component.scss']
 })
 export class BookComponent implements OnInit {
-  private ROOT_URL = "http://localhost:8000/";
   product_id;
   book;
 
@@ -29,7 +28,5 @@ export class BookComponent implements OnInit {
       .subscribe((doc) => {
         this.book = doc
       })
-
   }
-
 }
