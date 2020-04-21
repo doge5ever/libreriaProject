@@ -38,7 +38,7 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {    
     this.route.queryParams
       .subscribe(params => {
-        this.updateqParams(params);
+        this.qParams = params;
         this.http.paginateBooks(Object.assign({}, this.qParams, this.fixedqParams))
           .subscribe((results) => {
             this.results = results;
@@ -46,15 +46,6 @@ export class SearchComponent implements OnInit {
         })
         window.scroll(0,0)
     });
-  }
-
-  updateqParams = (params) => {
-    this.qParams.keywords = params.keywords;    
-    this.qParams.page = params.page ? params.page : 1 ;
-    this.qParams.tag = params.tag;
-    this.qParams.rating = params.rating;
-    this.qParams.minPrice = params.minPrice;
-    this.qParams.maxPrice = params.maxPrice;
   }
 
   readonly generateIndices = (page, totalPages, pageIndexSize) => {
