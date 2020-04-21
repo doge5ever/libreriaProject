@@ -23,6 +23,7 @@ export class CartComponent implements OnInit {
       .subscribe((results)=>{
         this.items = results;
       });
+    console.log(this.items);
   }
 
   ngOnInit(): void {

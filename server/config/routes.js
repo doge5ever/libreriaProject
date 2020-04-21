@@ -1,6 +1,5 @@
 const booksController = require('../controllers/booksController'),
   databaseSeedController = require('../controllers/databaseSeedController')
-  cartController = require('../controllers/cartController')
 const path = require('path');
 
 module.exports = function(app) {

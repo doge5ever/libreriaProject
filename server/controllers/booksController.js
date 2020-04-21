@@ -24,23 +24,11 @@ module.exports = {
     console.log('Received the following query parameters:', req.query)
 
     if (req.query.random) {
-      projectParams = {};
-      if (req.query.select) {
-        if (Array.isArray(req.query.select)) { 
-          req.query.select.forEach((field) => {
-            projectParams[field] = 1;
-        })} else {
-          projectParams = {[req.query.select]: 1}
-        }          
-      } else {
-        projectParams['nonExistentField'] = 0;
-      }
-      console.log(projectParams)
       Book
         .aggregate(
           [
-            { $sample: { size: +req.query.limit } },
-            { $project: projectParams }
+            { $sample: { size: req.query.limit ? +req.query.limit : 3} },
+            { $project: parseProject(req.query) }
           ])
         .then((output) => {
           res.json(output);
@@ -51,7 +39,10 @@ module.exports = {
         });
     } else {
       Book
-        .find({product_id: { $in: req.query.product_id} })
+        .find({product_id: {
+          $in: req.query.product_id
+        }}, 
+          parseSelect(req.query))
         .then((output) => {
           res.json(output);
           console.log(`Found matches. Sent data.`)
@@ -155,4 +146,20 @@ parseSelect = (params) => {
       }
     }
   }
+  return selectString;
+};
+
+parseProject = (params) => {
+  projectParams = {};
+      if (params.select) {
+        if (Array.isArray(params.select)) { 
+          params.select.forEach((field) => {
+            projectParams[field] = 1;
+        })} else {
+          projectParams = {[params.select]: 1}
+        }          
+      } else {
+        projectParams['nonExistentField'] = 0;
+      }
+  return projectParams;
 };
