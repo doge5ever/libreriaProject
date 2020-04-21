@@ -13,6 +13,7 @@ import { BookComponent } from './book/book.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 import { HttpService } from './http.service';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HttpService } from './http.service';
     SearchComponent,
     BookComponent,
     PagenotfoundComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
