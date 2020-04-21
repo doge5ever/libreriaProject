@@ -12,15 +12,18 @@ export class HttpService {
   ) { }
 
   getBooks = (params) => {
-    return this.http.get(this.ROOT_URL + 'api/books', {params: this.parseParams(params)})
+    return this.http.get(this.ROOT_URL + 'api/books', {params: this.parseParams(params)});
   }
 
   getRandomPicks = (params) => {
-    return this.http.get(this.ROOT_URL + 'api/books', {params: this.parseParams(params)})
+    return this.http.get(this.ROOT_URL + 'api/books', {params: this.parseParams(params)});
+  }
+
+  getItemsCart = (params) => {
+    return this.http.get(this.ROOT_URL + 'api/cart', {params: this.parseParams(params)});
   }
 
   private parseParams = (params) => {
-    console.log(params) 
     let httpParams = new HttpParams()
     Object.keys(params).forEach((paramKey) => {
       let paramVal = params[paramKey];

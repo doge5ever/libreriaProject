@@ -37,7 +37,11 @@ export class SearchComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         this.updateqParams(params);
-        this.queryDatabase();
+        this.http.getBooks(Object.assign({}, this.qParams, this.fixedqParams))
+          .subscribe((results) => {
+            this.results = results;
+            this.pageIndices = this.generateIndices(this.results.page, this.results.pages, this.pageIndexSize);
+        })
         window.scroll(0,0)
     });
   }
@@ -49,14 +53,6 @@ export class SearchComponent implements OnInit {
     this.qParams.rating = params.rating;
     this.qParams.minPrice = params.minPrice;
     this.qParams.maxPrice = params.maxPrice;
-  }
-
-  queryDatabase = () => {
-    this.http.getBooks(Object.assign({}, this.qParams, this.fixedqParams))
-      .subscribe((results) => {
-        this.results = results;
-        this.pageIndices = this.generateIndices(this.results.page, this.results.pages, this.pageIndexSize);
-      })
   }
 
   readonly generateIndices = (page, totalPages, pageIndexSize) => {
@@ -92,10 +88,9 @@ export class SearchComponent implements OnInit {
   }
 
   onClickSubmit = (form) => {
-    console.log(form.value)
     this.qParams.tag = form.value.tag;
     this.qParams.rating = form.value.rating;
-    switch (form.price) {
+    switch (form.value.price) {
       case "greaterThan":
         this.qParams.minPrice = form.value.greaterThanValue ? form.value.greaterThanValue : undefined;
         this.qParams.maxPrice = undefined;
@@ -111,6 +106,7 @@ export class SearchComponent implements OnInit {
     this.router.navigate(['/search'], {
       queryParams: Object.assign({}, this.qParams, {page: 1}),
     });
+    console.log('Submitted the form with the following values: ', form.value)
     form.reset();
   }
 

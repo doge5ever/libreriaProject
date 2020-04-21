@@ -12,10 +12,7 @@ export class LandingComponent implements OnInit {
   constructor(
     private randomService: RandombooksService
   ) {
-    randomService.randomPicks
-      .subscribe((results) => {
-        this.booksYouMightLike = results
-      });
+    this.booksYouMightLike = randomService.randomPicks
   }
 
   ngOnInit(): void {

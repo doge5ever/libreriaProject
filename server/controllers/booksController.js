@@ -23,32 +23,6 @@ module.exports = {
   getBooks: (req, res) => {
     console.log('Received the following query parameters:', req.query)
 
-    // THIS SHOULD THROW AN ERROR WHEN BOTH SELECT AND DESELECT ARE PROVIDED.
-    // RIGHT NOW, WE OVERRIDE THE VALUE OF DESELECT WHEN BOTH SELECT AND 
-    // DESELECT ARE PROVIDED.
-    let selectString = '';
-    if (req.query.select) {
-      if (Array.isArray(req.query.select)) {
-        req.query.select.forEach((field) => {
-          selectString += field + ' ';
-        });
-      } else {
-        selectString += req.query.select;
-      }
-    } else {
-      if (req.query.deselect) {
-        if (Array.isArray(req.query.deselect)) {
-          req.query.select.forEach((field) => {
-            selectString += '-' + field + ' ';
-          });
-        } else {
-          selectString += '-' + req.query.deselect;
-        }
-      }
-    }
-
-
-
     // FIX THE SELECTION IN THE RANDOM TO STREAMLINE CODE: https://mongoosejs.com/docs/api/aggregate.html#aggregate_Aggregate-project.
     if (req.query.random) {
       projectParams = {};
@@ -77,54 +51,102 @@ module.exports = {
         console.log(err)
       });
     } else {
-      searchInFields = ['title'];
-      keywords = req.query.keywords ? req.query.keywords.split(' ') : ['.'];
-      sort = "titleAlpha"
-
-      searchQueryParams = [];
-      sortParams = [];
-
-      searchInFields.forEach((field) => {
-        keywords.forEach((keyword) => {
-          searchQueryParams.push({
-            [field] : {
-              $regex: keyword,
-              $options: 'i'
-            }
-          })
-        })  
-      });
-
-      switch (sort) {
-        case 'titleAlpha':
-          sortParams.push(['title', 1])
-      }
-  
-      Book
-        .paginate({
-          $or: searchQueryParams,
-          tag: req.query.tag ? req.query.tag : /./,
-          rating: {$gte: req.query.rating ? +req.query.rating : 1},
-          price_USD: {
-            $gte: req.query.minPrice ? +req.query.minPrice : 0,
-            $lte: req.query.maxPrice ? +req.query.maxPrice : Number.MAX_VALUE,
-          },
-        }, {
-          select: selectString,
-          sort: sortParams,
-          limit: +req.query.limit,
-          page: +req.query.page,
-        })
-        .then((output) => {
-          res.json(output)
-          console.log('THIS IS THE QUERY', req.query)
-          console.log(`Found ${output.total} matches for '${req.query.keywords}'. Sent data.`)
-        })
-        .catch((err) => {
-          console.log(err)
-        });
-      }
-
+    
     }
+  },
+    
+  paginateBooks: (req, res) => {
+    Book
+      .paginate({
+        $or: parseKeywords(req.query),
+        tag: req.query.tag ? req.query.tag : /./,
+        rating: {$gte: req.query.rating ? +req.query.rating : 1},
+        price_USD: {
+          $gte: req.query.minPrice ? +req.query.minPrice : 0,
+          $lte: req.query.maxPrice ? +req.query.maxPrice : Number.MAX_VALUE,
+        },
+      }, {
+        select: parseSelect(req.query),
+        sort: parseSort(req.query),
+        limit: +req.query.limit,
+        page: +req.query.page,
+      })
+      .then((output) => {
+        res.json(output)
+        console.log('THIS IS THE QUERY', req.query)
+        console.log(`Found ${output.total} matches for '${req.query.keywords}'. Sent data.`)
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+    },
   }
 
+
+parseKeywords = (params) => {
+  searchInFields = ['title'];
+    keywords = params.keywords ? params.keywords.split(' ') : ['.'];
+    searchQueryParams = [];
+
+    searchInFields.forEach((field) => {
+      keywords.forEach((keyword) => {
+        searchQueryParams.push({
+          [field] : {
+            $regex: keyword,
+            $options: 'i'
+          }
+        })
+      })  
+    });
+  return searchQueryParams
+};
+
+parseSort = (params) => {
+  if (!params.sort) {
+    return [['title', 1]]
+  }
+  sortArray = Array.isArray(params.sort) ? params.sort : [params.sort];
+  returnArray = []
+  
+  sortArray.forEach((param) => {
+    switch (params.sort) {
+      case 'title':
+        returnArray.push(['title', 1]);
+        case 'priceAsc':
+          returnArray.push(['price_USD', 1]);
+        case 'priceDesc':
+          returnArray.push(['price_USD', -1]);
+        case 'ratingAsc':
+          returnArray.push(['rating', 1]);
+        case 'ratingDesc':
+          returnArray.push(['rating', -1]);
+    }
+  })
+};
+
+parseSelect = (params) => {
+  if ((params.select !== undefined) && (params.deselect !== undefined)) {
+    throw "Select and deselect query parameters cannot be both defined.";
+  }
+  
+  let selectString = '';
+  if (params.select) {
+    if (Array.isArray(params.select)) {
+      params.select.forEach((field) => {
+        selectString += field + ' ';
+      });
+    } else {
+        selectString += params.select;
+    }
+  } else {
+    if (params.deselect) {
+      if (Array.isArray(params.deselect)) {
+        params.select.forEach((field) => {
+          selectString += '-' + field + ' ';
+        });
+      } else {
+        selectString += '-' + params.deselect;
+      }
+    }
+  }
+};
