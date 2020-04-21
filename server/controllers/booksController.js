@@ -78,6 +78,18 @@ module.exports = {
         console.log(err)
       });
     },
+
+  getTags: (req, res) => {
+    Book
+      .distinct('tag')
+      .then((output) => {
+        res.json(output)
+        console.log(`Fetched ${output.length} distinct tags. Data sent.`)
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+    }
   }
 
 parseKeywords = (params) => {

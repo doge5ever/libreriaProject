@@ -12,6 +12,7 @@ import { CartService } from '../cart.service';
 export class SearchComponent implements OnInit {
   readonly pageIndexSize = 7;
   pageIndices;
+  tags;
 
   // TWO-WAY BINDED FILTER FORM VALUES
   greaterThanValue;
@@ -38,7 +39,10 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {    
     this.route.queryParams
       .subscribe(params => {
-        this.qParams = params;
+        Object.keys(params).forEach((key) => {
+          this.qParams[key] = params[key];
+        });
+
         this.http.paginateBooks(Object.assign({}, this.qParams, this.fixedqParams))
           .subscribe((results) => {
             this.results = results;
@@ -46,6 +50,11 @@ export class SearchComponent implements OnInit {
         })
         window.scroll(0,0)
     });
+
+    this.http.getTags()
+      .subscribe((results) => {
+        this.tags = results;
+      })
   }
 
   readonly generateIndices = (page, totalPages, pageIndexSize) => {
@@ -85,7 +94,11 @@ export class SearchComponent implements OnInit {
   }
   
   onClickSubmit = (form) => {
+    console.log("this is the tag", form.value.tag)
+    console.log("this is qParams", this.qParams)
+    
     this.qParams.tag = form.value.tag;
+    console.log(1)
     this.qParams.rating = form.value.rating;
     switch (form.value.price) {
       case "greaterThan":

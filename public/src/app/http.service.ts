@@ -20,6 +20,10 @@ export class HttpService {
     return this.http.get(this.ROOT_URL + 'api/books', {params: this.parseParams(params)});
   }
 
+  getTags = () => {
+    return this.http.get(this.ROOT_URL + 'api/tags');
+  }
+
   paginateBooks = (params) => {
     return this.http.get(this.ROOT_URL + 'api/paginate-books', {params: this.parseParams(params)});
   }

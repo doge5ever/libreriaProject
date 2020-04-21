@@ -17,7 +17,11 @@ module.exports = function(app) {
   app.get('/api/books', (req, res) => {
     booksController.getBooks(req, res);
   });
-      
+  
+  app.get('/api/tags', (req, res) => {
+    booksController.getTags(req, res);
+  });
+
   app.get('/api/paginate-books', (req, res) => {
     booksController.paginateBooks(req, res);
   });
@@ -27,9 +31,9 @@ module.exports = function(app) {
   });
 
 
-    // revise?
-    // app.all("*", (req, res, next) => {
-    //     console.log(__dirname + "../../../public/dist/public/index.html")
-    //     res.sendFile(path.resolve(__dirname + "../../../public/dist/public/index.html"))
-    // });
+  // revise?
+  // app.all("*", (req, res, next) => {
+  //     console.log(__dirname + "../../../public/dist/public/index.html")
+  //     res.sendFile(path.resolve(__dirname + "../../../public/dist/public/index.html"))
+  // });
 };

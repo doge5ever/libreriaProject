@@ -6,10 +6,8 @@
       <div id="Tag">
         <p>Tag</p>
         <select name="tag" ngModel>
-          <option selected>Select Tag</option>
-          <option>Poetry</option>
-          <option>Music</option>
-          <option>Science Fiction</option>
+          <option selected>--Select Tag--</option>
+          <option *ngFor="let tag of tags">{{tag.toString()}}</option>
         </select>
       </div>
       <div id="rating">
