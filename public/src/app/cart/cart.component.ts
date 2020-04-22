@@ -9,6 +9,7 @@ import { HttpService } from '../http.service';
 })
 export class CartComponent implements OnInit {
   items;
+  total;
 
   constructor(
     cartService: CartService,
@@ -19,11 +20,18 @@ export class CartComponent implements OnInit {
       deselect: 'product_desc'
     };
 
+    let total = 0;
     http.getBooks(params)
-      .subscribe((results)=>{
+      .subscribe((results) => {
         this.items = results;
+        if (Array.isArray(results)) {
+          results.forEach(item => {
+            total += item.price_USD
+            console.log(total)
+          })
+        }
+        this.total = total;
       });
-    console.log(this.items);
   }
   
   ngOnInit(): void {

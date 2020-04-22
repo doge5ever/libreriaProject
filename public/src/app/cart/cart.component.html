@@ -1,5 +1,5 @@
 <h1>Your Shopping Cart</h1>
-<div class="cart-empty" *ngIf="items.length === 0">
+<div class="cart-empty" *ngIf="items?.length === 0">
   <h2>Your cart is currently empty.</h2>
 </div>
 <div class="cart-not-empty">
@@ -21,7 +21,10 @@
           </div>
         </div>
       </li>
-      <button class="checkout" routerLink="/checkout">Proceed to Checkout</button>
+      <div class="item-update-section">
+        <h3>Subtotal: {{total | currency}}</h3>
+      </div>
     </ol>
   </form>
+  <button class="checkout" routerLink="/checkout">Proceed to Checkout</button>
 </div>
