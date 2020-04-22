@@ -11,6 +11,10 @@ export class CartService {
     private http: HttpService
   ) { }
 
+  getItemsId() {
+    return this.itemsId;
+  }
+
   addToCart(id) {
     if (this.itemsId.includes(id)) {
       alert("This item is already in the cart.");
@@ -21,11 +25,8 @@ export class CartService {
     }
   }
 
-  getItemsId() {
-    return this.itemsId;
-  }
-
   clearCart() {
     this.itemsId = [];
+    alert("Cart is cleared.")
   }
 }
