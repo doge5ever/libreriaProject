@@ -14,6 +14,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 import { HttpService } from './http.service';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CartComponent } from './cart/cart.component';
     BookComponent,
     PagenotfoundComponent,
     CartComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
