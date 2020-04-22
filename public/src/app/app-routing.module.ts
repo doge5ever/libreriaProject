@@ -7,8 +7,13 @@ import { BookComponent } from './book/book.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ShopComponent } from './shop/shop.component';
+import { CheckoutformComponent } from './checkoutform/checkoutform.component';
 
 const routes: Routes = [
+  { path: 'checkout', component: CheckoutComponent, children: [
+    { path: '', component: CheckoutformComponent}
+  ]},
   { path: '', component: ShopComponent, children: [
     { path: '', component: LandingComponent },
     { path: 'search', component: SearchComponent },

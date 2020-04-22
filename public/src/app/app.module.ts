@@ -15,6 +15,10 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HttpService } from './http.service';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ShopComponent } from './shop/shop.component';
+import { HeadersecuredComponent } from './headersecured/headersecured.component';
+import { FootersecuredComponent } from './footersecured/footersecured.component';
+import { CheckoutformComponent } from './checkoutform/checkoutform.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,10 @@ import { CheckoutComponent } from './checkout/checkout.component';
     PagenotfoundComponent,
     CartComponent,
     CheckoutComponent,
+    ShopComponent,
+    HeadersecuredComponent,
+    FootersecuredComponent,
+    CheckoutformComponent,
   ],
   imports: [
     BrowserModule,
