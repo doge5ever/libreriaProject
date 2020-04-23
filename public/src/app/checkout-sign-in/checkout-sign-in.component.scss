@@ -1,0 +1,32 @@
+.container {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: 1fr minmax(20px, 100px) 1fr;
+  align-items: center;
+}
+
+.sign-in-form {
+  padding: 20px;
+  border: 1pt solid black;
+
+  &#registered-user {
+    justify-self: flex-end;
+  }
+
+  &#guest {
+    justify-self: flex-start;
+  }
+
+  h2 {
+    margin: 0px 0px 30px 0px;
+  }
+}
+
+#or {
+  font-size: 30px;
+  justify-self: center;
+}
+
+#checkbox {
+  margin-top: 15px;
+}
