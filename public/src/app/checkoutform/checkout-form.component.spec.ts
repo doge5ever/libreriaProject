@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CheckoutformComponent } from './checkoutform.component';
+import { CheckoutformComponent } from './checkout-form.component';
 
 describe('CheckoutformComponent', () => {
   let component: CheckoutformComponent;
