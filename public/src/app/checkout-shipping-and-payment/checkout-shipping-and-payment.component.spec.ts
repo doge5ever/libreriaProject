@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CheckoutShippingAndPaymentComponent } from './shipping-and-payment.component';
+import { CheckoutShippingAndPaymentComponent } from './checkout-shipping-and-payment.component';
 
 describe('CheckoutShippingAndPaymentComponent', () => {
   let component: CheckoutShippingAndPaymentComponent;

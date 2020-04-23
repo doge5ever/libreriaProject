@@ -15,13 +15,13 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HttpService } from './http.service';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { ShopComponent } from './shop/shop.component';
+import { MainComponent } from './main/main.component';
 import { HeadersecuredComponent } from './headersecured/headersecured.component';
 import { FootersecuredComponent } from './footersecured/footersecured.component';
 import { CheckoutformComponent } from './checkoutform/checkoutform.component';
 import { CheckoutSignInComponent } from './checkout-sign-in/checkout-sign-in.component';
-import { CheckoutShippingAndPaymentComponent } from './shipping-and-payment/shipping-and-payment.component';
-import { CheckoutPlaceOrderComponent } from './place-order/place-order.component';
+import { CheckoutShippingAndPaymentComponent } from './checkout-shipping-and-payment/checkout-shipping-and-payment.component';
+import { CheckoutPlaceOrderComponent } from './checkout-place-order/checkout-place-order.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { CheckoutPlaceOrderComponent } from './place-order/place-order.component
     PagenotfoundComponent,
     CartComponent,
     CheckoutComponent,
-    ShopComponent,
+    MainComponent,
     HeadersecuredComponent,
     FootersecuredComponent,
     CheckoutformComponent,

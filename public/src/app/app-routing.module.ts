@@ -7,11 +7,12 @@ import { BookComponent } from './book/book.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { ShopComponent } from './shop/shop.component';
+import { MainComponent } from './main/main.component';
+
 import { CheckoutformComponent } from './checkoutform/checkoutform.component';
 import { CheckoutSignInComponent } from './checkout-sign-in/checkout-sign-in.component';
-import { CheckoutShippingAndPaymentComponent } from './shipping-and-payment/shipping-and-payment.component';
-import { CheckoutPlaceOrderComponent } from './place-order/place-order.component'
+import { CheckoutShippingAndPaymentComponent } from './checkout-shipping-and-payment/checkout-shipping-and-payment.component';
+import { CheckoutPlaceOrderComponent } from './checkout-place-order/checkout-place-order.component'
 
 const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent, children: [
@@ -22,7 +23,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'sign-in', pathMatch: 'prefix'}
     ]}
   ]},
-  { path: '', component: ShopComponent, children: [
+  { path: '', component: MainComponent, children: [
     { path: '', component: LandingComponent },
     { path: 'search', component: SearchComponent },
     { path: 'book/:product_id', component: BookComponent },
