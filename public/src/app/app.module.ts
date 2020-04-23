@@ -19,6 +19,9 @@ import { ShopComponent } from './shop/shop.component';
 import { HeadersecuredComponent } from './headersecured/headersecured.component';
 import { FootersecuredComponent } from './footersecured/footersecured.component';
 import { CheckoutformComponent } from './checkoutform/checkoutform.component';
+import { CheckoutSignInComponent } from './checkout-sign-in/checkout-sign-in.component';
+import { CheckoutShippingAndPaymentComponent } from './shipping-and-payment/shipping-and-payment.component';
+import { CheckoutPlaceOrderComponent } from './place-order/place-order.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import { CheckoutformComponent } from './checkoutform/checkoutform.component';
     HeadersecuredComponent,
     FootersecuredComponent,
     CheckoutformComponent,
+    CheckoutSignInComponent,
+    CheckoutShippingAndPaymentComponent,
+    CheckoutPlaceOrderComponent,
   ],
   imports: [
     BrowserModule,

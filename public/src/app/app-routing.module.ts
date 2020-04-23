@@ -9,10 +9,18 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ShopComponent } from './shop/shop.component';
 import { CheckoutformComponent } from './checkoutform/checkoutform.component';
+import { CheckoutSignInComponent } from './checkout-sign-in/checkout-sign-in.component';
+import { CheckoutShippingAndPaymentComponent } from './shipping-and-payment/shipping-and-payment.component';
+import { CheckoutPlaceOrderComponent } from './place-order/place-order.component'
 
 const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent, children: [
-    { path: '', component: CheckoutformComponent}
+    { path: '', component: CheckoutformComponent, children: [
+      { path: 'sign-in', component: CheckoutSignInComponent},
+      { path: 'shipping-and-payment', component: CheckoutShippingAndPaymentComponent},
+      { path: 'place-order', component: CheckoutPlaceOrderComponent},
+      { path: '', redirectTo: 'sign-in', pathMatch: 'prefix'}
+    ]}
   ]},
   { path: '', component: ShopComponent, children: [
     { path: '', component: LandingComponent },
