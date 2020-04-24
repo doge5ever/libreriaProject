@@ -1,102 +1,130 @@
-<div id="product-summary">
-  <h2>Items:</h2>
-  <form>
-    <div class="item">
-      <span>1x</span><img src="../../assets/book_covers/0072b94dfa30608e.jpg">
-      <div>
-        <span>This is the title</span>
-        <span>$12.12</span>
+<form>
+  <div id="product-summary">
+    <h2>Items:</h2>
+      <div class="item">
+        <span class="quantity"> QTY
+          <input type="text">X
+        </span>
+        <img src="../../assets/book_covers/0072b94dfa30608e.jpg">
+        <div class="text">
+          <span>This is the title</span>
+          <span>$12.12</span>
+          <button>Update Cart</button>
+        </div>
       </div>
-    </div>
-    <button>Update Cart</button>
-  </form>
-</div>
-<div id="contact-details" class="card">
-  <h1>Contact Details</h1>
-  <table>
-    <tr>
-      <td>
-        First Name:
-      </td>
-      <td>
-        <input type="text">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Last Name:
-      </td>
-      <td>
-        <input type="text">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Email Address:
-      </td>
-      <td>
-        <input type="text">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Phone Number:
-      </td>
-      <td>
-        <input type="text">
-      </td>
-    </tr>
-  </table>
-</div>
-<div id="shipping-address" class="card">
-  <h1>Shipping Address</h1>
-  <table>
-    <tr>
-      <td>
-        Street Address:
-      </td>
-      <td>
-        <input type="text">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        City:
-      </td>
-      <td>
-        <input type="text">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        State:
-      </td>
-      <td>
-        <select>
-          <option>Select State</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Zip Code:
-      </td>
-      <td>
-        <input type="text">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Country:
-      </td>
-      <td>
-        <select type="text">
-          <option>Select Country</option>
-        </select>
-      </td>
-    </tr>
-  </table>
-</div>
-<div id="Payment Method" class="card">
-  <h1>Payment Method</h1>
-</div>
+  </div>
+  <div id="contact-details" class="flat-card">
+    <h1>Contact Details</h1>
+    <table>
+      <tr>
+        <td>First Name:</td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td>Last Name:</td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td>Email Address:</td>
+        <td>
+          <input type="text">
+        </td>
+      </tr>
+      <tr>
+        <td>Phone Number:</td>
+        <td><input type="text"></td>
+      </tr>
+    </table>
+  </div>
+  <div id="shipping-address" class="flat-card">
+    <h1>Shipping Address</h1>
+    <table>
+      <tr>
+        <td>Street Address:</td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td>City:</td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td>State:</td>
+        <td>
+          <select>
+            <option>Select State</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Zip Code:</td>
+        <td>
+          <input type="text">
+        </td>
+      </tr>
+      <tr>
+        <td>Country:</td>
+        <td>
+          <select type="text">
+            <option>Select Country</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div id="Payment Method" class="flat-card">
+    <h1>Payment Method</h1>
+    <table>
+      <tr>
+        <td>Name on Card</td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td>Credit Card Number</td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td>Exp Month</td>
+        <td><input type="text"></td>
+        <td>CVV</td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+      </tr>
+    </table>
+    <h1>Billing Address</h1>
+    <input type="checkbox">Billing address is the same as the Shipping Address.
+    <table>
+      <tr>
+        <td>Street Address:</td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td>City:</td>
+        <td><input type="text"></td>
+      </tr>
+      <tr>
+        <td>State:</td>
+        <td>
+          <select>
+            <option>Select State</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Zip Code:</td>
+        <td>
+          <input type="text">
+        </td>
+      </tr>
+      <tr>
+        <td>Country:</td>
+        <td>
+          <select type="text">
+            <option>Select Country</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+    <button type="submit">Continue</button>
+  </div>
+</form>
