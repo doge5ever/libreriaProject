@@ -15,34 +15,34 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.checkoutForm = fb.group({
-      contactDetails: {
+      contactDetails: fb.group({
         firstName: null,
         lastName: null,
         emailAddress: null,
         phoneNumber: null
-      }, 
-      shippingAddress: {
+      }), 
+      shippingAddress: fb.group({
         streetAddress: null,
         city: null,
         state: null,
         zipCode: null,
         country: null
-        },
-      paymentMethod: {
+        }),
+      paymentMethod: fb.group({
         nameOnCard: null,
         creditCardNumber: null,
         expMonth: null,
         expYear: null,
         CVV: null,
-        billingAddress: {
+        billingAddress: fb.group({
           isSameAddress: null,
           streetAddress: null,
           city: null,
           state: null,
           zipCode: null,
           country: null
-        },  
-      },
+        }),  
+      }),
     })
   };
 

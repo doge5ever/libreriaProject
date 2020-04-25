@@ -17,44 +17,44 @@
 <div>
 </div>
 <form [formGroup]="checkoutForm" (ngSubmit)="submitForm(checkoutForm)">
-  <div id="contact-details" class="flat-card" ngModelGroup="contactDetails">
+  <div id="contact-details" class="flat-card" formGroupName="contactDetails">
     <h1>Contact Details</h1>
     <table>
       <tr>
         <td>First Name:</td>
-        <td><input type="text" name="firstName" required ngModel></td>
+        <td><input type="text" formControlName="firstName" required ></td>
       </tr>
       <tr>
         <td>Last Name:</td>
-        <td><input type="text" name="lastName" required ngModel></td>
+        <td><input type="text" formControlName="lastName" required ></td>
       </tr>
       <tr>
         <td>Email Address:</td>
         <td>
-          <input type="text" name="emailAddress" required ngModel>
+          <input type="text" formControlName="emailAddress" required >
         </td>
       </tr>
       <tr>
         <td>Phone Number:</td>
-        <td><input type="text" name="phoneNumber" required ngModel></td>
+        <td><input type="text" formControlName="phoneNumber" required ></td>
       </tr>
     </table>
   </div>
-  <div id="shipping-address" class="flat-card" ngModelGroup="shippingAddress">
+  <div id="shipping-address" class="flat-card" formGroupName="shippingAddress">
     <h1>Shipping Address</h1>
     <table>
       <tr>
         <td>Street Address:</td>
-        <td><input type="text" name="streetAddress" required ngModel></td>
+        <td><input type="text" formControlName="streetAddress" required ></td>
       </tr>
       <tr>
         <td>City:</td>
-        <td><input type="text" name="city" required ngModel></td>
+        <td><input type="text" formControlName="city" required ></td>
       </tr>
       <tr>
         <td>State:</td>
         <td>
-          <select name="state" required ngModel>
+          <select formControlName="state" required >
             <option>Select State</option>
           </select>
         </td>
@@ -62,57 +62,57 @@
       <tr>
         <td>Zip Code:</td>
         <td>
-          <input type="text" name="zipCode" required ngModel>
+          <input type="text" formControlName="zipCode" required >
         </td>
       </tr>
       <tr>
         <td>Country:</td>
         <td>
-          <select type="text" name="country" required ngModel>
+          <select type="text" formControlName="country" required >
             <option>Select Country</option>
           </select>
         </td>
       </tr>
     </table>
   </div>
-  <div id="Payment Method" class="flat-card" ngModelGroup="paymentMethod">
+  <div id="Payment Method" class="flat-card" formGroupName="paymentMethod">
     <h1>Payment Method</h1>
     <table>
       <tr>
         <td>Name on Card</td>
-        <td><input type="text" name="nameOnCard" required ngModel></td>
+        <td><input type="text" formControlName="nameOnCard" required ></td>
       </tr>
       <tr>
         <td>Credit Card Number</td>
-        <td><input type="text" name="creditCardNumber" required ngModel></td>
+        <td><input type="text" formControlName="creditCardNumber" required ></td>
       </tr>
       <tr>
         <td>Exp Month</td>
-        <td><input type="text" name="expMonth" required ngModel></td>
+        <td><input type="text" formControlName="expMonth" required ></td>
         <td>Exp Year</td>
-        <td><input type="text" name="expYear" required ngModel></td>
+        <td><input type="text" formControlName="expYear" required ></td>
         <td>CVV</td>
-        <td><input type="text" name="CVV" required ngModel></td>
+        <td><input type="text" formControlName="CVV" required ></td>
       </tr>
       <tr>
       </tr>
     </table>
     <h1>Billing Address</h1>
-    <div ngModelGroup="billingAddress">
+    <div formGroupName="billingAddress">
     <input type="checkbox">Billing address is the same as the Shipping Address.
       <table>
         <tr>
           <td>Street Address:</td>
-          <td><input type="text" name="streetAddress" ngModel></td>
+          <td><input type="text" formControlName="streetAddress" ></td>
         </tr>
         <tr>
           <td>City:</td>
-          <td><input type="text" name="city" ngModel></td>
+          <td><input type="text" formControlName="city" ></td>
         </tr>
         <tr>
           <td>State:</td>
           <td>
-            <select name="state" ngModel>
+            <select formControlName="state" >
               <option>Select State</option>
             </select>
           </td>
@@ -120,13 +120,13 @@
         <tr>
           <td>Zip Code:</td>
           <td>
-            <input type="text" name="zipCode" ngModel>
+            <input type="text" formControlName="zipCode" >
           </td>
         </tr>
         <tr>
           <td>Country:</td>
           <td>
-            <select type="text" name="country" ngModel>
+            <select type="text" formControlName="country" >
               <option>Select Country</option>
             </select>
           </td>
