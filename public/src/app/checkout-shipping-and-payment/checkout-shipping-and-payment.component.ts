@@ -58,7 +58,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   }
 
   submitForm = (form): void => {
-    // this.checkoutService.updateForm(form.value);
+    console.log(this.getField('contactDetails', 'firstName'));
     console.log(this.checkoutForm.value);
   }
 }
