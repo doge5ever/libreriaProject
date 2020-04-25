@@ -22,6 +22,9 @@ import { CheckoutformComponent } from './checkoutform/checkout-form.component';
 import { CheckoutSignInComponent } from './checkout-sign-in/checkout-sign-in.component';
 import { CheckoutShippingAndPaymentComponent } from './checkout-shipping-and-payment/checkout-shipping-and-payment.component';
 import { CheckoutPlaceOrderComponent } from './checkout-place-order/checkout-place-order.component';
+import { CheckoutService } from './checkout.service';
+import { CartService } from './cart.service';
+import { RandombooksService } from './randombooks.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { CheckoutPlaceOrderComponent } from './checkout-place-order/checkout-pla
     FormsModule
   ],
   providers: [
-    HttpService
+    HttpService,
+    RandombooksService,
+    CartService,
+    CheckoutService
   ],
   bootstrap: [AppComponent]
 })
