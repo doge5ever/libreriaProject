@@ -49,6 +49,13 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getField = (str1: string, str2: string, str3?: string): FormGroup => {
+    if (str3) {
+      return this.checkoutForm.get(str1).get(str2).get(str3) as FormGroup;
+    } else {
+      return this.checkoutForm.get(str1).get(str2) as FormGroup;
+    }
+  }
 
   submitForm = (form): void => {
     // this.checkoutService.updateForm(form.value);
