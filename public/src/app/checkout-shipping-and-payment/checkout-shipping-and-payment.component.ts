@@ -9,6 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CheckoutShippingAndPaymentComponent implements OnInit {
   checkoutForm: FormGroup;
+  maxLength: number = 100;
+  namePattern: RegExp = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/;
+  zipPattern: RegExp = /^(\d{5}(?:\-\d{4})?)$/;
 
   constructor(
     private checkoutService: CheckoutService,
@@ -16,30 +19,70 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   ) {
     this.checkoutForm = fb.group({
       contactDetails: fb.group({
-        firstName: [null, Validators.required],
-        lastName: [null, Validators.required],
-        emailAddress: [null, Validators.required],
+        firstName: [null, [
+          Validators.required,
+          Validators.min(3),
+          Validators.max(this.maxLength),
+          Validators.pattern(this.namePattern)
+        ]],
+        lastName: [null, [
+          Validators.required,
+          Validators.min(3),
+          Validators.max(this.maxLength),
+          Validators.pattern(this.namePattern)
+        ]],
+        emailAddress: [null, [
+          Validators.required,
+          Validators.email
+        ]],
         phoneNumber:null
       }), 
       shippingAddress: fb.group({
-        streetAddress: [null, Validators.required],
-        city:[null, Validators.required],
+        streetAddress: [null, [
+          Validators.required,
+          Validators.min(5),
+          Validators.max(this.maxLength)
+        ]],
+        city:[null, [
+          Validators.required,
+          Validators.min(3),
+          Validators.max(this.maxLength)
+        ]],
         state:[null, Validators.required],
-        zipCode:[null, Validators.required],
+        zipCode:[null, [
+          Validators.required,
+          Validators.pattern(this.zipPattern)
+        ]],
         country:[null, Validators.required]
         }),
       paymentMethod: fb.group({
         nameOnCard:[null, Validators.required],
-        creditCardNumber:[null, Validators.required],
+        creditCardNumber:[null, [
+          Validators.required,
+          Validators.pattern(/\d{16}/)
+        ]],
         expMonth:[null, Validators.required],
         expYear:[null, Validators.required],
-        CVV:[null, Validators.required],
+        CVV:[null, [
+          Validators.required,
+          Validators.pattern(/\d{3,4}/)
+        ]],
         billingAddress: fb.group({
-          isSameAddress:[null, Validators.required],
-          streetAddress:[null, Validators.required],
-          city:[null, Validators.required],
+          streetAddress: [null, [
+            Validators.required,
+            Validators.min(5),
+            Validators.max(this.maxLength)
+          ]],
+          city:[null, [
+            Validators.required,
+            Validators.min(3),
+            Validators.max(this.maxLength)
+          ]],
           state:[null, Validators.required],
-          zipCode:[null, Validators.required],
+          zipCode:[null, [
+            Validators.required,
+            Validators.pattern(this.zipPattern)
+          ]],
           country:[null, Validators.required]
         }),  
       }),
@@ -49,7 +92,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getField = (str1: string, str2: string, str3?: string): FormGroup => {
+  getFormControl = (str1: string, str2: string, str3?: string): FormGroup => {
     if (str3) {
       return this.checkoutForm.get(str1).get(str2).get(str3) as FormGroup;
     } else {
@@ -58,7 +101,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   }
 
   submitForm = (form): void => {
-    console.log(this.getField('contactDetails', 'firstName'));
+    console.log(this.getFormControl('contactDetails', 'firstName'));
     console.log(this.checkoutForm.value);
   }
 }
