@@ -99,39 +99,41 @@
     </table>
     <h1>Billing Address</h1>
     <div formGroupName="billingAddress">
-    <input type="checkbox">Billing address is the same as the Shipping Address.
-      <table>
-        <tr>
-          <td>Street Address:</td>
-          <td><input type="text" formControlName="streetAddress" ></td>
-        </tr>
-        <tr>
-          <td>City:</td>
-          <td><input type="text" formControlName="city" ></td>
-        </tr>
-        <tr>
-          <td>State:</td>
-          <td>
-            <select formControlName="state" >
-              <option>Select State</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>Zip Code:</td>
-          <td>
-            <input type="text" formControlName="zipCode" >
-          </td>
-        </tr>
-        <tr>
-          <td>Country:</td>
-          <td>
-            <select type="text" formControlName="country" >
-              <option>Select Country</option>
-            </select>
-          </td>
-        </tr>
-      </table>
+    <input type="checkbox" formControlName="sameAddressCheckbox">Billing address is the same as the Shipping Address.
+      <div [hidden]="this.getFormControl('paymentMethod', 'billingAddress', 'sameAddressCheckbox').value">
+        <table>
+          <tr>
+            <td>Street Address:</td>
+            <td><input type="text" formControlName="streetAddress" ></td>
+          </tr>
+          <tr>
+            <td>City:</td>
+            <td><input type="text" formControlName="city" ></td>
+          </tr>
+          <tr>
+            <td>State:</td>
+            <td>
+              <select formControlName="state" >
+                <option>Select State</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Zip Code:</td>
+            <td>
+              <input type="text" formControlName="zipCode" >
+            </td>
+          </tr>
+          <tr>
+            <td>Country:</td>
+            <td>
+              <select type="text" formControlName="country" >
+                <option>Select Country</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
     <button type="submit">Continue</button>
   </div>
