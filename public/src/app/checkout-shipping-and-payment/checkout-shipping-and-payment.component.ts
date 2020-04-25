@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckoutService } from '../checkout.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'checkout-app-shipping-and-payment',
@@ -8,7 +8,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./checkout-shipping-and-payment.component.scss']
 })
 export class CheckoutShippingAndPaymentComponent implements OnInit {
-  checkoutForm: Object;
+  checkoutForm: FormGroup;
 
   constructor(
     private checkoutService: CheckoutService,
@@ -50,6 +50,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   }
 
   submitForm = (form): void => {
-    this.checkoutService.updateForm(form.value);
+    // this.checkoutService.updateForm(form.value);
+    console.log(this.checkoutForm.value);
   }
 }
