@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckoutService } from '../checkout.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'checkout-app-shipping-and-payment',
@@ -10,17 +11,39 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   checkoutForm: Object;
 
   constructor(
-    private checkoutService: CheckoutService
+    private checkoutService: CheckoutService,
+    private fb: FormBuilder
   ) {
-    this.checkoutForm = {
+    this.checkoutForm = fb.group({
       contactDetails: {
-        firstName: ''
-      },
-      shippingAddress: {},
+        firstName: null,
+        lastName: null,
+        emailAddress: null,
+        phoneNumber: null
+      }, 
+      shippingAddress: {
+        streetAddress: null,
+        city: null,
+        state: null,
+        zipCode: null,
+        country: null
+        },
       paymentMethod: {
-        billingAddress: {}
-      }
-    }
+        nameOnCard: null,
+        creditCardNumber: null,
+        expMonth: null,
+        expYear: null,
+        CVV: null,
+        billingAddress: {
+          isSameAddress: null,
+          streetAddress: null,
+          city: null,
+          state: null,
+          zipCode: null,
+          country: null
+        },  
+      },
+    })
   };
 
   ngOnInit(): void {
