@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckoutService } from '../checkout.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'checkout-app-shipping-and-payment',
@@ -16,31 +16,31 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   ) {
     this.checkoutForm = fb.group({
       contactDetails: fb.group({
-        firstName: null,
-        lastName: null,
-        emailAddress: null,
-        phoneNumber: null
+        firstName: [null, Validators.required],
+        lastName: [null, Validators.required],
+        emailAddress: [null, Validators.required],
+        phoneNumber:null
       }), 
       shippingAddress: fb.group({
-        streetAddress: null,
-        city: null,
-        state: null,
-        zipCode: null,
-        country: null
+        streetAddress: [null, Validators.required],
+        city:[null, Validators.required],
+        state:[null, Validators.required],
+        zipCode:[null, Validators.required],
+        country:[null, Validators.required]
         }),
       paymentMethod: fb.group({
-        nameOnCard: null,
-        creditCardNumber: null,
-        expMonth: null,
-        expYear: null,
-        CVV: null,
+        nameOnCard:[null, Validators.required],
+        creditCardNumber:[null, Validators.required],
+        expMonth:[null, Validators.required],
+        expYear:[null, Validators.required],
+        CVV:[null, Validators.required],
         billingAddress: fb.group({
-          isSameAddress: null,
-          streetAddress: null,
-          city: null,
-          state: null,
-          zipCode: null,
-          country: null
+          isSameAddress:[null, Validators.required],
+          streetAddress:[null, Validators.required],
+          city:[null, Validators.required],
+          state:[null, Validators.required],
+          zipCode:[null, Validators.required],
+          country:[null, Validators.required]
         }),  
       }),
     })
@@ -48,6 +48,8 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  get 
 
   submitForm = (form): void => {
     // this.checkoutService.updateForm(form.value);
