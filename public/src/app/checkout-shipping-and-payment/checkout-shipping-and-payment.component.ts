@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CheckoutShippingAndPaymentComponent implements OnInit {
   checkoutForm: FormGroup;
   maxLength: number = 100;
-  namePattern: RegExp = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/;
+  namePattern: RegExp = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*$/;
   zipPattern: RegExp = /^(\d{5}(?:\-\d{4})?)$/;
 
   constructor(
@@ -59,15 +59,16 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
         nameOnCard:[null, Validators.required],
         creditCardNumber:[null, [
           Validators.required,
-          Validators.pattern(/\d{16}/)
+          Validators.pattern(/^\d{16}$/)
         ]],
         expMonth:[null, Validators.required],
         expYear:[null, Validators.required],
         CVV:[null, [
           Validators.required,
-          Validators.pattern(/\d{3,4}/)
+          Validators.pattern(/^\d{3,4}$/)
         ]],
         billingAddress: fb.group({
+          sameAddressCheckbox: false,
           streetAddress: [null, [
             Validators.required,
             Validators.min(5),
@@ -103,5 +104,6 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   submitForm = (form): void => {
     console.log(this.getFormControl('contactDetails', 'firstName'));
     console.log(this.checkoutForm.value);
+    console.log(this.getFormControl('paymentMethod', 'billingAddress', 'sameAddressCheckbox'))
   }
 }
