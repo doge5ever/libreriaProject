@@ -13,44 +13,48 @@
         </div>
       </div>
   </div>
-  <div id="contact-details" class="flat-card">
+</form>
+<div>
+</div>
+<form #checkoutForm="ngForm"  (ngSubmit)="submitForm(checkoutForm)">
+  <div id="contact-details" class="flat-card" ngModelGroup="contactDetails">
     <h1>Contact Details</h1>
     <table>
       <tr>
         <td>First Name:</td>
-        <td><input type="text"></td>
+        <td><input type="text" name="firstName" required ngModel></td>
       </tr>
       <tr>
         <td>Last Name:</td>
-        <td><input type="text"></td>
+        <td><input type="text" name="lastName" required ngModel></td>
       </tr>
       <tr>
         <td>Email Address:</td>
         <td>
-          <input type="text">
+          <input type="text" name="emailAddress" required ngModel>
         </td>
       </tr>
       <tr>
         <td>Phone Number:</td>
-        <td><input type="text"></td>
+        <td><input type="text" name="phoneNumber" required ngModel></td>
       </tr>
     </table>
   </div>
-  <div id="shipping-address" class="flat-card">
+  <div id="shipping-address" class="flat-card" ngModelGroup="shippingAddress">
     <h1>Shipping Address</h1>
     <table>
       <tr>
         <td>Street Address:</td>
-        <td><input type="text"></td>
+        <td><input type="text" name="streetAddress" required ngModel></td>
       </tr>
       <tr>
         <td>City:</td>
-        <td><input type="text"></td>
+        <td><input type="text" name="city" required ngModel></td>
       </tr>
       <tr>
         <td>State:</td>
         <td>
-          <select>
+          <select name="state" required ngModel>
             <option>Select State</option>
           </select>
         </td>
@@ -58,75 +62,77 @@
       <tr>
         <td>Zip Code:</td>
         <td>
-          <input type="text">
+          <input type="text" name="zipCode" required ngModel>
         </td>
       </tr>
       <tr>
         <td>Country:</td>
         <td>
-          <select type="text">
+          <select type="text" name="country" required ngModel>
             <option>Select Country</option>
           </select>
         </td>
       </tr>
     </table>
   </div>
-  <div id="Payment Method" class="flat-card">
+  <div id="Payment Method" class="flat-card" ngModelGroup="paymentMethod">
     <h1>Payment Method</h1>
     <table>
       <tr>
         <td>Name on Card</td>
-        <td><input type="text"></td>
+        <td><input type="text" name="nameOnCard" required ngModel></td>
       </tr>
       <tr>
         <td>Credit Card Number</td>
-        <td><input type="text"></td>
+        <td><input type="text" name="creditCardNumber" required ngModel></td>
       </tr>
       <tr>
         <td>Exp Month</td>
-        <td><input type="text"></td>
+        <td><input type="text" name="expMonth" required ngModel></td>
         <td>Exp Year</td>
-        <td><input type="text"></td>
+        <td><input type="text" name="expYear" required ngModel></td>
         <td>CVV</td>
-        <td><input type="text"></td>
+        <td><input type="text" name="CVV" required ngModel></td>
       </tr>
       <tr>
       </tr>
     </table>
     <h1>Billing Address</h1>
+    <div ngModelGroup="billingAddress">
     <input type="checkbox">Billing address is the same as the Shipping Address.
-    <table>
-      <tr>
-        <td>Street Address:</td>
-        <td><input type="text"></td>
-      </tr>
-      <tr>
-        <td>City:</td>
-        <td><input type="text"></td>
-      </tr>
-      <tr>
-        <td>State:</td>
-        <td>
-          <select>
-            <option>Select State</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>Zip Code:</td>
-        <td>
-          <input type="text">
-        </td>
-      </tr>
-      <tr>
-        <td>Country:</td>
-        <td>
-          <select type="text">
-            <option>Select Country</option>
-          </select>
-        </td>
-      </tr>
-    </table>
+      <table>
+        <tr>
+          <td>Street Address:</td>
+          <td><input type="text" name="streetAddress" ngModel></td>
+        </tr>
+        <tr>
+          <td>City:</td>
+          <td><input type="text" name="city" ngModel></td>
+        </tr>
+        <tr>
+          <td>State:</td>
+          <td>
+            <select name="state" ngModel>
+              <option>Select State</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Zip Code:</td>
+          <td>
+            <input type="text" name="zipCode" ngModel>
+          </td>
+        </tr>
+        <tr>
+          <td>Country:</td>
+          <td>
+            <select type="text" name="country" ngModel>
+              <option>Select Country</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
     <button type="submit">Continue</button>
   </div>
 </form>
