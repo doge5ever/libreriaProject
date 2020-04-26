@@ -123,8 +123,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     }
   }
 
-  submitForm = (form): void => {
-    console.log("This is the form:", this.checkoutForm.valid)
-    console.log(this.getFormControl('paymentMethod', 'billingAddress'))
+  submitForm = (): void => {
+    this.checkoutService.updateForm(this.checkoutForm.value)
   }
 }

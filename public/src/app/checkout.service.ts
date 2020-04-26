@@ -1,65 +1,64 @@
 import { Injectable } from '@angular/core';
 
-interface checkoutInterface {
-  contactDetails: {
-      firstName: string,
-      lastName: string,
-      emailAddress: string,
-      phoneNumber?: number
-    }, 
-  shippingAddress: {
-    streetAddress: string,
-    city: string,
-    state: string,
-    zipCode: number,
-    country: string
-    },
-  paymentMethod: {
-    nameOnCard: string,
-    creditCardNumber: number,
-    expMonth: number,
-    expYear: number,
-    CVV: number,
-    billingAddress: {
-      isSameAddress: boolean,
-      streetAddress: string,
-      city: string,
-      state: string,
-      zipCode: number,
-      country: string
-    },  
-  },
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class CheckoutService {
-  checkoutForm: checkoutInterface;
+  checkoutForm: Object;
 
   constructor() {
+    // this.checkoutForm = {
+    //   contactDetails: {
+    //     firstName: undefined,
+    //     lastName: undefined,
+    //     emailAddress: undefined,
+    //     phoneNumber: undefined
+    //   }, 
+    //   shippingAddress: {
+    //     streetAddress: undefined,
+    //     city: undefined,
+    //     state: undefined,
+    //     zipCode: undefined,
+    //     country: undefined
+    //     },
+    //   paymentMethod: {
+    //     nameOnCard: undefined,
+    //     creditCardNumber: undefined,
+    //     expMonth: undefined,
+    //     expYear: undefined,
+    //     CVV: undefined,
+    //     billingAddress: {
+    //       isSameAddress: undefined,
+    //       streetAddress: undefined,
+    //       city: undefined,
+    //       state: undefined,
+    //       zipCode: undefined,
+    //       country: undefined
+    //     },  
+    //   },
+    // }
     this.checkoutForm = {
       contactDetails: {
-        firstName: undefined,
-        lastName: undefined,
-        emailAddress: undefined,
-        phoneNumber: undefined
+        firstName: 'Dominic',
+        lastName: 'Awa',
+        emailAddress: 'domdomawa@gmail.com',
+        phoneNumber: '4088763099'
       }, 
       shippingAddress: {
-        streetAddress: undefined,
-        city: undefined,
-        state: undefined,
-        zipCode: undefined,
-        country: undefined
+        streetAddress: '5454 Rudy Dr.',
+        city: 'San Jose',
+        state: 'CA',
+        zipCode: '95124',
+        country: 'United States of America'
         },
       paymentMethod: {
-        nameOnCard: undefined,
-        creditCardNumber: undefined,
-        expMonth: undefined,
-        expYear: undefined,
-        CVV: undefined,
+        nameOnCard: 'Dominic Awa',
+        creditCardNumber: '1234123412341234',
+        expMonth: '01',
+        expYear: '20',
+        CVV: '123',
         billingAddress: {
-          isSameAddress: undefined,
+          isSameAddress: true,
           streetAddress: undefined,
           city: undefined,
           state: undefined,
@@ -67,11 +66,10 @@ export class CheckoutService {
           country: undefined
         },  
       },
-
     }
   }
 
-  updateForm = (form: checkoutInterface):void => {
+  updateForm = (form: Object):void => {
     console.log("this is the form submitted", form)
     Object.keys(form).forEach((key) => {
       this.checkoutForm[key] = form[key];
@@ -80,7 +78,7 @@ export class CheckoutService {
     console.log("Updated the checkout form: ", this.checkoutForm)
   }
 
-  getForm = ():checkoutInterface => {
+  getForm = () => {
     return this.checkoutForm;
   }
 }
