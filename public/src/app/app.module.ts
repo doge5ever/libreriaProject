@@ -25,6 +25,7 @@ import { CheckoutPlaceOrderComponent } from './checkout-place-order/checkout-pla
 import { CheckoutService } from './checkout.service';
 import { CartService } from './cart.service';
 import { RandombooksService } from './randombooks.service';
+import { FieldErrorsComponent } from './field-errors/field-errors.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { RandombooksService } from './randombooks.service';
     CheckoutSignInComponent,
     CheckoutShippingAndPaymentComponent,
     CheckoutPlaceOrderComponent,
+    FieldErrorsComponent,
   ],
   imports: [
     BrowserModule,
