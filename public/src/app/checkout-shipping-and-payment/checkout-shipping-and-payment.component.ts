@@ -29,42 +29,65 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
             Validators.pattern(this.namePattern),
           ],
         }],
-        lastName: [null, [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(this.maxLength),
-          Validators.pattern(this.namePattern)
-        ]],
-        emailAddress: [null, [
-          Validators.required,
-          Validators.email
-        ]],
+        lastName: [null, {
+          updateOn: 'blur',
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(this.maxLength),
+            Validators.pattern(this.namePattern)
+          ]
+        }],
+        emailAddress: [null, {
+          updateOn: 'blur',
+          validators: [
+            Validators.required,
+            Validators.email
+          ]
+        }],
         phoneNumber:null
       }), 
       shippingAddress: fb.group({
-        streetAddress: [null, [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(this.maxLength)
-        ]],
-        city:[null, [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(this.maxLength)
-        ]],
+        streetAddress: [null, {
+          updateOn: 'blur',
+          validators: [
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(this.maxLength)
+          ]
+        }],
+        city:[null, {
+          updateOn: 'blur',
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(this.maxLength)
+          ]
+        }],
         state:[null, Validators.required],
-        zipCode:[null, [
-          Validators.required,
-          Validators.pattern(this.zipPattern)
-        ]],
+        zipCode:[null, {
+          updateOn: 'blur',
+          validators: [
+            Validators.required,
+            Validators.pattern(this.zipPattern)
+          ]
+        }],
         country:[null, Validators.required]
         }),
       paymentMethod: fb.group({
-        nameOnCard:[null, Validators.required],
-        creditCardNumber:[null, [
-          Validators.required,
-          Validators.pattern(/^\d{16}$/)
-        ]],
+        nameOnCard:[null, {
+          updateOn: 'blur',
+          validators: [
+            Validators.required
+          ]
+        }],
+        creditCardNumber:[null, {
+          updateOn: 'blur',
+          validators: [
+            Validators.required,
+            Validators.pattern(/^\d{16}$/)
+          ]
+        }],
         expMonth:[null, Validators.required],
         expYear:[null, Validators.required],
         CVV:[null, [
@@ -73,23 +96,32 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
         ]],
         billingAddress: fb.group({
           sameAddressCheckbox: false,
-          streetAddress: [{disabled: false, value: null}, [
-            Validators.required,
-            Validators.minLength(5),
-            Validators.maxLength(this.maxLength),
-          ]],
-          city:[{disabled: false, value: null}, [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(this.maxLength),
-          ]],
+          streetAddress: [{disabled: false, value: null}, {
+            updateOn: 'blur',
+            validators: [
+              Validators.required,
+              Validators.minLength(5),
+              Validators.maxLength(this.maxLength),
+            ]
+          }],
+          city:[{disabled: false, value: null}, {
+            updateOn: 'blur',
+            validators: [
+              Validators.required,
+              Validators.minLength(3),
+              Validators.maxLength(this.maxLength),
+            ]
+          }],
           state:[{disabled: false, value: null}, [
             Validators.required,
             ]],
-          zipCode:[{disabled: false, value: null}, [
-            Validators.required,
-            Validators.pattern(this.zipPattern),
-          ]],
+          zipCode:[{disabled: false, value: null}, {
+            updateOn: 'blur',
+            validators: [
+              Validators.required,
+              Validators.pattern(this.zipPattern),
+            ]
+          }],
           country:[{disabled: false, value: null}, [
             Validators.required,
           ]]
