@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckoutService } from '../checkout.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CustomValidators } from '../custom-validators';
 
 @Component({
   selector: 'checkout-app-shipping-and-payment',
@@ -19,12 +20,15 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   ) {
     this.checkoutForm = fb.group({
       contactDetails: fb.group({
-        firstName: [null, [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(this.maxLength),
-          Validators.pattern(this.namePattern)
-        ]],
+        firstName: [null, {
+          updateOn: 'blur',
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(this.maxLength),
+            Validators.pattern(this.namePattern),
+          ],
+        }],
         lastName: [null, [
           Validators.required,
           Validators.minLength(3),
@@ -121,6 +125,21 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     } else {
       return this.checkoutForm.get(str1).get(str2) as FormGroup;
     }
+  }
+
+  showError = (strArray: Array<string>, errorType:string): boolean => { 
+    if (strArray.length === 2) {
+      var formControl = this.getFormControl(strArray[0], strArray[1])
+    } else if (strArray.length === 3) {
+      var formControl = this.getFormControl(strArray[0], strArray[1], strArray[2])
+    } else {
+      let formControl = null
+      throw('Array must have length of either 2 or 3.')
+    }
+    if (formControl.errors && formControl.errors[errorType]) {
+      return (formControl.errors[errorType] && (formControl.dirty && formControl.touched))
+    }
+    return false;
   }
 
   submitForm = (): void => {
