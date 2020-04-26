@@ -8,101 +8,68 @@
     <h1>Contact Details</h1>
     <table>
       <tr>
-        <td>First Name:</td>
-        <td>Insert text here</td>
-      </tr>
-      <tr>
-        <td>Last Name:</td>
-        <td>Insert text here</td>
+        <td>Name:</td>
+        <td>{{checkoutForm.contactDetails.firstName + ' ' + checkoutForm.contactDetails.lastName}}</td>
       </tr>
       <tr>
         <td>Email Address:</td>
         <td>
-          Insert text here
+          {{checkoutForm.contactDetails.emailAddress}}
         </td>
       </tr>
       <tr>
         <td>Phone Number:</td>
-        <td>Insert text here</td>
+        <td>{{checkoutForm.contactDetails.phoneNumber}}</td>
       </tr>
     </table>
   </div>
   <div id="shipping-address" class="flat-card">
-    <h1>Shipping Address</h1>
-    <table>
-      <tr>
-        <td>Street Address:</td>
-        <td>Insert text here</td>
-      </tr>
-      <tr>
-        <td>City:</td>
-        <td>Insert text here</td>
-      </tr>
-      <tr>
-        <td>State:</td>
-        <td>Insert text here</td>
-      </tr>
-      <tr>
-        <td>Zip Code:</td>
-        <td>Insert text here</td>
-      </tr>
-      <tr>
-        <td>Country:</td>
-        <td>Insert text here</td>
-      </tr>
-    </table>
-  </div>
+    <h1>Shipping Address:</h1>
+    <p>
+      {{checkoutForm.shippingAddress.streetAddress}}<br>
+      {{checkoutForm.shippingAddress.city}}, 
+      {{checkoutForm.shippingAddress.state}} 
+      {{checkoutForm.shippingAddress.zipCode}}<br>
+      {{checkoutForm.shippingAddress.country}}
+    </p>
+    </div>
   <div id="Payment Method" class="flat-card">
     <h1>Payment Method</h1>
     <table>
       <tr>
         <td>Name on Card</td>
-        <td>Insert text here</td>
+        <td>{{checkoutForm.paymentMethod.nameOnCard}}</td>
       </tr>
       <tr>
         <td>Credit Card Number</td>
-        <td>Insert text here</td>
+        <td>{{checkoutForm.paymentMethod.creditCardNumber}}</td>
       </tr>
       <tr>
-        <td>Exp Month</td>
-        <td>Insert text here</td>
-      </tr>
-      <tr>
-        <td>Exp Year</td>
-        <td>Insert text here</td>
+        <td>Exp Month/Exp Year</td>
+        <td>{{checkoutForm.paymentMethod.expMonth}}/{{checkoutForm.paymentMethod.expYear}}</td>
       </tr>
       <tr>
         <td>CVV</td>
-        <td>Insert text here</td>
+        <td>{{checkoutForm.paymentMethod.CVV}}</td>
       </tr>
       <tr>
       </tr>
     </table>
     <h1>Billing Address</h1>
-    <table>
-      <tr>
-        <td>Street Address:</td>
-        <td>Insert text here</td>
-      </tr>
-      <tr>
-        <td>City:</td>
-        <td>Insert text here</td>
-      </tr>
-      <tr>
-        <td>State:</td>
-        <td>Insert text here</td>
-      </tr>
-      <tr>
-        <td>Zip Code:</td>
-        <td>
-          Insert text here
-        </td>
-      </tr>
-      <tr>
-        <td>Country:</td>
-        <td>Insert text here</td>
-      </tr>
-    </table>
+    <p *ngIf="checkoutForm.paymentMethod.billingAddress.isSameAddress; else elseBlock">
+      {{checkoutForm.shippingAddress.streetAddress}}<br>
+      {{checkoutForm.shippingAddress.city}}, 
+      {{checkoutForm.shippingAddress.state}} 
+      {{checkoutForm.shippingAddress.zipCode}}<br>
+      {{checkoutForm.shippingAddress.country}}
+    </p>
+    <ng-template #elseBlock>
+      {{checkoutForm.paymentMethod.billingAddress.streetAddress}}<br>
+      {{checkoutForm.paymentMethod.billingAddress.city}}, 
+      {{checkoutForm.paymentMethod.billingAddress.state}} 
+      {{checkoutForm.paymentMethod.billingAddress.zipCode}}<br>
+      {{checkoutForm.paymentMethod.billingAddress.country}}
+    </ng-template>
     <button>Confirm & Place Order</button>
   </div>
 </form>
