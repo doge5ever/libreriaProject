@@ -159,19 +159,22 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     }
   }
 
-  showError = (strArray: Array<string>, errorType:string): boolean => { 
-    if (strArray.length === 2) {
-      var formControl = this.getFormControl(strArray[0], strArray[1])
-    } else if (strArray.length === 3) {
-      var formControl = this.getFormControl(strArray[0], strArray[1], strArray[2])
-    } else {
-      let formControl = null
-      throw('Array must have length of either 2 or 3.')
-    }
-    if (formControl.errors && formControl.errors[errorType]) {
-      return (formControl.errors[errorType] && (formControl.dirty && formControl.touched))
-    }
-    return false;
+  // showError = (strArray: Array<string>, errorType:string): boolean => { 
+  //   if (strArray.length === 2) {
+  //     var formControl = this.getFormControl(strArray[0], strArray[1])
+  //   } else if (strArray.length === 3) {
+  //     var formControl = this.getFormControl(strArray[0], strArray[1], strArray[2])
+  //   } else {
+  //     let formControl = null
+  //     throw('Array must have length of either 2 or 3.')
+  //   }
+  //   if (formControl.errors && formControl.errors[errorType]) {
+  //     return (formControl.errors[errorType] && (formControl.dirty && formControl.touched))
+  //   }
+  //   return false;
+  // }
+  isEmpty = (obj: Object): boolean => {
+    return (Object.keys(obj).length === 0 && obj.constructor === Object)
   }
 
   submitForm = (): void => {

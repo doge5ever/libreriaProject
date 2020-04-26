@@ -26,11 +26,12 @@
           <input type="text" formControlName="firstName">
         </td>
       </tr>
-      <tr *ngIf="showError(['contactDetails', 'firstName'], 'required')" class="error-msg">
+      <tr>
         <td></td>
-        <td>First Name is required.</td>
+        <td>
+          <field-errors fieldName="First Name" [formControl]="getFormControl('contactDetails', 'firstName')"></field-errors>
+        </td>
       </tr>
-      
       <tr>
         <td>Last Name:</td>
         <td><input type="text" formControlName="lastName"></td>
