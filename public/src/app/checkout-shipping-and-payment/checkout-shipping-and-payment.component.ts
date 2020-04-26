@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CheckoutService } from '../checkout.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from '../custom-validators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'checkout-app-shipping-and-payment',
@@ -13,6 +14,8 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   maxLength: number = 100;
   namePattern: RegExp = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*$/;
   zipPattern: RegExp = /^(\d{5}(?:\-\d{4})?)$/;
+  error;
+
 
   constructor(
     private checkoutService: CheckoutService,
@@ -159,25 +162,72 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     }
   }
 
-  // showError = (strArray: Array<string>, errorType:string): boolean => { 
-  //   if (strArray.length === 2) {
-  //     var formControl = this.getFormControl(strArray[0], strArray[1])
-  //   } else if (strArray.length === 3) {
-  //     var formControl = this.getFormControl(strArray[0], strArray[1], strArray[2])
-  //   } else {
-  //     let formControl = null
-  //     throw('Array must have length of either 2 or 3.')
-  //   }
-  //   if (formControl.errors && formControl.errors[errorType]) {
-  //     return (formControl.errors[errorType] && (formControl.dirty && formControl.touched))
-  //   }
-  //   return false;
-  // }
+  errorMessage = (formControl: FormGroup, fieldName: string) => {
+    let displayError: string;
+    let errorPriority: Array<string> = [
+      'required',
+      'requiredTrue',
+      'minlength',
+      'maxlength',
+      'min',
+      'max',
+      'pattern',
+      'email'
+    ];
+    return Observable.create((subscriber) => {
+      formControl.valueChanges.subscribe(() => {
+        console.log("emitted a value!")
+        if (formControl.errors) {
+          for (let i=0; i<errorPriority.length; i++) {
+            let errorsOfForm = Object.keys(formControl.errors);
+            if (errorsOfForm.includes(errorPriority[i])) {
+              displayError = errorPriority[i];
+              break;
+            }
+          }
+        } else {
+          displayError = 'noError';
+        }
+        switch (displayError) {
+          case 'required':
+            console.log("Must display an error.")
+            subscriber.next(`${fieldName} is required.`);
+            break;
+          case 'requiredTrue':
+            subscriber.next(`${fieldName} is required.`);
+            break;
+          case 'pattern':
+            subscriber.next(`${fieldName} provided is invalid.`);
+            break;
+          case 'email':
+            subscriber.next(`Email address provided is invalid.`);
+            break;
+          case 'minlength':
+            subscriber.next(`${fieldName} must have at least ${formControl.errors.minlength.requiredLength} characters.`);
+            break;
+          case 'maxlength':
+            subscriber.next(`${fieldName} must have at most ${formControl.errors.maxlength.requiredLength} characters.`);
+            break;
+          case 'min':
+            subscriber.next(`${fieldName} must be at least n.`);
+            break;
+          case 'max':
+            subscriber.next( `${fieldName} must be at most n.`);
+            break;
+          default:
+            subscriber.next('');
+            break;
+          }  
+      })
+    })
+  }
+
   isEmpty = (obj: Object): boolean => {
     return (Object.keys(obj).length === 0 && obj.constructor === Object)
   }
 
   submitForm = (): void => {
     this.checkoutService.updateForm(this.checkoutForm.value)
+
   }
 }
