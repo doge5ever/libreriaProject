@@ -21,14 +21,14 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
       contactDetails: fb.group({
         firstName: [null, [
           Validators.required,
-          Validators.min(3),
-          Validators.max(this.maxLength),
+          Validators.minLength(3),
+          Validators.maxLength(this.maxLength),
           Validators.pattern(this.namePattern)
         ]],
         lastName: [null, [
           Validators.required,
-          Validators.min(3),
-          Validators.max(this.maxLength),
+          Validators.minLength(3),
+          Validators.maxLength(this.maxLength),
           Validators.pattern(this.namePattern)
         ]],
         emailAddress: [null, [
@@ -40,13 +40,13 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
       shippingAddress: fb.group({
         streetAddress: [null, [
           Validators.required,
-          Validators.min(5),
-          Validators.max(this.maxLength)
+          Validators.minLength(5),
+          Validators.maxLength(this.maxLength)
         ]],
         city:[null, [
           Validators.required,
-          Validators.min(3),
-          Validators.max(this.maxLength)
+          Validators.minLength(3),
+          Validators.maxLength(this.maxLength)
         ]],
         state:[null, Validators.required],
         zipCode:[null, [
@@ -69,25 +69,47 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
         ]],
         billingAddress: fb.group({
           sameAddressCheckbox: false,
-          streetAddress: [null, [
+          streetAddress: [{disabled: false, value: null}, [
             Validators.required,
-            Validators.min(5),
-            Validators.max(this.maxLength)
+            Validators.minLength(5),
+            Validators.maxLength(this.maxLength),
           ]],
-          city:[null, [
+          city:[{disabled: false, value: null}, [
             Validators.required,
-            Validators.min(3),
-            Validators.max(this.maxLength)
+            Validators.minLength(3),
+            Validators.maxLength(this.maxLength),
           ]],
-          state:[null, Validators.required],
-          zipCode:[null, [
+          state:[{disabled: false, value: null}, [
             Validators.required,
-            Validators.pattern(this.zipPattern)
+            ]],
+          zipCode:[{disabled: false, value: null}, [
+            Validators.required,
+            Validators.pattern(this.zipPattern),
           ]],
-          country:[null, Validators.required]
+          country:[{disabled: false, value: null}, [
+            Validators.required,
+          ]]
         }),  
       }),
     })
+
+    this.getFormControl('paymentMethod', 'billingAddress', 'sameAddressCheckbox').valueChanges
+      .subscribe(checked => {
+        if (checked) {
+          this.getFormControl('paymentMethod', 'billingAddress', 'streetAddress').disable()
+          this.getFormControl('paymentMethod', 'billingAddress', 'city').disable()
+          this.getFormControl('paymentMethod', 'billingAddress', 'state').disable()
+          this.getFormControl('paymentMethod', 'billingAddress', 'zipCode').disable()
+          this.getFormControl('paymentMethod', 'billingAddress', 'country').disable()
+        }
+        else {
+          this.getFormControl('paymentMethod', 'billingAddress', 'streetAddress').enable()
+          this.getFormControl('paymentMethod', 'billingAddress', 'city').enable()
+          this.getFormControl('paymentMethod', 'billingAddress', 'state').enable()
+          this.getFormControl('paymentMethod', 'billingAddress', 'zipCode').enable()
+          this.getFormControl('paymentMethod', 'billingAddress', 'country').enable()
+        }
+    });
   };
 
   ngOnInit(): void {
@@ -102,8 +124,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   }
 
   submitForm = (form): void => {
-    console.log(this.getFormControl('contactDetails', 'firstName'));
-    console.log(this.checkoutForm.value);
-    console.log(this.getFormControl('paymentMethod', 'billingAddress', 'sameAddressCheckbox'))
+    console.log("This is the form:", this.checkoutForm.valid)
+    console.log(this.getFormControl('paymentMethod', 'billingAddress'))
   }
 }

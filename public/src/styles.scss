@@ -107,3 +107,8 @@ input.cart {
   font-size: 18px;
   box-shadow: 1pt 1pt rgba(0,0,0,0.5);
 }
+
+
+input.ng-invalid.ng-dirty.ng-touched {
+  border-color: red;
+}
