@@ -28,13 +28,19 @@
       </tr>
       <tr>
         <td></td>
-        <td>
-          <!-- value should be here -->
+        <td class="error-msg">
+          {{errorMessageObsObj['contactDetails firstName'] | async}}
         </td>
       </tr>
       <tr>
         <td>Last Name:</td>
         <td><input type="text" formControlName="lastName"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="error-msg">
+          {{errorMessageObsObj['contactDetails lastName'] | async}}
+        </td>
       </tr>
       <tr>
         <td>Email Address:</td>
@@ -43,8 +49,20 @@
         </td>
       </tr>
       <tr>
+        <td></td>
+        <td class="error-msg">
+          {{errorMessageObsObj['contactDetails emailAddress'] | async}}
+        </td>
+      </tr>
+      <tr>
         <td>Phone Number:</td>
         <td><input type="text" formControlName="phoneNumber"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="error-msg">
+          {{errorMessageObsObj['contactDetails phoneNumber'] | async}}
+        </td>
       </tr>
     </table>
   </div>
@@ -56,8 +74,20 @@
         <td><input type="text" formControlName="streetAddress"></td>
       </tr>
       <tr>
+        <td></td>
+        <td class="error-msg">
+          {{errorMessageObsObj['shippingAddress streetAddress'] | async}}
+        </td>
+      </tr>
+      <tr>
         <td>City:</td>
         <td><input type="text" formControlName="city"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="error-msg">
+          {{errorMessageObsObj['shippingAddress city'] | async}}
+        </td>
       </tr>
       <tr>
         <td>State:</td>
@@ -68,9 +98,21 @@
         </td>
       </tr>
       <tr>
+        <td></td>
+        <td class="error-msg">
+          {{errorMessageObsObj['shippingAddress state'] | async}}
+        </td>
+      </tr>
+      <tr>
         <td>Zip Code:</td>
         <td>
           <input type="text" formControlName="zipCode">
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="error-msg">
+          {{errorMessageObsObj['shippingAddress zipCode'] | async}}
         </td>
       </tr>
       <tr>
@@ -79,6 +121,12 @@
           <select type="text" formControlName="country">
             <option>Select Country</option>
           </select>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="error-msg">
+          {{errorMessageObsObj['shippingAddress country'] | async}}
         </td>
       </tr>
     </table>
@@ -91,8 +139,20 @@
         <td><input type="text" formControlName="nameOnCard"></td>
       </tr>
       <tr>
+        <td></td>
+        <td class="error-msg">
+          {{errorMessageObsObj['paymentMethod nameOnCard'] | async}}
+        </td>
+      </tr>
+      <tr>
         <td>Credit Card Number</td>
         <td><input type="text" formControlName="creditCardNumber"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="error-msg">
+          {{errorMessageObsObj['paymentMethod creditCardNumber'] | async}}
+        </td>
       </tr>
       <tr>
         <td>Exp Month</td>
@@ -101,6 +161,20 @@
         <td><input type="text" formControlName="expYear"></td>
         <td>CVV</td>
         <td><input type="text" formControlName="CVV"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="error-msg">
+          {{errorMessageObsObj['paymentMethod expMonth'] | async}}
+        </td>
+        <td></td>
+        <td class="error-msg">
+          {{errorMessageObsObj['paymentMethod expYear'] | async}}
+        </td>
+        <td></td>
+        <td class="error-msg">
+          {{errorMessageObsObj['paymentMethod CVV'] | async}}
+        </td>
       </tr>
       <tr>
       </tr>
@@ -115,8 +189,20 @@
             <td><input type="text" formControlName="streetAddress" ></td>
           </tr>
           <tr>
+            <td></td>
+            <td class="error-msg">
+              {{errorMessageObsObj['paymentMethod billingAddress streetAddress'] | async}}
+            </td>
+          </tr>
+          <tr>
             <td>City:</td>
             <td><input type="text" formControlName="city" ></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="error-msg">
+              {{errorMessageObsObj['paymentMethod billingAddress city'] | async}}
+            </td>
           </tr>
           <tr>
             <td>State:</td>
@@ -127,9 +213,21 @@
             </td>
           </tr>
           <tr>
+            <td></td>
+            <td class="error-msg">
+              {{errorMessageObsObj['paymentMethod billingAddress state'] | async}}
+            </td>
+          </tr>
+          <tr>
             <td>Zip Code:</td>
             <td>
               <input type="text" formControlName="zipCode" >
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="error-msg">
+              {{errorMessageObsObj['paymentMethod billingAddress zipCode'] | async}}
             </td>
           </tr>
           <tr>
@@ -140,10 +238,15 @@
               </select>
             </td>
           </tr>
+          <tr>
+            <td></td>
+            <td class="error-msg">
+              {{errorMessageObsObj['paymentMethod billingAddress country'] | async}}
+            </td>
+          </tr>
         </table>
       </div>
     </div>
-    <!-- <button type="submit" [disabled]="checkoutForm.invalid">Continue</button> -->
-    <button type="submit">Continue</button>
+    <button type="submit" [disabled]="checkoutForm.invalid">Continue</button>
   </div>
 </form>
