@@ -1,13 +1,13 @@
 const booksController = require('../controllers/booksController'),
-  databaseSeedController = require('../controllers/databaseSeedController')
-const path = require('path');
+  databaseSeedController = require('../controllers/databaseSeedController'),
+  ordersController = require('../controllers/ordersController')
+
+const path = require('path'),
+  cors = require('cors');
 
 module.exports = function(app) {
-  
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
+  // For DEVELOPMENT PURPOSE. Delete when being deployed.
+  app.use(cors());
 
   // BOOK ROUTES
   app.get('/api/single-book/:product_id', (req, res) => {
@@ -26,6 +26,10 @@ module.exports = function(app) {
     booksController.paginateBooks(req, res);
   });
   
+  app.post('/api/order', (req, res) => {
+    ordersController.postOrder(req, res);
+  })
+
   app.get('/api/seed-database', (req, res) => {
     databaseSeedController.seedDatabase(req, res);
   });
