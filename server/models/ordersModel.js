@@ -30,7 +30,7 @@ module.exports = function() {
           country: { type: String, required: [true, 'Country is required.']},
         }
       }
-    }, 
+    },
     {
       timestamps: true 
     });

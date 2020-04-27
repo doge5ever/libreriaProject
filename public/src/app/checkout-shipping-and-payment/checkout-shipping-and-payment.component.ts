@@ -26,6 +26,5 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
 
   submitForm = (): void => {
     this.checkoutService.updateForm(this.checkoutFormControl.value)
-    console.log(this.checkoutFormControl)
   }
 }
