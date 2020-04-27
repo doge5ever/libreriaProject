@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckoutService } from '../checkout.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CustomValidators } from '../custom-validators';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -14,8 +13,29 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   maxLength: number = 100;
   namePattern: RegExp = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*$/;
   zipPattern: RegExp = /^(\d{5}(?:\-\d{4})?)$/;
-  error;
 
+  fieldControlDirectory: Array<Array<string>> = [
+    ['contactDetails', 'firstName'],
+    ['contactDetails', 'lastName'],
+    ['contactDetails', 'emailAddress'],
+    ['contactDetails', 'phoneNumber'],
+    ['shippingAddress', 'streetAddress'],
+    ['shippingAddress', 'city'],
+    ['shippingAddress', 'state'],
+    ['shippingAddress', 'zipCode'],
+    ['shippingAddress', 'country'],
+    ['paymentMethod', 'nameOnCard'],
+    ['paymentMethod', 'creditCardNumber'],
+    ['paymentMethod', 'expMonth'],
+    ['paymentMethod', 'expYear'],
+    ['paymentMethod', 'billingAddress', 'sameAddressCheckbox'],
+    ['paymentMethod', 'billingAddress', 'streetAddress'],
+    ['paymentMethod', 'billingAddress', 'city'],
+    ['paymentMethod', 'billingAddress', 'state'],
+    ['paymentMethod', 'billingAddress', 'zipCode'],
+    ['paymentMethod', 'billingAddress', 'country'],
+  ]
+  errorObservers: Object;
 
   constructor(
     private checkoutService: CheckoutService,
@@ -135,20 +155,24 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     this.getFormControl('paymentMethod', 'billingAddress', 'sameAddressCheckbox').valueChanges
       .subscribe(checked => {
         if (checked) {
-          this.getFormControl('paymentMethod', 'billingAddress', 'streetAddress').disable()
-          this.getFormControl('paymentMethod', 'billingAddress', 'city').disable()
-          this.getFormControl('paymentMethod', 'billingAddress', 'state').disable()
-          this.getFormControl('paymentMethod', 'billingAddress', 'zipCode').disable()
-          this.getFormControl('paymentMethod', 'billingAddress', 'country').disable()
+          this.fieldControlDirectory
+            .filter((array) => array[2] === 'billingAddress')
+            .forEach((array) => {
+              // @ts-ignore
+              this.getFormControl(...array).disable;
+            })
         }
         else {
-          this.getFormControl('paymentMethod', 'billingAddress', 'streetAddress').enable()
-          this.getFormControl('paymentMethod', 'billingAddress', 'city').enable()
-          this.getFormControl('paymentMethod', 'billingAddress', 'state').enable()
-          this.getFormControl('paymentMethod', 'billingAddress', 'zipCode').enable()
-          this.getFormControl('paymentMethod', 'billingAddress', 'country').enable()
+          this.fieldControlDirectory
+            .filter((array) => array[2] === 'billingAddress')
+            .forEach((array) => {
+              // @ts-ignore
+              this.getFormControl(...array).enable;
+          })
         }
     });
+
+
   };
 
   ngOnInit(): void {
@@ -162,26 +186,45 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     }
   }
 
-  errorMessage = (formControl: FormGroup, fieldName: string) => {
+  errorPriority: Array<string> = [
+    'required',
+    'requiredTrue',
+    'minlength',
+    'maxlength',
+    'min',
+    'max',
+    'pattern',
+    'email'
+  ];
+
+  locateFieldName: Object = {
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    emailAddress: 'Email Address',
+    phoneNumber: 'Phone Number',
+    streetAddress: 'Street Address',
+    city: 'City',
+    state: 'State',
+    zipCode: 'Zip Code',
+    country: 'Country',
+    nameOnCard: 'Name On Card',
+    creditCardNumber: 'Credit Card Number',
+    expMonth: 'Exp. Month',
+    expYear: 'Exp. Year',
+  }
+
+  errorMessageObs = (formControl: FormGroup) => {
     let displayError: string;
-    let errorPriority: Array<string> = [
-      'required',
-      'requiredTrue',
-      'minlength',
-      'maxlength',
-      'min',
-      'max',
-      'pattern',
-      'email'
-    ];
+    let fieldName = this.locateFieldName[this.getControlName(formControl)]
+    
     return Observable.create((subscriber) => {
       formControl.valueChanges.subscribe(() => {
         console.log("emitted a value!")
         if (formControl.errors) {
-          for (let i=0; i<errorPriority.length; i++) {
+          for (let i=0; i<this.errorPriority.length; i++) {
             let errorsOfForm = Object.keys(formControl.errors);
-            if (errorsOfForm.includes(errorPriority[i])) {
-              displayError = errorPriority[i];
+            if (errorsOfForm.includes(this.errorPriority[i])) {
+              displayError = this.errorPriority[i];
               break;
             }
           }
@@ -222,12 +265,13 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     })
   }
 
-  isEmpty = (obj: Object): boolean => {
-    return (Object.keys(obj).length === 0 && obj.constructor === Object)
-  }
-
   submitForm = (): void => {
     this.checkoutService.updateForm(this.checkoutForm.value)
-
+    console.log(this.getFormControl('contactDetails','firstName'))
+  }
+  
+  getControlName(c: AbstractControl): string | null {
+    const formGroup = c.parent.controls;
+    return Object.keys(formGroup).find(name => c === formGroup[name]) || null;
   }
 }
