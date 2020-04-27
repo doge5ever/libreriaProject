@@ -32,6 +32,7 @@ interface CheckoutInterface {
       country: string
     },  
   },
+  isValid: boolean
 }
 
 @Injectable({
@@ -102,6 +103,7 @@ export class CheckoutService {
           country: ''
         },  
       },
+      isValid: false
     }
 
     this.checkoutFormControl = fb.group({
@@ -224,12 +226,28 @@ export class CheckoutService {
       obsObj[directoryArray.join(" ")] = this.errorMessageObs(this.getFormControl(...directoryArray))
     })
     this.errorMessageObsObj = obsObj;
+
+    this.getFormControl('paymentMethod', 'billingAddress', 'isSameAddress').valueChanges
+      .subscribe((checked) => {
+        this.formControlDirectory
+          .filter((array) => ((array[1] === 'billingAddress') && !(array[2] === 'isSameAddress')))
+          .forEach((array) => {
+            if (checked) {
+              // @ts-ignore
+              this.getFormControl(...array).disable();
+            } else {
+              // @ts-ignore
+              this.getFormControl(...array).enable();
+            }
+          })
+      })
   }
 
   updateForm = (form: Object):void => {
     Object.keys(form).forEach((key) => {
       this.checkoutForm[key] = form[key];
     })
+    this.checkoutForm.isValid = this.checkoutFormControl.valid
     console.log("Updated the checkout form: ", this.checkoutForm)
   }
 
@@ -263,6 +281,7 @@ export class CheckoutService {
       return this.checkoutFormControl.get(str1).get(str2) as FormGroup;
     }
   }
+
 
   errorPriority: Array<string> = [
     'required',
@@ -344,13 +363,6 @@ export class CheckoutService {
 
   submitForm = (): void => {
     this.updateForm(this.checkoutFormControl.value)
-    console.log(this.checkoutFormControl)
-    this.formControlDirectory
-    .filter((array) => ((array[1] === 'billingAddress') && !(array[2] === 'isSameAddress')))
-    .forEach((array) => {
-      // @ts-ignore
-      console.log(this.getFormControl(...array));
-    })
   }
   
   getControlName(c: AbstractControl): string | null {
