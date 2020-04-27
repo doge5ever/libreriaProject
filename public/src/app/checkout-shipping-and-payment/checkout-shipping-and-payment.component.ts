@@ -156,7 +156,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
       .subscribe(checked => {
         if (checked) {
           this.formControlDirectory
-            .filter((array) => array[2] === 'billingAddress')
+            .filter((array) => ((array[1] === 'billingAddress') && !(array[2] === 'sameAddressCheckbox')))
             .forEach((array) => {
               // @ts-ignore
               this.getFormControl(...array).disable;
@@ -164,7 +164,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
         }
         else {
           this.formControlDirectory
-            .filter((array) => array[2] === 'billingAddress')
+            .filter((array) => ((array[1] === 'billingAddress') && !(array[2] === 'sameAddressCheckbox')))
             .forEach((array) => {
               // @ts-ignore
               this.getFormControl(...array).enable;
@@ -224,7 +224,6 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     
     return Observable.create((subscriber) => {
       formControl.valueChanges.subscribe(() => {
-        console.log("emitted a value!")
         if (formControl.errors) {
           for (let i=0; i<this.errorPriority.length; i++) {
             let errorsOfForm = Object.keys(formControl.errors);
@@ -238,7 +237,6 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
         }
         switch (displayError) {
           case 'required':
-            console.log("Must display an error.")
             subscriber.next(`${fieldName} is required.`);
             break;
           case 'requiredTrue':
@@ -272,7 +270,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
 
   submitForm = (): void => {
     this.checkoutService.updateForm(this.checkoutForm.value)
-    console.log(this.errorMessageObsObj)
+    console.log(this.getFormControl('paymentMethod', 'billingAddress', 'sameAddressCheckbox'))
   }
   
   getControlName(c: AbstractControl): string | null {
