@@ -39,20 +39,20 @@ export class CheckoutService {
     // }
     this.checkoutForm = {
       contactDetails: {
-        firstName: 'Dominic',
-        lastName: 'Awa',
-        emailAddress: 'domdomawa@gmail.com',
-        phoneNumber: '4088763099'
+        firstName: 'John',
+        lastName: 'Doe',
+        emailAddress: 'johndoe@gmail.com',
+        phoneNumber: '12341234'
       }, 
       shippingAddress: {
-        streetAddress: '5454 Rudy Dr.',
-        city: 'San Jose',
-        state: 'CA',
-        zipCode: '95124',
+        streetAddress: '123 Fake St.',
+        city: 'See-Tee',
+        state: 'OR',
+        zipCode: '12345',
         country: 'United States of America'
         },
       paymentMethod: {
-        nameOnCard: 'Dominic Awa',
+        nameOnCard: 'John Doe',
         creditCardNumber: '1234123412341234',
         expMonth: '01',
         expYear: '20',
@@ -70,10 +70,8 @@ export class CheckoutService {
   }
 
   updateForm = (form: Object):void => {
-    console.log("this is the form submitted", form)
     Object.keys(form).forEach((key) => {
       this.checkoutForm[key] = form[key];
-      console.log(this.checkoutForm)
     })
     console.log("Updated the checkout form: ", this.checkoutForm)
   }
