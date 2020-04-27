@@ -28,6 +28,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     ['paymentMethod', 'creditCardNumber'],
     ['paymentMethod', 'expMonth'],
     ['paymentMethod', 'expYear'],
+    ['paymentMethod', 'CVV'],
     ['paymentMethod', 'billingAddress', 'sameAddressCheckbox'],
     ['paymentMethod', 'billingAddress', 'streetAddress'],
     ['paymentMethod', 'billingAddress', 'city'],
@@ -113,10 +114,13 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
         }],
         expMonth:[null, Validators.required],
         expYear:[null, Validators.required],
-        CVV:[null, [
-          Validators.required,
-          Validators.pattern(/^\d{3,4}$/)
-        ]],
+        CVV:[null, {
+          updateOn: 'blur',
+          validators: [
+            Validators.required,
+            Validators.pattern(/^\d{3,4}$/)
+          ]
+        }],
         billingAddress: fb.group({
           sameAddressCheckbox: false,
           streetAddress: [{disabled: false, value: null}, {
@@ -216,6 +220,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     creditCardNumber: 'Credit Card Number',
     expMonth: 'Exp. Month',
     expYear: 'Exp. Year',
+    CVV: 'CVV',
   }
 
   errorMessageObs = (formControl: FormGroup) => {
