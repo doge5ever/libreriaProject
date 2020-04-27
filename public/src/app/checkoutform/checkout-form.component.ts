@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./checkout-form.component.scss']
 })
 export class CheckoutformComponent implements OnInit {
+  signInDisabled: boolean;
+  shippingAndPaymentDisabled: boolean;
+  placeOrderDisabled: boolean;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() { 
+    this.signInDisabled = true;
+    this.shippingAndPaymentDisabled = false;
+    this.placeOrderDisabled = true;
   }
 
+  
+  ngOnInit(): void {
+  }
 }

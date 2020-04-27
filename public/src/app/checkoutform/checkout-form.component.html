@@ -1,8 +1,20 @@
 <div>
   <span>
-    <a routerLink="/checkout/sign-in">Sign In</a> /
-    <a routerLink="/checkout/shipping-and-payment">Shipping & Payment</a> / 
-    <a routerLink="/checkout/place-order">Place Order</a>
+    <a routerLink="/checkout/sign-in" 
+    [style.pointer-events]="signInDisabled ? 'none' : 'auto'"
+    [style.text-decoration]="signInDisabled ? 'none' : 'auto'">
+      Sign In
+    </a> /
+    <a routerLink="/checkout/shipping-and-payment"
+    [style.pointer-events]="shippingAndPaymentDisabled ? 'none' : 'auto'"
+    [style.text-decoration]="shippingAndPaymentDisabled ? 'none' : 'auto'">
+      Shipping & Payment
+    </a> / 
+    <a routerLink="/checkout/place-order"
+    [style.pointer-events]="placeOrderDisabled ? 'none' : 'auto'"
+    [style.text-decoration]="placeOrderDisabled ? 'none' : 'auto'">
+      Place Order
+    </a>
   </span>
 </div>
 <router-outlet>
