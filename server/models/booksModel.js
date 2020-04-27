@@ -13,7 +13,7 @@ module.exports = function() {
         product_id: { type: Number, unique: true, required: [true, 'Product ID cannot blank'] }
     }, 
     {
-        // timestamps: true 
+        timestamps: true 
     });
     bookSchema.plugin(mongoosePaginate);
     mongoose.model('Book', bookSchema);

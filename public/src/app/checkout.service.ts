@@ -79,4 +79,8 @@ export class CheckoutService {
   getForm = () => {
     return this.checkoutForm;
   }
+
+  postForm = (): void => {
+
+  }
 }
