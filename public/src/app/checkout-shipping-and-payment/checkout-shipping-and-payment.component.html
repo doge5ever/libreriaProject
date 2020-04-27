@@ -16,7 +16,7 @@
 </form>
 <div>
 </div>
-<form [formGroup]="checkoutForm" (ngSubmit)="submitForm()">
+<form [formGroup]="checkoutFormControl" (ngSubmit)="submitForm()">
   <div id="contact-details" class="flat-card" formGroupName="contactDetails">
     <h1>Contact Details</h1>
     <table>
@@ -181,8 +181,8 @@
     </table>
     <h1>Billing Address</h1>
     <div formGroupName="billingAddress">
-    <input type="checkbox" formControlName="sameAddressCheckbox">Billing address is the same as the Shipping Address.
-      <div [hidden]="this.getFormControl('paymentMethod', 'billingAddress', 'sameAddressCheckbox').value">
+    <input type="checkbox" formControlName="isSameAddress">Billing address is the same as the Shipping Address.
+      <div [hidden]="this.getFormControl('paymentMethod', 'billingAddress', 'isSameAddress').value">
         <table>
           <tr>
             <td>Street Address:</td>
@@ -247,6 +247,7 @@
         </table>
       </div>
     </div>
-    <button type="submit" [disabled]="checkoutForm.invalid">Continue</button>
+    <button type="submit" [disabled]="checkoutFormControl.invalid">Continue</button>
+    <button type="submit">Continue</button>
   </div>
 </form>
