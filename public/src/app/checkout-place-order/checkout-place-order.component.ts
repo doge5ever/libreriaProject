@@ -18,4 +18,7 @@ export class CheckoutPlaceOrderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  submitForm = () => {
+    this.checkoutService.postForm();
+  }
 }

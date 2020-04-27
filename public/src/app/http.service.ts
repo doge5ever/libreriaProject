@@ -36,6 +36,10 @@ export class HttpService {
     return this.http.get(this.ROOT_URL + 'api/books', {params: this.parseParams(params)});
   }
 
+  postOrder = (order) => {
+    return this.http.post(this.ROOT_URL + 'api/orders', order);
+  }
+
   private parseParams = (params) => {
     let httpParams = new HttpParams()
     Object.keys(params).forEach((paramKey) => {

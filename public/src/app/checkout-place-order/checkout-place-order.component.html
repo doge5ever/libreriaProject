@@ -70,6 +70,6 @@
       {{checkoutForm.paymentMethod.billingAddress.zipCode}}<br>
       {{checkoutForm.paymentMethod.billingAddress.country}}
     </ng-template>
-    <button>Confirm & Place Order</button>
+    <button (click)="submitForm()">Confirm & Place Order</button>
   </div>
 </form>

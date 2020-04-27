@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,9 @@ import { Injectable } from '@angular/core';
 export class CheckoutService {
   checkoutForm: Object;
 
-  constructor() {
+  constructor(
+    private http: HttpService
+  ) {
     // this.checkoutForm = {
     //   contactDetails: {
     //     firstName: undefined,
@@ -81,6 +84,9 @@ export class CheckoutService {
   }
 
   postForm = (): void => {
-
+    this.http.postOrder(this.checkoutForm).subscribe((res) => {
+      console.log(res);
+    });
+    console.log('Sent the form to the server: ', this.checkoutForm)
   }
 }
