@@ -14,7 +14,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   namePattern: RegExp = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*$/;
   zipPattern: RegExp = /^(\d{5}(?:\-\d{4})?)$/;
 
-  fieldControlDirectory: Array<Array<string>> = [
+  formControlDirectory: Array<Array<string>> = [
     ['contactDetails', 'firstName'],
     ['contactDetails', 'lastName'],
     ['contactDetails', 'emailAddress'],
@@ -35,7 +35,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     ['paymentMethod', 'billingAddress', 'zipCode'],
     ['paymentMethod', 'billingAddress', 'country'],
   ]
-  errorObservers: Object;
+  errorMessageObsObj: Object;
 
   constructor(
     private checkoutService: CheckoutService,
@@ -155,7 +155,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     this.getFormControl('paymentMethod', 'billingAddress', 'sameAddressCheckbox').valueChanges
       .subscribe(checked => {
         if (checked) {
-          this.fieldControlDirectory
+          this.formControlDirectory
             .filter((array) => array[2] === 'billingAddress')
             .forEach((array) => {
               // @ts-ignore
@@ -163,7 +163,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
             })
         }
         else {
-          this.fieldControlDirectory
+          this.formControlDirectory
             .filter((array) => array[2] === 'billingAddress')
             .forEach((array) => {
               // @ts-ignore
@@ -172,7 +172,12 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
         }
     });
 
-
+    let obsObj = {};
+    this.formControlDirectory.forEach((directoryArray) => {
+      // @ts-ignore
+      obsObj[directoryArray.join(" ")] = this.errorMessageObs(this.getFormControl(...directoryArray))
+    })
+    this.errorMessageObsObj = obsObj;
   };
 
   ngOnInit(): void {
@@ -267,7 +272,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
 
   submitForm = (): void => {
     this.checkoutService.updateForm(this.checkoutForm.value)
-    console.log(this.getFormControl('contactDetails','firstName'))
+    console.log(this.errorMessageObsObj)
   }
   
   getControlName(c: AbstractControl): string | null {
