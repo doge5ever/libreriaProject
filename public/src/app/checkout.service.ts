@@ -1,45 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 
+interface CheckoutInterface {
+  contactDetails: {
+    firstName: string,
+    lastName: string,
+    emailAddress: string,
+    phoneNumber: string
+  }, 
+  shippingAddress: {
+    streetAddress: string,
+    city: string,
+    state: string,
+    zipCode: string,
+    country: string
+    },
+  paymentMethod: {
+    nameOnCard: string,
+    creditCardNumber: string,
+    expMonth: string,
+    expYear: string,
+    CVV: string,
+    billingAddress: {
+      isSameAddress: boolean,
+      streetAddress: string,
+      city: string,
+      state: string,
+      zipCode: string,
+      country: string
+    },  
+  },
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class CheckoutService {
-  checkoutForm: Object;
+  checkoutForm: CheckoutInterface;
 
   constructor(
     private http: HttpService
   ) {
-    // this.checkoutForm = {
-    //   contactDetails: {
-    //     firstName: undefined,
-    //     lastName: undefined,
-    //     emailAddress: undefined,
-    //     phoneNumber: undefined
-    //   }, 
-    //   shippingAddress: {
-    //     streetAddress: undefined,
-    //     city: undefined,
-    //     state: undefined,
-    //     zipCode: undefined,
-    //     country: undefined
-    //     },
-    //   paymentMethod: {
-    //     nameOnCard: undefined,
-    //     creditCardNumber: undefined,
-    //     expMonth: undefined,
-    //     expYear: undefined,
-    //     CVV: undefined,
-    //     billingAddress: {
-    //       isSameAddress: undefined,
-    //       streetAddress: undefined,
-    //       city: undefined,
-    //       state: undefined,
-    //       zipCode: undefined,
-    //       country: undefined
-    //     },  
-    //   },
-    // }
     this.checkoutForm = {
       contactDetails: {
         firstName: 'John',
@@ -84,9 +85,21 @@ export class CheckoutService {
   }
 
   postForm = (): void => {
-    this.http.postOrder(this.checkoutForm).subscribe((res) => {
+    this.http.postOrder(this.processCheckoutForm()).subscribe((res) => {
       console.log(res);
     });
     console.log('Sent the form to the server: ', this.checkoutForm)
+  }
+
+  processCheckoutForm = (): CheckoutInterface => {
+    let form = Object.assign({}, this.checkoutForm);
+    if (form.paymentMethod.billingAddress.isSameAddress) {
+      form.paymentMethod.billingAddress.streetAddress = form.shippingAddress.streetAddress;
+      form.paymentMethod.billingAddress.city = form.shippingAddress.city;
+      form.paymentMethod.billingAddress.state = form.shippingAddress.state;
+      form.paymentMethod.billingAddress.zipCode = form.shippingAddress.zipCode;
+      form.paymentMethod.billingAddress.country = form.shippingAddress.country;
+    return form;
+    }
   }
 }
