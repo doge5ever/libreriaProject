@@ -37,7 +37,7 @@ export class HttpService {
   }
 
   postOrder = (order) => {
-    return this.http.post(this.ROOT_URL + 'api/orders', order);
+    return this.http.post(this.ROOT_URL + 'api/order', order);
   }
 
   private parseParams = (params) => {
