@@ -77,13 +77,6 @@ export class CheckoutService {
       this.formIsValid = new BehaviorSubject(false);
     }
 
-  postForm = (): void => {
-    this.http.postOrder(this.processCheckoutForm()).subscribe((res) => {
-      console.log(res);
-    });
-    console.log('Sent the form to the server: ', this.checkoutForm)
-  }
-
   updateForm = (form) => {
     Object.keys(form).forEach((key) => {
      this.checkoutForm[key] = form[key];
@@ -91,6 +84,13 @@ export class CheckoutService {
 
     this.formIsValid.next(true);
     return null;
+  }
+
+  postForm = (): void => {
+    this.http.postOrder(this.processCheckoutForm()).subscribe((res) => {
+      console.log(res);
+    });
+    console.log('Sent the form to the server: ', this.checkoutForm)
   }
 
   processCheckoutForm = (): CheckoutInterface => {
