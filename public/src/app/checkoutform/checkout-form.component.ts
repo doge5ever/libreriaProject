@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CheckoutService } from '../checkout.service';
 
 @Component({
   selector: 'app-checkout-form',
@@ -10,12 +11,16 @@ export class CheckoutformComponent implements OnInit {
   shippingAndPaymentDisabled: boolean;
   placeOrderDisabled: boolean;
 
-  constructor() { 
+  constructor(
+    private checkoutService: CheckoutService,
+  ) { 
     this.signInDisabled = true;
     this.shippingAndPaymentDisabled = false;
-    this.placeOrderDisabled = true;
-  }
 
+    checkoutService.formIsValid.subscribe((isValid) => {
+      this.placeOrderDisabled = !isValid;
+    })
+  }
   
   ngOnInit(): void {
   }

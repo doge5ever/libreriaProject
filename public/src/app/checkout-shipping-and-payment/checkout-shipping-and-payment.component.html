@@ -16,7 +16,7 @@
 </form>
 <div>
 </div>
-<form [formGroup]="checkoutFormControl" (ngSubmit)="submitForm()">
+<form [formGroup]="checkoutFormControl" (ngSubmit)="onSubmit()">
   <div id="contact-details" class="flat-card" formGroupName="contactDetails">
     <h1>Contact Details</h1>
     <table>
@@ -247,7 +247,7 @@
         </table>
       </div>
     </div>
-    <button type="submit" [disabled]="checkoutFormControl.invalid">Continue</button>
-    <button type="submit">Continue</button>
+    <!-- <button type="button" [disabled]="checkoutFormControl.invalid" [routerLink]="['/checkout','place-order']"">Continue</button> -->
+    <button type="submit">For Testing Only</button>
   </div>
 </form>
