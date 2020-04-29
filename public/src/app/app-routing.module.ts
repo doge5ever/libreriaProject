@@ -13,6 +13,7 @@ import { CheckoutformComponent } from './checkoutform/checkout-form.component';
 import { CheckoutSignInComponent } from './checkout-sign-in/checkout-sign-in.component';
 import { CheckoutShippingAndPaymentComponent } from './checkout-shipping-and-payment/checkout-shipping-and-payment.component';
 import { CheckoutPlaceOrderComponent } from './checkout-place-order/checkout-place-order.component'
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent, children: [
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'sign-in', pathMatch: 'prefix'}
     ]}
   ]},
+  { path: 'login', component: LoginComponent },
   { path: '', component: MainComponent, children: [
     { path: '', component: LandingComponent },
     { path: 'search', component: SearchComponent },
