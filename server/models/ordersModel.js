@@ -14,7 +14,6 @@ module.exports = function() {
         city: { type: String, required: [true, 'City is required.']},
         state: { type: String, required: [true, 'State is required.']},
         zipCode: { type: String, required: [true, 'Zip Code is required.']},
-        country: { type: String, required: [true, 'Country is required.']},
       },
       paymentMethod: {
         nameOnCard: { type: String, required: [true, 'Name on Card is required.'] },
@@ -27,7 +26,6 @@ module.exports = function() {
           city: { type: String, required: [true, 'City is required.']},
           state: { type: String, required: [true, 'State is required.']},
           zipCode: { type: String, required: [true, 'Zip Code is required.']},
-          country: { type: String, required: [true, 'Country is required.']},
         }
       }
     },
