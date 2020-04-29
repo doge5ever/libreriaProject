@@ -56,7 +56,7 @@
       </tr>
       <tr>
         <td>Phone Number:</td>
-        <td><input type="text" formControlName="phoneNumber"></td>
+        <td><input type="text" formControlName="phoneNumber" [textMask]="{mask: phoneMask, guide: false}"></td>
       </tr>
       <tr>
         <td></td>
@@ -106,27 +106,13 @@
       <tr>
         <td>Zip Code:</td>
         <td>
-          <input type="text" formControlName="zipCode">
+          <input type="text" formControlName="zipCode" [textMask]="{mask: zipCodeMask, guide: false}">
         </td>
       </tr>
       <tr>
         <td></td>
         <td class="error-msg">
           {{errorMessageObsObj['shippingAddress zipCode'] | async}}
-        </td>
-      </tr>
-      <tr>
-        <td>Country:</td>
-        <td>
-          <select type="text" formControlName="country">
-            <option>Select Country</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td class="error-msg">
-          {{errorMessageObsObj['shippingAddress country'] | async}}
         </td>
       </tr>
     </table>
@@ -146,7 +132,7 @@
       </tr>
       <tr>
         <td>Credit Card Number</td>
-        <td><input type="text" formControlName="creditCardNumber"></td>
+        <td><input type="text" formControlName="creditCardNumber" [textMask]="{mask: creditCardNumberMask, guide: false}"></td>
       </tr>
       <tr>
         <td></td>
@@ -221,27 +207,13 @@
           <tr>
             <td>Zip Code:</td>
             <td>
-              <input type="text" formControlName="zipCode" >
+              <input type="text" formControlName="zipCode" [textMask]="{mask: zipCodeMask}">
             </td>
           </tr>
           <tr>
             <td></td>
             <td class="error-msg">
               {{errorMessageObsObj['paymentMethod billingAddress zipCode'] | async}}
-            </td>
-          </tr>
-          <tr>
-            <td>Country:</td>
-            <td>
-              <select type="text" formControlName="country" >
-                <option>Select Country</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="error-msg">
-              {{errorMessageObsObj['paymentMethod billingAddress country'] | async}}
             </td>
           </tr>
         </table>

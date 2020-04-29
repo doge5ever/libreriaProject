@@ -14,6 +14,9 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   maxLength: number = 100;
   namePattern: RegExp = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*$/;
   zipPattern: RegExp = /^(\d{5}(?:\-\d{4})?)$/;
+  phoneMask: Array<string | RegExp> = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  zipCodeMask: Array<string | RegExp> = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+  creditCardNumberMask: Array<string | RegExp> = [/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ',/\d/, /\d/, /\d/, /\d/, ' ',/\d/, /\d/, /\d/, /\d/];
 
   formControlDirectory: Array<Array<string>> = [
     ['contactDetails', 'firstName'],
@@ -22,9 +25,8 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     ['contactDetails', 'phoneNumber'],
     ['shippingAddress', 'streetAddress'],
     ['shippingAddress', 'city'],
-    ['shippingAddress', 'state'],
+    ['shippingAddress', 'state'], 
     ['shippingAddress', 'zipCode'],
-    ['shippingAddress', 'country'],
     ['paymentMethod', 'nameOnCard'],
     ['paymentMethod', 'creditCardNumber'],
     ['paymentMethod', 'expMonth'],
@@ -35,7 +37,6 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     ['paymentMethod', 'billingAddress', 'city'],
     ['paymentMethod', 'billingAddress', 'state'],
     ['paymentMethod', 'billingAddress', 'zipCode'],
-    ['paymentMethod', 'billingAddress', 'country'],
   ]
   
   checkoutFormControl: FormGroup;
@@ -48,6 +49,16 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     private router: Router,
   ) {
     this.initializeCheckoutFormControl();
+
+    // this.getFormControl('paymentMethod', 'creditCardNumber').valueChanges.subscribe((value) => {
+    //   console.log('emitted!')
+    //   let numString = value?.replace(/[_ ]/g, '')
+    //   if (numString.length > 0 && numString.length < 16) {
+    //     this.creditCardNumberMask =[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, ' ',/\d/, /\d/, /\d/, /\d/, /\d/];
+    //   } else {
+    //     this.creditCardNumberMask =[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ',/\d/, /\d/, /\d/, /\d/, ' ',/\d/, /\d/, /\d/, /\d/];
+    //   }
+    // })
 
     let obsObj = {};
     this.formControlDirectory.forEach((directoryArray) => {
@@ -130,8 +141,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
             Validators.pattern(this.zipPattern)
           ]
         }],
-        country:[this.checkoutService.checkoutForm.shippingAddress.country, Validators.required]
-        }),
+      }),
       paymentMethod: this.fb.group({
         nameOnCard:[this.checkoutService.checkoutForm.paymentMethod.nameOnCard, {
           updateOn: 'blur',
@@ -143,7 +153,6 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
           updateOn: 'blur',
           validators: [
             Validators.required,
-            Validators.pattern(/^\d{16}$/)
           ]
         }],
         expMonth:[this.checkoutService.checkoutForm.paymentMethod.expMonth, Validators.required],
@@ -152,7 +161,6 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
           updateOn: 'blur',
           validators: [
             Validators.required,
-            Validators.pattern(/^\d{3,4}$/)
           ]
         }],
         billingAddress: this.fb.group({
@@ -183,9 +191,6 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
               Validators.pattern(this.zipPattern),
             ]
           }],
-          country:[{disabled: false, value: this.checkoutService.checkoutForm.paymentMethod.billingAddress.country}, [
-            Validators.required,
-          ]]
         }),  
       }),
     })
@@ -224,7 +229,6 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     city: 'City',
     state: 'State',
     zipCode: 'Zip Code',
-    country: 'Country',
     nameOnCard: 'Name On Card',
     creditCardNumber: 'Credit Card Number',
     expMonth: 'Exp. Month',
