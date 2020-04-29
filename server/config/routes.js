@@ -35,8 +35,7 @@ module.exports = function(app) {
   });
 
   app.post('/login',
-    passport.authenticate('local'),
-    function(req, res) {
+    passport.authenticate('local'), (req, res) => {
       res.redirect('/users/' + req.user.username);
   });
 
