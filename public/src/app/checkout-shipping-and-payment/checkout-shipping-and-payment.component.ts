@@ -17,6 +17,8 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   phoneMask: Array<string | RegExp> = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   zipCodeMask: Array<string | RegExp> = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
   creditCardNumberMask: Array<string | RegExp> = [/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ',/\d/, /\d/, /\d/, /\d/, ' ',/\d/, /\d/, /\d/, /\d/];
+  CVVMask: Array<string | RegExp> = [/\d/, /\d/, /\d/, /\d/];
+
 
   formControlDirectory: Array<Array<string>> = [
     ['contactDetails', 'firstName'],
@@ -161,6 +163,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
           updateOn: 'blur',
           validators: [
             Validators.required,
+            Validators.minLength(3)
           ]
         }],
         billingAddress: this.fb.group({
