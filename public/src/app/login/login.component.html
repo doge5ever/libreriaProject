@@ -1,0 +1,14 @@
+<form [formGroup]="loginFormControl" (ngSubmit)="onSubmit()">
+  <table>
+    <tr>
+      <td>Email:</td>
+      <td><input type="text" formControlName="email"></td>
+    </tr>
+    <tr>
+      <td>
+        <td>Password:</td>
+        <td><input type="password" formControlName="password"></td>
+      </td>
+    </tr>
+  </table>
+</form>
