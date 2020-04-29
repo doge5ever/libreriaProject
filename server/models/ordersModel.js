@@ -10,7 +10,7 @@ module.exports = function() {
         phoneNumber: { type: String },
       },
       shippingAddress: {
-        streetAddress: { type: String, required: [ true, 'Street Address is required.'] },
+        streetAddress: { type: String, required: [true, 'Street Address is required.'] },
         city: { type: String, required: [true, 'City is required.']},
         state: { type: String, required: [true, 'State is required.']},
         zipCode: { type: String, required: [true, 'Zip Code is required.']},
