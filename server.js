@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+require('dotenv').config();
+
 app.use(bodyParser.json());
 
 app.use(express.static( __dirname + '/public/dist/bookstoreProject' ));
