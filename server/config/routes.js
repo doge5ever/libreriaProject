@@ -1,13 +1,13 @@
+const path = require('path'),
+  passport = require('passport');
+
+
 const booksController = require('../controllers/booksController'),
   databaseSeedController = require('../controllers/databaseSeedController'),
-  ordersController = require('../controllers/ordersController')
-
-const path = require('path'),
-  cors = require('cors');
+  ordersController = require('../controllers/ordersController'),
+  usersController = require('../controllers/usersController');
 
 module.exports = function(app) {
-  // For DEVELOPMENT PURPOSE. Delete when being deployed.
-  app.use(cors());
 
   // Session based
 
@@ -37,9 +37,8 @@ module.exports = function(app) {
     databaseSeedController.seedDatabase(req, res);
   });
 
-  app.post('/login',
-    passport.authenticate('local'), (req, res) => {
-      res.redirect('/users/' + req.user.username);
+  app.post('/login', (req, res) => {
+    usersController.authenticateUser(req, res);
   });
 
   // revise?
