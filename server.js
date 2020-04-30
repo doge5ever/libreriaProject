@@ -1,3 +1,4 @@
+
 const express = require('express'),
   bodyParser = require('body-parser'),
   session = require('express-session'),
@@ -5,6 +6,7 @@ const express = require('express'),
 
 const app = express();
 
+require('dotenv').config();
 
 // For DEVELOPMENT PURPOSE. Delete when being deployed.
 app.use(cors());
@@ -12,8 +14,14 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static( __dirname + '/public/dist/bookstoreProject' ));
 app.use(session({
-  secret: process.env.asecret,
-  resave: false
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true,
+  store: Session,
+  cookie: {
+    maxAge: 1000 * 60 * 60
+  }
+
 }));
 
 
