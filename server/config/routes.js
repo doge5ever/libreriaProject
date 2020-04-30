@@ -9,6 +9,9 @@ module.exports = function(app) {
   // For DEVELOPMENT PURPOSE. Delete when being deployed.
   app.use(cors());
 
+  // Session based
+
+  
   // BOOK ROUTES
   app.get('/api/single-book/:product_id', (req, res) => {
     booksController.getSingleBook(req, res);
