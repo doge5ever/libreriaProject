@@ -36,8 +36,16 @@ export class HttpService {
     return this.http.get(this.ROOT_URL + 'api/books', {params: this.parseParams(params)});
   }
 
-  postOrder = (order) => {
-    return this.http.post(this.ROOT_URL + 'api/order', order);
+  postOrder = (form) => {
+    return this.http.post(this.ROOT_URL + 'api/order', form);
+  }
+
+  registerUser = (form) => {
+    return this.http.post(this.ROOT_URL + 'api/register-user', form)
+  }
+
+  authenticateUser = (form) => {
+    return this.http.post(this.ROOT_URL + 'api/login-user', form);
   }
 
   private parseParams = (params) => {
