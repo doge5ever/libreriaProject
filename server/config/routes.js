@@ -9,9 +9,6 @@ const booksController = require('../controllers/booksController'),
 
 module.exports = function(app) {
 
-  // Session based
-
-  
   // BOOK ROUTES
   app.get('/api/single-book/:product_id', (req, res) => {
     booksController.getSingleBook(req, res);
@@ -37,7 +34,12 @@ module.exports = function(app) {
     databaseSeedController.seedDatabase(req, res);
   });
 
-  app.post('/login', (req, res) => {
+
+  app.post('/api/register-user', (req, res) => {
+    usersController.registerUser(req, res);
+  });
+  
+  app.post('/api/login-user', (req, res) => {
     usersController.authenticateUser(req, res);
   });
 
