@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginFormControl: FormGroup;
-  constructor() {}
+  constructor(
+    private http: HttpService
+  ) {}
 
   ngOnInit(): void {
     this.loginFormControl = new FormGroup({
@@ -18,6 +21,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit = () => {
-    console.log("Submitted the form:", this.loginFormControl)
+    this.http.authenticateUser(this.loginFormControl.value).subscribe((res) => {
+      console.log(res);
+    });
+    console.log("Sent form to server.", this.loginFormControl)
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +9,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
   registerFormControl: FormGroup;
-  constructor() { }
+
+  constructor(
+    private http: HttpService
+  ) { }
 
   ngOnInit(): void {
     this.registerFormControl = new FormGroup({
@@ -21,6 +25,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit = () => {
-    console.log("Submitted the form:", this.registerFormControl)
+    this.http.registerUser(this.registerFormControl.value).subscribe((res) => {
+      console.log(res);
+    });
+    console.log("Sent form to server.", this.registerFormControl)
   }
 }
