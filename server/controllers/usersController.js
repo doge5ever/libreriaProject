@@ -37,6 +37,10 @@ module.exports = {
   }, 
 
   authenticateUser: (req, res) => {
-    passport.authenticate('local');
-  },
+    return passport.authenticate('local', {
+      failureRedirect: '/api/login-failure',
+      successRedirect: '/api/login-success'
+    }), (err, req, res, next) => {
+      if (err) {next(err)};
+    }},
 };

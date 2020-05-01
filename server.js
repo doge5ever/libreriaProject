@@ -22,11 +22,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static( __dirname + '/public/dist/bookstoreProject' ));
 
-
-
-
-
-
 passport.use(new LocalStrategy({
   usernameField: 'emailAddress',
   passwordField: 'password'
@@ -59,9 +54,11 @@ passport.use(new LocalStrategy({
 
 passport.serializeUser((user, cb) => {
   cb(null, user.id);
+  console.log('I am in the serializer')
 });
 
 passport.deserializeUser((id, cb) => {
+  console.log('I am in the deserializer')
   User.findById(id, (err, res) => {
     if (err) {return cb(err);}
     cb(null, user);

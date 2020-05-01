@@ -1,7 +1,3 @@
-const path = require('path'),
-  passport = require('passport');
-
-
 const booksController = require('../controllers/booksController'),
   databaseSeedController = require('../controllers/databaseSeedController'),
   ordersController = require('../controllers/ordersController'),
@@ -39,10 +35,17 @@ module.exports = function(app) {
     usersController.registerUser(req, res);
   });
   
-  app.post('/api/login-user', (req, res) => {
-    usersController.authenticateUser(req, res);
-  });
+  app.post('/api/login-user', usersController.authenticateUser());
 
+  app.get('/api/login-success', (req, res) => {
+    console.log("SUCCESS!");
+    res.send('You are authenticated!');
+  })
+
+  app.get('/api/login-failure', (req, res) => {
+    console.log("Failed");
+    res.send('Authentication failed.');
+  })
   // revise?
   // app.all("*", (req, res, next) => {
   //     console.log(__dirname + "../../../public/dist/public/index.html")
