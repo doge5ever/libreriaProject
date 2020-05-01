@@ -14,6 +14,7 @@ import { CheckoutSignInComponent } from './checkout-sign-in/checkout-sign-in.com
 import { CheckoutShippingAndPaymentComponent } from './checkout-shipping-and-payment/checkout-shipping-and-payment.component';
 import { CheckoutPlaceOrderComponent } from './checkout-place-order/checkout-place-order.component'
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent, children: [
@@ -25,6 +26,8 @@ const routes: Routes = [
     ]}
   ]},
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  
   { path: '', component: MainComponent, children: [
     { path: '', component: LandingComponent },
     { path: 'search', component: SearchComponent },
