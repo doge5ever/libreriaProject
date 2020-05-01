@@ -1,6 +1,5 @@
 const mongoose = require('mongoose'),
-  passport = require('passport')
-  bcrypt = require('bcrypt');
+  passport = require('passport');
 
 const User = mongoose.model('User');
 const saltRounds = 10;
@@ -37,10 +36,8 @@ module.exports = {
   }, 
 
   authenticateUser: (req, res) => {
-    return passport.authenticate('local', {
-      failureRedirect: '/api/login-failure',
-      successRedirect: '/api/login-success'
-    }), (err, req, res, next) => {
-      if (err) {next(err)};
-    }},
+    passport.authenticate('local', (err, user, info) => {
+      res.json({ err: err, user: user, info: info });
+    })(req, res);
+  },
 };
