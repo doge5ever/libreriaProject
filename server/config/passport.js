@@ -1,59 +1,70 @@
 const  mongoose = require('mongoose'),
   passport = require('passport'),
   session = require('express-session'),
-  bcrypt = require('bcrypt');
+  bcrypt = require('bcrypt'),
+  cookieParser = require('cookie-parser');
 
 const MongoStore = require('connect-mongo')(session);
 const User = mongoose.model('User');
 
 var LocalStrategy = require('passport-local').Strategy;
 
-
 module.exports = function (app) {
-  passport.use(new LocalStrategy({
-  usernameField: 'emailAddress',
-  passwordField: 'password'
+  app.use(cookieParser('secret'));
+  
+passport.use(new LocalStrategy({
+  usernameField: 'emailAddress'
 },
-(emailAddress, password, done) => {
-  User
-    .findOne({emailAddress: emailAddress})
+function(emailAddress, password, done) {
+  User.findOne({emailAddress: emailAddress})
     .then((user) => {
-      if (!user) {return done(null, null, 'INVALID')}
+      if (!user) {return done(null, null, 'INVALID');}
       bcrypt.compare(password, user.hash)
         .then((isValid) => {
-          if (isValid) {return done(null, user.emailAddress, 'VALID')}
+          if (isValid) {
+            console.log('User is validated.')
+            return done(null, user, 'VALID');
+            }
           return done(null, user, 'INVALID');
         })
         .catch((err) => {
-          console.log(err);
-          return done(err, null, 'ERROR');
+          console.log('ERROR: ', err);
+          return done(err, null, 'INVALID');
         })
     })
     .catch((err) => {
-      console.log(err);
-      return done(err, null, 'ERROR');
+      console.log('ERROR: ', err);
+      return done(err, null, 'INVALID');
     })
   }
 ));
 
 passport.serializeUser((user, cb) => {
-  cb(null, user.id);
+  console.log("I am serializing.")
+  console.log(user._id);
+  cb(null, user._id);
 });
 
-passport.deserializeUser((id, cb) => {
-  User.findById(id, (err, res) => {
-    if (err) {return cb(err);}
+passport.deserializeUser((_id, cb) => {
+  console.log("I am deserializing.");
+  User.findById(_id, (err, user) => {
+    console.log(user)
+    if (err) {return cb(user);}
     cb(null, user);
   });
 });
 
+sessionStore = new MongoStore({mongooseConnection: mongoose.connection});
+
 app.use(session({
-  secret: process.env.SECRET,
+  secret: 'secret',
   resave: false,
   saveUninitialized: true,
-  store: new MongoStore({mongooseConnection: mongoose.connection}),
+  store: sessionStore,
   cookie: {
-    maxAge: 1000 * 60 * 60
+    maxAge: 1000 * 60 * 60,
+    secure: false,
+    httpOnly: false,
   }
 }));
 app.use(passport.initialize());

@@ -3,7 +3,10 @@ const path = require('path');
 const fs = require('fs');
 
 module.exports = function() {
-    mongoose.connect('mongodb://localhost/libreria');
+    mongoose.connect('mongodb://localhost/libreria', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
     // create a variable that points to the models folder
     var models_path = path.join(__dirname, './../models');
     // read all of the files in the models_path and require (run) each of the javascript files

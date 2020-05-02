@@ -36,8 +36,12 @@ module.exports = {
   }, 
 
   authenticateUser: (req, res) => {
-    passport.authenticate('local', (err, user, info) => {
-      res.json({ err: err, user: user, info: info });
+    passport.authenticate('local', {
+      session: true, 
+      successRedirect: 'api/login-success',
+      failureRedirect: 'api/login-failure'
+    }, (err, user, info) => {
+      res.status(200).json({ err: err, user: user, info: info, sessionId: req.session.id });
     })(req, res);
   },
 };
