@@ -45,7 +45,7 @@ export class HttpService {
   }
 
   authenticateUser = (form) => {
-    return this.http.post(this.ROOT_URL + 'api/login-user', form, {withCredentials: true, });
+    return this.http.post(this.ROOT_URL + 'api/login-user', form, {withCredentials: true});
   }
 
   private parseParams = (params) => {
