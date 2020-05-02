@@ -32,7 +32,7 @@ module.exports = {
           ])
         .then((output) => {
           res.json(output);
-          console.log(`Found ${output.total} matches for ${req.query.keywords}. Sent data.`);
+          console.log('This is the output: ', output);
         })
         .catch((err) => {
           console.log(err)
