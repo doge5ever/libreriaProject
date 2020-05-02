@@ -42,18 +42,23 @@ module.exports = function(app) {
     usersController.authenticateUser(req, res);
   });
 
-  app.all("*", (req, res, next) => {
-    console.log(__dirname + "../../../public/dist/bookstoreProject/index.html")
-    res.sendFile(path.resolve(__dirname + "../../../public/dist/bookstoreProject/index.html"))
-  }); 
+  app.get('/api/login-success', (req, res) => {
+    console.log('Login success.')
+  })
+
+  app.get('/api/login-failure', (req, res) => {
+    console.log('Login failed.')
+  })
+
+  // app.all("*", (req, res, next) => {
+  //   console.log(__dirname + "../../../public/dist/bookstoreProject/index.html")
+  //   res.sendFile(path.resolve(__dirname + "../../../public/dist/bookstoreProject/index.html"))
+  // }); 
 };
 
-const isLoggedIn = (req, res, next) => {
-  console.log("This is the req.user: ", JSON.stringify(req.session))
-  console.log("This is ze cookies: ", JSON.stringify(req.cookies))
-  
+const isLoggedIn = (req, res, next) => {  
   if(req.isAuthenticated()){
       return next()
   }
-  return res.status(400).json({"statusCode" : 400, "message" : "not authenticated"})
+  return res.status(400).json({"statusCode" : 400, "message" : "Not authenticated"})
 }
