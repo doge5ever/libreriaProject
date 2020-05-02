@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RandombooksService } from '../randombooks.service';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-landing',
@@ -10,13 +10,29 @@ export class LandingComponent implements OnInit {
   booksYouMightLike; 
 
   constructor(
-    private randomService: RandombooksService
+    private http: HttpService
   ) {
-    this.booksYouMightLike = randomService.randomPicks
+    let params = {
+      random: true,
+      limit: 5
+    };
+
+    if (!sessionStorage.getItem('randomBooks')) {
+      this.http.getRandomPicks(params).toPromise()
+        .then((results) => {
+          sessionStorage.setItem('randomBooks', JSON.stringify(results));
+        })
+        .then(() => {
+          this.booksYouMightLike = JSON.parse(sessionStorage.getItem('randomBooks'));
+        })
+    } else {
+    this.booksYouMightLike = JSON.parse(sessionStorage.getItem('randomBooks'));
+    }
   }
 
   ngOnInit(): void {
     window.scroll(0,0)
   }
+
 }
 

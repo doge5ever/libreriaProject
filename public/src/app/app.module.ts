@@ -25,7 +25,6 @@ import { CheckoutShippingAndPaymentComponent } from './checkout-shipping-and-pay
 import { CheckoutPlaceOrderComponent } from './checkout-place-order/checkout-place-order.component';
 import { CheckoutService } from './checkout.service';
 import { CartService } from './cart.service';
-import { RandombooksService } from './randombooks.service';
 import { FieldErrorsComponent } from './field-errors/field-errors.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -62,7 +61,6 @@ import { RegisterComponent } from './register/register.component';
   ],
   providers: [
     HttpService,
-    RandombooksService,
     CartService,
     CheckoutService
   ],
