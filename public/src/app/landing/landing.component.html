@@ -9,7 +9,7 @@
   <div class="gallery">
     <div class="gallery-pics" *ngFor="let category of categories">
       <span>{{category}}</span>
-      <a [routerLink]="['/search']" [queryParams]="{tag: category}"><img src="../../assets/landing/shop_by_category/test.jpg"></a>
+      <a [routerLink]="['/search']" [queryParams]="{tag: category}"><img src="../../assets/landing/shop_by_category/{{category}}.jpg"></a>
     </div>
   </div>
 </div>
