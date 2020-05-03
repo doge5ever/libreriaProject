@@ -26,7 +26,7 @@
         <a [routerLink]="['book', book['product_id']]">
           <span class="title">{{book['title']}}</span>
         </a>
-        <p class="description">{{book['product_desc']}}</p>
+        <p class="description">{{book['short_product_desc']}}...<a [routerLink]="['book', book['product_id']]">See More</a></p>
       </td>
     </tr>
     

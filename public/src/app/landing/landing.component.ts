@@ -24,7 +24,13 @@ export class LandingComponent implements OnInit {
     
     let params = {
       random: true,
-      limit: 5
+      limit: 5,
+      select: [
+        'title', 
+        'product_id',
+        'UPC',
+        'short_product_desc'
+      ]
     };
 
     if (!sessionStorage.getItem('randomBooks')) {

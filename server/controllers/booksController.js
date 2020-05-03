@@ -162,16 +162,15 @@ parseSelect = (params) => {
 };
 
 parseProject = (params) => {
-  projectParams = {};
-      if (params.select) {
-        if (Array.isArray(params.select)) { 
-          params.select.forEach((field) => {
-            projectParams[field] = 1;
-        })} else {
-          projectParams = {[params.select]: 1}
-        }          
+  projectParams = {}; 
+  if (!params.select) {return {'nonExistentField': 0}}; 
+  let paramsArray = Array.isArray(params.select) ? params.select : [params.select]
+    paramsArray.forEach((param) => {
+      if (param === 'short_product_desc') {
+        projectParams[param] = { $substr: ['$product_desc', 0, 300] };
       } else {
-        projectParams['nonExistentField'] = 0;
+        projectParams[param] = 1;
       }
+    }) 
   return projectParams;
 };

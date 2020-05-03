@@ -15,6 +15,7 @@ module.exports = function() {
     {
         timestamps: true 
     });
+
     bookSchema.plugin(mongoosePaginate);
     mongoose.model('Book', bookSchema);
 }
