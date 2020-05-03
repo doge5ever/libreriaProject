@@ -17,7 +17,9 @@ export class BookComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpService,
     private cartservice: CartService
-  ) {}
+  ) {
+    this.book = {}
+  }
 
   ngOnInit(): void {
     window.scroll(0,0);
