@@ -3,14 +3,14 @@
     <h2>
       Log In
     </h2>
-    <form>
+    <form [formGroup]="loginFormControl" (ngSubmit)="loginOnSubmit()">
       <table>
         <tr>
           <td>
             Email Address:
           </td>
           <td>
-            <input type="text">
+            <input type="text" formControlName="emailAddress">
           </td>
         </tr>
         <tr>
@@ -18,7 +18,7 @@
             Password:
           </td>
           <td>
-            <input type="password">
+            <input type="password" formControlName="password">
           </td>
         </tr>
       </table>
@@ -30,14 +30,14 @@
     <h2>
       Continue as Guest
     </h2>
-    <form>
+    <form [formGroup]="guestFormControl" (ngSubmit)="guestOnSubmit()">
       <table>
         <tr>
           <td>
             Email Address:
           </td>
           <td>
-            <input type="text">
+            <input type="text" formControlName="emailAddress">
           </td>
         </tr>
         <tr>
