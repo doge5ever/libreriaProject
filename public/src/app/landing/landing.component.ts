@@ -8,10 +8,20 @@ import { HttpService } from '../http.service';
 })
 export class LandingComponent implements OnInit {
   booksYouMightLike; 
+  categories: Array<string>;
 
   constructor(
     private http: HttpService
   ) {
+    this.categories = [
+      'Business',
+      'Philosophy',
+      'Self Help',
+      'Classics',
+      'Politics',
+      'Autobiography'
+    ];
+    
     let params = {
       random: true,
       limit: 5
