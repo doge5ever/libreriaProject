@@ -41,7 +41,7 @@ module.exports = {
       successRedirect: 'api/login-success',
       failureRedirect: 'api/login-failure'
     }, (err, user, info) => {
-      res.status(200).json({ err: err, user: user, info: info, sessionId: req.session.id });
+      res.status(200).json({ err: err, info: info });
     })(req, res);
   },
 };
