@@ -65,7 +65,9 @@
   </div>
   <div id="content">
     <span id="keywords-display">
-      Displaying the results for <b>"{{qParams.keywords}}"</b>.
+      Displaying the results for 
+      <b *ngIf="!qParams.keywords && !!qParams.tag; else elseBlock">"{{qParams.tag}}" category</b>
+      <ng-template #elseBlock>"{{qParams.keywords}}"</ng-template>.
     </span>
     <p id="matches" *ngIf="results.total == 0">No matches found.</p>
     <p id="matches" *ngIf="results.total == 1">Found {{results.total}} match.</p>
