@@ -9,7 +9,7 @@ const passport = require('passport');
 module.exports = function(app) {
 
   // BOOK ROUTES
-  app.get('/api/single-book/:product_id', isLoggedIn, (req, res) => {
+  app.get('/api/single-book/:product_id', (req, res) => {
     booksController.getSingleBook(req, res);
     console.log(req.isAuthenticated())
   });
