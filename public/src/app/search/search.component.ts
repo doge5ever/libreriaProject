@@ -36,9 +36,12 @@ export class SearchComponent implements OnInit {
       this.results = {};
      }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {   
     this.route.queryParams
       .subscribe(params => {
+        Object.keys(this.qParams).forEach((key) => {
+          this.qParams[key] = params[key];
+        });
         Object.keys(params).forEach((key) => {
           this.qParams[key] = params[key];
         });
