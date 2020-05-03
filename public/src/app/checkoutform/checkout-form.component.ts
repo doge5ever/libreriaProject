@@ -7,14 +7,14 @@ import { CheckoutService } from '../checkout.service';
   styleUrls: ['./checkout-form.component.scss']
 })
 export class CheckoutformComponent implements OnInit {
-  signInDisabled: boolean;
+  logInDisabled: boolean;
   shippingAndPaymentDisabled: boolean;
   placeOrderDisabled: boolean;
 
   constructor(
     private checkoutService: CheckoutService,
   ) { 
-    this.signInDisabled = true;
+    this.logInDisabled = true;
     this.shippingAndPaymentDisabled = false;
 
     checkoutService.formIsValid.subscribe((isValid) => {

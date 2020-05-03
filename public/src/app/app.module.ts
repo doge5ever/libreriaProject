@@ -20,7 +20,7 @@ import { MainComponent } from './main/main.component';
 import { HeadersecuredComponent } from './headersecured/headersecured.component';
 import { FootersecuredComponent } from './footersecured/footersecured.component';
 import { CheckoutformComponent } from './checkoutform/checkout-form.component';
-import { CheckoutSignInComponent } from './checkout-sign-in/checkout-sign-in.component';
+import { CheckoutLogInComponent } from './checkout-login/checkout-login.component';
 import { CheckoutShippingAndPaymentComponent } from './checkout-shipping-and-payment/checkout-shipping-and-payment.component';
 import { CheckoutPlaceOrderComponent } from './checkout-place-order/checkout-place-order.component';
 import { CheckoutService } from './checkout.service';
@@ -44,7 +44,7 @@ import { RegisterComponent } from './register/register.component';
     HeadersecuredComponent,
     FootersecuredComponent,
     CheckoutformComponent,
-    CheckoutSignInComponent,
+    CheckoutLogInComponent,
     CheckoutShippingAndPaymentComponent,
     CheckoutPlaceOrderComponent,
     FieldErrorsComponent,
