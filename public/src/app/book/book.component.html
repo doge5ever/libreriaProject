@@ -2,7 +2,7 @@
 <div id="breadcrumbs">
   <a routerLink="">Home</a>
   >>
-  <a routerLink="">{{book['tag']}}</a>
+  <a [routerLink]="['/search']" [queryParams]="{tag: book['tag']}">{{book['tag']}}</a>
   >>
   <a>{{book['title']}}</a>
 </div>

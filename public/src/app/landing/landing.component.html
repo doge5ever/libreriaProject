@@ -7,29 +7,9 @@
   <h1>Shop by Category</h1>
   <p>Discover a wide selection of books here in Libreria!</p>
   <div class="gallery">
-    <div class="gallery-pics">
-      <span>Category 1</span>
-      <a routerLink=""><img src="../../assets/landing/shop_by_category/test.jpg"></a>
-    </div>
-    <div class="gallery-pics">
-      <span>Category 2</span>
-      <a routerLink=""><img src="../../assets/landing/shop_by_category/test.jpg"></a>
-    </div>
-    <div class="gallery-pics">
-      <span>Category 3</span>
-      <a routerLink=""><img src="../../assets/landing/shop_by_category/test.jpg"></a>
-    </div>
-    <div class="gallery-pics">
-      <span>Category 4</span>
-      <a routerLink=""><img src="../../assets/landing/shop_by_category/test.jpg"></a>
-    </div>
-    <div class="gallery-pics">
-      <span>Category 5</span>
-      <a routerLink=""><img src="../../assets/landing/shop_by_category/test.jpg"></a>
-    </div>
-    <div class="gallery-pics">
-      <span>Category 6</span>
-      <a routerLink=""><img src="../../assets/landing/shop_by_category/test.jpg"></a>
+    <div class="gallery-pics" *ngFor="let category of categories">
+      <span>{{category}}</span>
+      <a [routerLink]="['/search']" [queryParams]="{tag: category}"><img src="../../assets/landing/shop_by_category/test.jpg"></a>
     </div>
   </div>
 </div>
