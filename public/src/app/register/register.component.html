@@ -1,13 +1,19 @@
-<form [formGroup]="registerFormControl" (ngSubmit)="onSubmit()">
-  <table>
-    <tr>
-      <td>Email:</td>
-      <td><input type="text" formControlName="emailAddress"></td>
-    </tr>
-    <tr>
-      <td>Password:</td>
-      <td><input type="password" formControlName="password"></td>
-    </tr>
-  </table>
-  <button type="submit">Register</button>
-</form>
+<app-header></app-header>
+<div class="registration-form">
+  <h2>Register</h2>
+  <form [formGroup]="registerFormControl" (ngSubmit)="onSubmit()">
+    <table>
+      <tr>
+        <td>Email:</td>
+        <td><input type="text" formControlName="emailAddress"></td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td><input type="password" formControlName="password"></td>
+      </tr>
+    </table>
+    <button type="submit">Register</button><br>
+    <a [routerLink]="['/login']">Already have an account?</a>
+  </form>
+</div>
+<app-footer></app-footer>

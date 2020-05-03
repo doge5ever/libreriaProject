@@ -1,18 +1,22 @@
 <app-header></app-header>
-<form [formGroup]="loginFormControl" (ngSubmit)="onSubmit()">
-  <table>
-    <tr>
-      <td>Email:</td>
-      <td><input type="text" formControlName="emailAddress"></td>
-    </tr>
-    <tr>
-      <td>Password:</td>
-      <td><input type="password" formControlName="password"></td>
-    </tr>
-  </table>
-  <button type="submit">Log In</button>
-</form>
-<a routerLink="/register">Create an account</a>
-<div class="error-msg" [hidden]="errorMsgHidden">
-  Email address and password combination invalid.
+<div class="login-form" >
+  <form [formGroup]="loginFormControl" (ngSubmit)="onSubmit()">
+    <h2>Log In</h2>
+    <table>
+      <tr>
+        <td>Email:</td>
+        <td><input type="text" formControlName="emailAddress"></td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td><input type="password" formControlName="password"></td>
+      </tr>
+    </table>
+    <button type="submit">Log In</button>
+  </form>
+  <a routerLink="/register">No account? Create an account</a>
+  <div class="error-msg" [hidden]="errorMsgHidden">
+    Email address and password combination invalid.
+  </div>
 </div>
+<app-footer></app-footer>
