@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +13,11 @@ export class AuthService {
   ) { 
     this.isAuthenticated = false;
   }
-
-  getUserInfo = (): boolean => {
-    let userData = localStorage.getItem('userInfo');
-    if (userData && JSON.parse(userData)) {return true;}
-    return false;
-  }
   
-  setUserInfo = (user): void => {
-    localStorage.setItem('userInfo', JSON.stringify(user));
-  }
-
-
+  updateAuthentication = (res) => {
+    if (res.valid) {
+      this.isAuthenticated = true;
+      console.log('Value for isAuthenticated: ', this.isAuthenticated);
+    }
+  }  
 }

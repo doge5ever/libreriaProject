@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpService } from '../http.service';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +11,15 @@ import { HttpService } from '../http.service';
 })
 export class LoginComponent implements OnInit {
   loginFormControl: FormGroup;
+  errorMsgHidden: boolean;
+
   constructor(
-    private http: HttpService
-  ) {}
+    private http: HttpService,
+    private auth: AuthService,
+    private router: Router
+  ) {
+    this.errorMsgHidden = true;
+  }
 
   ngOnInit(): void {
     this.loginFormControl = new FormGroup({
@@ -21,9 +29,19 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit = () => {
-    this.http.authenticateUser(this.loginFormControl.value).subscribe((res) => {
+    this.http.authenticateUser(this.loginFormControl.value).subscribe((res: {err: string, valid: boolean}) => {
+      console.log("Sent form to server.", this.loginFormControl)
       console.log(res);
+      this.auth.updateAuthentication(res);
+      if (res.valid) {
+        this.router.navigate(['/']);
+      } else {
+        this.showInvalidLogin();
+      }
     });
-    console.log("Sent form to server.", this.loginFormControl)
-  }
+  };
+
+  showInvalidLogin = () => {
+   this.errorMsgHidden = false;
+  };
 }
