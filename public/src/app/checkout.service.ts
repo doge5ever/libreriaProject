@@ -87,21 +87,22 @@ export class CheckoutService {
   }
 
   postForm = (): void => {
-    this.http.postOrder(this.processCheckoutForm()).subscribe((res) => {
+    this.processCheckoutForm();
+    this.http.postOrder(this.checkoutForm).subscribe((res) => {
+      console.log('Sent the form to the server: ', this.checkoutForm)
       console.log(res);
     });
-    console.log('Sent the form to the server: ', this.checkoutForm)
+
   }
 
-  processCheckoutForm = (): CheckoutInterface => {
-    let form = Object.assign({}, this.checkoutForm);
-    if (form.paymentMethod.billingAddress.isSameAddress) {
-      form.paymentMethod.billingAddress.streetAddress = form.shippingAddress.streetAddress;
-      form.paymentMethod.billingAddress.city = form.shippingAddress.city;
-      form.paymentMethod.billingAddress.state = form.shippingAddress.state;
-      form.paymentMethod.billingAddress.zipCode = form.shippingAddress.zipCode;
-      form.paymentMethod.billingAddress.country = form.shippingAddress.country;
-    return form;
+  processCheckoutForm = (): void => {
+    if (this.checkoutForm.paymentMethod.billingAddress.isSameAddress) {
+      this.checkoutForm.paymentMethod.billingAddress.streetAddress = this.checkoutForm.shippingAddress.streetAddress;
+      this.checkoutForm.paymentMethod.billingAddress.city = this.checkoutForm.shippingAddress.city;
+      this.checkoutForm.paymentMethod.billingAddress.state = this.checkoutForm.shippingAddress.state;
+      this.checkoutForm.paymentMethod.billingAddress.zipCode = this.checkoutForm.shippingAddress.zipCode;
+      this.checkoutForm.paymentMethod.billingAddress.country = this.checkoutForm.shippingAddress.country;
     }
+    delete this.checkoutForm.paymentMethod.billingAddress.isSameAddress;
   }
 }

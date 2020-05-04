@@ -3,6 +3,7 @@ import { CheckoutService } from '../checkout.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, AbstractControl, Validators } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'checkout-app-shipping-and-payment',
@@ -49,18 +50,9 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     private checkoutService: CheckoutService,
     private fb: FormBuilder,
     private router: Router,
+    private auth: AuthService
   ) {
     this.initializeCheckoutFormControl();
-
-    // this.getFormControl('paymentMethod', 'creditCardNumber').valueChanges.subscribe((value) => {
-    //   console.log('emitted!')
-    //   let numString = value?.replace(/[_ ]/g, '')
-    //   if (numString.length > 0 && numString.length < 16) {
-    //     this.creditCardNumberMask =[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, ' ',/\d/, /\d/, /\d/, /\d/, /\d/];
-    //   } else {
-    //     this.creditCardNumberMask =[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ',/\d/, /\d/, /\d/, /\d/, ' ',/\d/, /\d/, /\d/, /\d/];
-    //   }
-    // })
 
     let obsObj = {};
     this.formControlDirectory.forEach((directoryArray) => {
@@ -91,7 +83,10 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   initializeCheckoutFormControl = () => {
     this.checkoutFormControl = this.fb.group({
       contactDetails: this.fb.group({
-        firstName: [this.checkoutService.checkoutForm.contactDetails.firstName, {
+        firstName: [{
+          value: this.auth.isLoggedIn ? this.auth.firstName : this.checkoutService.checkoutForm.contactDetails.firstName,
+          disabled: this.auth.isLoggedIn
+        }, {
           updateOn: 'blur',
           validators: [
             Validators.required,
@@ -100,7 +95,10 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
             Validators.pattern(this.namePattern),
           ],
         }],
-        lastName: [this.checkoutService.checkoutForm.contactDetails.lastName, {
+        lastName: [{
+          value: this.auth.isLoggedIn ? this.auth.lastName : this.checkoutService.checkoutForm.contactDetails.lastName,
+          disabled: this.auth.isLoggedIn
+        }, {
           updateOn: 'blur',
           validators: [
             Validators.required,
@@ -109,7 +107,10 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
             Validators.pattern(this.namePattern)
           ]
         }],
-        emailAddress: [this.checkoutService.checkoutForm.contactDetails.emailAddress, {
+        emailAddress: [{
+          value: this.auth.isLoggedIn ? this.auth.emailAddress : this.checkoutService.checkoutForm.contactDetails.emailAddress,
+          disabled: this.auth.isLoggedIn
+        }, {
           updateOn: 'blur',
           validators: [
             Validators.required,
@@ -200,7 +201,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
   }
 
   onSubmit = () => {
-    this.checkoutService.updateForm(this.checkoutFormControl.value);
+    this.checkoutService.updateForm(this.checkoutFormControl.getRawValue());
     this.router.navigate(['/checkout','place-order'])
   }
 

@@ -32,16 +32,13 @@ export class LoginComponent implements OnInit {
     this.http.authenticateUser(this.loginFormControl.value).subscribe((res: {err: string, valid: boolean}) => {
       console.log("Sent form to server.", this.loginFormControl)
       console.log(res);
-      this.auth.updateAuthentication(res);
       if (res.valid) {
+        this.auth.updateUserInfo(res);
+        this.errorMsgHidden = true;
         this.router.navigate(['/']);
       } else {
-        this.showInvalidLogin();
+        this.errorMsgHidden = false;
       }
     });
-  };
-
-  showInvalidLogin = () => {
-   this.errorMsgHidden = false;
   };
 }
