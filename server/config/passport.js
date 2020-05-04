@@ -20,23 +20,24 @@ module.exports = function (app) {
   function(emailAddress, password, done) {
     User.findOne({emailAddress: emailAddress})
       .then((user) => {
-        if (!user) {return done(null, false);}
+        if (!user) {return done({err: null, valid: false, firstName: null});}
         bcrypt.compare(password, user.hash)
           .then((isValid) => {
             if (isValid) {
               console.log('User is validated.')
-              return done(null, true);
+              console.log(user)
+              return done({err: null, valid: true, firstName: user.firstName});
               }
-            return done(null, false);
+            return done({err: null, valid: false, firstName: null});
           })
           .catch((err) => {
             console.log('ERROR: ', err);
-            return done(err, false);
+            return done({err: err, valid: false, firstName: null});
           })
       })
       .catch((err) => {
         console.log('ERROR: ', err);
-        return done(err, false);
+        return done({err: err, valid: false, firstName: null});
       })
     }
   ));
