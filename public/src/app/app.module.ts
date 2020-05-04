@@ -28,6 +28,7 @@ import { CartService } from './cart.service';
 import { FieldErrorsComponent } from './field-errors/field-errors.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { RegisterComponent } from './register/register.component';
     FieldErrorsComponent,
     LoginComponent,
     RegisterComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
