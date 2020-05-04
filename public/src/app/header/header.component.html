@@ -6,7 +6,8 @@
   <div>
   </div>
   <div id="login-bar">
-    <a [routerLink]="['/login']">Hi! Sign In</a>
+      <span *ngIf="auth.isLoggedIn; else elseBlock"><a [routerLink]="['/profile']"> Hi {{auth.firstName}}!</a></span>
+      <ng-template #elseBlock><a [routerLink]="['/login']">Hi! Sign In</a></ng-template>
   </div>
   <div id="cart">
     <a [routerLink]="['/cart']"><img src="../../assets/icons/shopping_cart.svg" height="45px">
