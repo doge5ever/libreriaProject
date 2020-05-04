@@ -1,9 +1,9 @@
-import { Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 export class CustomValidators {
-  static delay(value: number) {
-    setTimeout(() => {
-      return Validators.nullValidator;
-    }, value);
+  static matchValues = (str1: string, str2: string) => {
+    return (g: FormGroup) => { 
+      return g.get(str1).value === g.get(str2).value ? null : {isSame: {valid: false}};
+    }
   }
 }

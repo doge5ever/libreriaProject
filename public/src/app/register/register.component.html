@@ -4,6 +4,14 @@
   <form [formGroup]="registerFormControl" (ngSubmit)="onSubmit()">
     <table>
       <tr>
+        <td>First Name:</td>
+        <td><input type="text" formControlName="firstName"></td>
+      </tr>
+      <tr>
+        <td>Last Name:</td>
+        <td><input type="text" formControlName="lastName"></td>
+      </tr>
+      <tr>
         <td>Email:</td>
         <td><input type="text" formControlName="emailAddress"></td>
       </tr>
@@ -11,9 +19,16 @@
         <td>Password:</td>
         <td><input type="password" formControlName="password"></td>
       </tr>
+      <tr>
+        <td>Confirm Password:</td>
+        <td><input type="password" formControlName="confirmPassword"></td>
+      </tr>
     </table>
-    <button type="submit">Register</button><br>
+    <button type="submit" [disabled]="registerFormControl.invalid">Register</button><br>
     <a [routerLink]="['/login']">Already have an account?</a>
+    <div class="error-msg" [hidden]="registeredErrorHidden">
+      Unable to register user.
+    </div>
   </form>
 </div>
 <app-footer></app-footer>
