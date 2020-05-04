@@ -20,19 +20,24 @@ module.exports = function (app) {
   function(emailAddress, password, done) {
     User.findOne({emailAddress: emailAddress})
       .then((user) => {
-        if (!user) {return done({err: null, valid: false, firstName: null});}
+        if (!user) {return done({err: null, valid: false});}
         bcrypt.compare(password, user.hash)
           .then((isValid) => {
             if (isValid) {
               console.log('User is validated.')
-              console.log(user)
-              return done({err: null, valid: true, firstName: user.firstName});
+              let userObj = user.toObject();
+              delete userObj._id;
+              delete userObj.hash;
+              delete userObj.createdAt;
+              delete userObj.updatedAt;
+              delete userObj.__v;
+              return done({err: null, valid: true, user: userObj});
               }
-            return done({err: null, valid: false, firstName: null});
+            return done({err: null, valid: false});
           })
           .catch((err) => {
             console.log('ERROR: ', err);
-            return done({err: err, valid: false, firstName: null});
+            return done({err: err, valid: false});
           })
       })
       .catch((err) => {

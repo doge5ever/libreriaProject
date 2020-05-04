@@ -5,23 +5,25 @@ import { HttpService } from './http.service';
   providedIn: 'root'
 })
 export class AuthService {
-  isAuthenticated: boolean;
+  isLoggedIn: boolean;
   firstName: string;
+  lastName: string;
+  emailAddress: string;
 
   constructor(
     private http: HttpService
   ) { 
-    this.isAuthenticated = false;
+    this.isLoggedIn = false;
     this.firstName = '';
+    this.lastName = '';
+    this.emailAddress = '';
   }
   
-  updateAuthentication = (res) => {
-    if (res.valid) {
-      this.isAuthenticated = true;
-      this.firstName = res.firstName;
-      console.log(res)
-      console.log('Value for isAuthenticated: ', this.isAuthenticated);
-      console.log('FirstName: ', this.firstName);
-    }
+  updateUserInfo = (res) => {
+    console.log(res);
+    this.isLoggedIn = true;
+    this.firstName = res.user.firstName;
+    this.lastName = res.user.lastName;
+    this.emailAddress = res.user.emailAddress;
   }  
 }
