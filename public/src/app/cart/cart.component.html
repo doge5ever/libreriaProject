@@ -9,10 +9,6 @@
       <li *ngFor="let item of items">
         <div class="item-update-section">
           <h3>{{item.price_USD | currency}}</h3>
-          <span class="quantity-section">Qty
-            <input type="text">
-            <button class="update" type="submit">Update</button>
-          </span>
         </div>
         <div class="item-details-section">
           <h3>{{item.title}}</h3>

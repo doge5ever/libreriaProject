@@ -1,10 +1,19 @@
-.item-update-section {
-  // float: right;
-  padding-right: 40px;
-  padding-top: 20px;
-}
-
 .cart-not-empty {
-  width: 600px;
-  border: 3px solid rgb(0,0,0);
+  width: 800px;
+  border: 2px solid rgba(0,0,0,0.2);
+  margin: 40px auto;
+  padding: 40px;
+
+  .img-container {
+    img {
+      height: 250px;
+    }
+  }
+
+  .item-update-section {
+    float: right;
+    padding-right: 40px;
+    padding-top: 20px;
+
+  }
 }
