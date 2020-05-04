@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckoutService } from '../checkout.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-checkout-form',
@@ -13,8 +14,9 @@ export class CheckoutformComponent implements OnInit {
 
   constructor(
     private checkoutService: CheckoutService,
+    private auth: AuthService
   ) { 
-    this.logInDisabled = true;
+    this.logInDisabled = auth.isLoggedIn;
     this.shippingAndPaymentDisabled = false;
 
     checkoutService.formIsValid.subscribe((isValid) => {
