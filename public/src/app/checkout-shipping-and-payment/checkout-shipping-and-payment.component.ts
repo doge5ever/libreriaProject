@@ -52,6 +52,10 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     private router: Router,
     private auth: AuthService
   ) {
+    if (!checkoutService.canCheckout.value) {
+      router.navigate(['/checkout', 'login'])
+    }
+
     this.initializeCheckoutFormControl();
 
     let obsObj = {};
@@ -84,32 +88,32 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     this.checkoutFormControl = this.fb.group({
       contactDetails: this.fb.group({
         firstName: [{
-          value: this.auth.isLoggedIn ? this.auth.firstName : this.checkoutService.checkoutForm.contactDetails.firstName,
+          value: this.checkoutService.checkoutForm.contactDetails.firstName,
           disabled: this.auth.isLoggedIn
         }, {
           updateOn: 'blur',
           validators: [
             Validators.required,
-            Validators.minLength(3),
+            Validators.minLength(2),
             Validators.maxLength(this.maxLength),
             Validators.pattern(this.namePattern),
           ],
         }],
         lastName: [{
-          value: this.auth.isLoggedIn ? this.auth.lastName : this.checkoutService.checkoutForm.contactDetails.lastName,
+          value: this.checkoutService.checkoutForm.contactDetails.lastName,
           disabled: this.auth.isLoggedIn
         }, {
           updateOn: 'blur',
           validators: [
             Validators.required,
-            Validators.minLength(3),
+            Validators.minLength(2),
             Validators.maxLength(this.maxLength),
             Validators.pattern(this.namePattern)
           ]
         }],
         emailAddress: [{
-          value: this.auth.isLoggedIn ? this.auth.emailAddress : this.checkoutService.checkoutForm.contactDetails.emailAddress,
-          disabled: this.auth.isLoggedIn
+          value: this.checkoutService.checkoutForm.contactDetails.emailAddress,
+          disabled: this.auth.isLoggedIn || this.checkoutService.isGuest
         }, {
           updateOn: 'blur',
           validators: [

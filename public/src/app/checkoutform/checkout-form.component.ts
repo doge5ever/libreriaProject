@@ -22,6 +22,11 @@ export class CheckoutformComponent implements OnInit {
     checkoutService.formIsValid.subscribe((isValid) => {
       this.placeOrderDisabled = !isValid;
     })
+
+    checkoutService.canCheckout.subscribe((bool) => {
+      this.logInDisabled = bool;
+      this.shippingAndPaymentDisabled = !bool;
+    })
   }
   
   ngOnInit(): void {
