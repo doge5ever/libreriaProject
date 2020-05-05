@@ -1,13 +1,13 @@
 <h1>Your Shopping Cart</h1>
-<div class="cart-empty" *ngIf="items?.length === 0">
-  <h2>Your cart is currently empty.</h2>
+<div class="cart" *ngIf="items?.length === 0; else elseBlock">
+  <h3>Your cart is currently empty.</h3>
 </div>
-<div class="cart-not-empty">
-  <h2>Items in your cart</h2>
-  <form>
-   <ol>
+<ng-template #elseBlock>
+  <div class="cart">
+    <h2>Items in your cart</h2>
+    <ol>
       <li *ngFor="let item of items">
-        <div class="item-update-section">
+        <div class="item-price">
           <h3>{{item.price_USD | currency}}</h3>
         </div>
         <div class="item-details-section">
@@ -17,10 +17,10 @@
           </div>
         </div>
       </li>
-      <div class="item-update-section">
+      <div class="item-price subtotal">
         <h3>Subtotal: {{total | currency}}</h3>
       </div>
     </ol>
-  </form>
-  <button class="checkout" routerLink="/checkout">Proceed to Checkout</button>
-</div>
+    <button class="checkout-btn" [routerLink]="['/checkout']">Proceed to Checkout</button>
+  </div>
+</ng-template>
