@@ -24,6 +24,9 @@
       </table>
       <button type="submit">Log In</button>
     </form>
+    <div class="error-msg" [hidden]="errorMsgHidden">
+      Email address and password combination invalid.
+    </div>
   </div>
   <span id="or">OR</span>
   <div id="guest" class="login-form">
@@ -45,16 +48,16 @@
             Confirm Email Address:
           </td>
           <td>
-            <input type="text">
+            <input type="text" formControlName="confirmEmailAddress">
           </td>
         </tr>
         <tr>
         </tr>
       </table>
       <div id="checkbox">
-      <input type="checkbox" value="subscribe">Subscribe to receive great deals and promotions.
+      <input type="checkbox" formControlName="subscribe">Subscribe to receive great deals and promotions.
       </div>
-      <button type="submit">Continue</button>
+      <button type="submit" [disabled]="guestFormControl.invalid">Continue</button>
     </form>
   </div>
 </div>
