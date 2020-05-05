@@ -16,5 +16,4 @@ Purchasing books:
 
 Other features:
 	- Should recommend books based on recent purchases.
-	- Chatbot (looking for a book, or looking for technical support)
 	- Should be able to track user activity for analytics.
