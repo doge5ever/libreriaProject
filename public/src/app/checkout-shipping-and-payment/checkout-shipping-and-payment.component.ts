@@ -57,28 +57,8 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     }
 
     this.initializeCheckoutFormControl();
-
-    let obsObj = {};
-    this.formControlDirectory.forEach((directoryArray) => {
-      // @ts-ignore
-      obsObj[directoryArray.join(" ")] = this.errorMessageObs(this.getFormControl(...directoryArray))
-    })
-    this.errorMessageObsObj = obsObj;
-
-    this.getFormControl('paymentMethod', 'billingAddress', 'isSameAddress').valueChanges
-      .subscribe((checked) => {
-        this.formControlDirectory
-          .filter((array) => ((array[1] === 'billingAddress') && !(array[2] === 'isSameAddress')))
-          .forEach((array) => {
-            if (checked) {
-              // @ts-ignore
-              this.getFormControl(...array).disable();
-            } else {
-              // @ts-ignore
-              this.getFormControl(...array).enable();
-            }
-          })
-      })
+    this.getErrorMessageObservers();
+    this.disableBillingAddressWhenSame();
   };
   
   ngOnInit(): void {
@@ -201,6 +181,32 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
           }],
         }),  
       }),
+    })
+  }
+
+  getErrorMessageObservers = () => {
+    let obsObj = {};
+    this.formControlDirectory.forEach((directoryArray) => {
+      // @ts-ignore
+      obsObj[directoryArray.join(" ")] = this.errorMessageObs(this.getFormControl(...directoryArray))
+    })
+    this.errorMessageObsObj = obsObj;
+  }
+
+  disableBillingAddressWhenSame = () => {
+    this.getFormControl('paymentMethod', 'billingAddress', 'isSameAddress').valueChanges
+    .subscribe((checked) => {
+      this.formControlDirectory
+        .filter((array) => ((array[1] === 'billingAddress') && !(array[2] === 'isSameAddress')))
+        .forEach((array) => {
+          if (checked) {
+            // @ts-ignore
+            this.getFormControl(...array).disable();
+          } else {
+            // @ts-ignore
+            this.getFormControl(...array).enable();
+          }
+        })
     })
   }
 
