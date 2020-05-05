@@ -1,12 +1,12 @@
 <h1>Your Shopping Cart</h1>
-<div class="cart" *ngIf="items?.length === 0; else elseBlock">
+<div class="cart" *ngIf="cartService.cartItems?.length === 0; else elseBlock">
   <h3>Your cart is currently empty.</h3>
 </div>
 <ng-template #elseBlock>
   <div class="cart">
     <h2>Items in your cart</h2>
     <ol>
-      <li *ngFor="let item of items">
+      <li *ngFor="let item of cartService.cartItems">
         <div class="item-price">
           <h3>{{item.price_USD | currency}}</h3>
         </div>
@@ -18,7 +18,7 @@
         </div>
       </li>
       <div class="item-price subtotal">
-        <h3>Subtotal: {{total | currency}}</h3>
+        <h3>Subtotal: {{cartService.total | currency}}</h3>
       </div>
     </ol>
     <button class="checkout-btn" [routerLink]="['/checkout']">Proceed to Checkout</button>

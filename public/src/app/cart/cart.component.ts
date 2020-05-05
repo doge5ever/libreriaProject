@@ -8,31 +8,11 @@ import { HttpService } from '../http.service';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  items;
-  total;
 
   constructor(
-    cartService: CartService,
+    public cartService: CartService,
     private http: HttpService
-  ) {
-    let params = {
-      product_id: cartService.getItemsId(),
-      deselect: 'product_desc'
-    };
-
-    let total = 0;
-    http.getBooks(params)
-      .subscribe((results) => {
-        this.items = results;
-        if (Array.isArray(results)) {
-          results.forEach(item => {
-            total += item.price_USD
-            console.log(total)
-          })
-        }
-        this.total = total;
-      });
-  }
+  ) { }
   
   ngOnInit(): void {
   }
