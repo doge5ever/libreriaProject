@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from './auth.service';
 
 interface CheckoutInterface {
   contactDetails: {
@@ -38,10 +39,14 @@ interface CheckoutInterface {
 })
 export class CheckoutService {
   checkoutForm: CheckoutInterface;
+  canCheckout: BehaviorSubject<boolean>;
   formIsValid: BehaviorSubject<boolean>;
-  
+  isGuest: boolean;
+  guestSubscribe: boolean;
+
   constructor(
     private http: HttpService,
+    private auth: AuthService
   ) {
       this.checkoutForm = {
         contactDetails: {
@@ -74,7 +79,10 @@ export class CheckoutService {
         },
       }
 
+      this.isGuest = false
       this.formIsValid = new BehaviorSubject(false);
+      // MODIFY 1
+      this.canCheckout = new BehaviorSubject(auth.isLoggedIn || this.isGuest);
     }
 
   updateForm = (form) => {
