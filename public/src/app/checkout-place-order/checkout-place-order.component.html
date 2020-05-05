@@ -9,28 +9,28 @@
     <table>
       <tr>
         <td>Name:</td>
-        <td>{{checkoutForm.contactDetails.firstName + ' ' + checkoutForm.contactDetails.lastName}}</td>
+        <td>{{checkoutService.checkoutForm.contactDetails.firstName + ' ' + checkoutService.checkoutForm.contactDetails.lastName}}</td>
       </tr>
       <tr>
         <td>Email Address:</td>
         <td>
-          {{checkoutForm.contactDetails.emailAddress}}
+          {{checkoutService.checkoutForm.contactDetails.emailAddress}}
         </td>
       </tr>
       <tr>
         <td>Phone Number:</td>
-        <td>{{checkoutForm.contactDetails.phoneNumber}}</td>
+        <td>{{checkoutService.checkoutForm.contactDetails.phoneNumber}}</td>
       </tr>
     </table>
   </div>
   <div id="shipping-address" class="flat-card">
     <h1>Shipping Address:</h1>
     <p>
-      {{checkoutForm.shippingAddress.streetAddress}}<br>
-      {{checkoutForm.shippingAddress.city}}, 
-      {{checkoutForm.shippingAddress.state}} 
-      {{checkoutForm.shippingAddress.zipCode}}<br>
-      {{checkoutForm.shippingAddress.country}}
+      {{checkoutService.checkoutForm.shippingAddress.streetAddress}}<br>
+      {{checkoutService.checkoutForm.shippingAddress.city}}, 
+      {{checkoutService.checkoutForm.shippingAddress.state}} 
+      {{checkoutService.checkoutForm.shippingAddress.zipCode}}<br>
+      {{checkoutService.checkoutForm.shippingAddress.country}}
     </p>
     </div>
   <div id="Payment Method" class="flat-card">
@@ -38,37 +38,37 @@
     <table>
       <tr>
         <td>Name on Card</td>
-        <td>{{checkoutForm.paymentMethod.nameOnCard}}</td>
+        <td>{{checkoutService.checkoutForm.paymentMethod.nameOnCard}}</td>
       </tr>
       <tr>
         <td>Credit Card Number</td>
-        <td>{{checkoutForm.paymentMethod.creditCardNumber}}</td>
+        <td>{{checkoutService.checkoutForm.paymentMethod.creditCardNumber}}</td>
       </tr>
       <tr>
         <td>Exp Month/Exp Year</td>
-        <td>{{checkoutForm.paymentMethod.expMonth}}/{{checkoutForm.paymentMethod.expYear}}</td>
+        <td>{{checkoutService.checkoutForm.paymentMethod.expMonth}}/{{checkoutService.checkoutForm.paymentMethod.expYear}}</td>
       </tr>
       <tr>
         <td>CVV</td>
-        <td>{{checkoutForm.paymentMethod.CVV}}</td>
+        <td>{{checkoutService.checkoutForm.paymentMethod.CVV}}</td>
       </tr>
       <tr>
       </tr>
     </table>
     <h1>Billing Address</h1>
-    <p *ngIf="checkoutForm.paymentMethod.billingAddress.isSameAddress; else elseBlock">
-      {{checkoutForm.shippingAddress.streetAddress}}<br>
-      {{checkoutForm.shippingAddress.city}}, 
-      {{checkoutForm.shippingAddress.state}} 
-      {{checkoutForm.shippingAddress.zipCode}}<br>
-      {{checkoutForm.shippingAddress.country}}
+    <p *ngIf="checkoutService.checkoutForm.paymentMethod.billingAddress.isSameAddress; else elseBlock">
+      {{checkoutService.checkoutForm.shippingAddress.streetAddress}}<br>
+      {{checkoutService.checkoutForm.shippingAddress.city}}, 
+      {{checkoutService.checkoutForm.shippingAddress.state}} 
+      {{checkoutService.checkoutForm.shippingAddress.zipCode}}<br>
+      {{checkoutService.checkoutForm.shippingAddress.country}}
     </p>
     <ng-template #elseBlock>
-      {{checkoutForm.paymentMethod.billingAddress.streetAddress}}<br>
-      {{checkoutForm.paymentMethod.billingAddress.city}}, 
-      {{checkoutForm.paymentMethod.billingAddress.state}} 
-      {{checkoutForm.paymentMethod.billingAddress.zipCode}}<br>
-      {{checkoutForm.paymentMethod.billingAddress.country}}
+      {{checkoutService.checkoutForm.paymentMethod.billingAddress.streetAddress}}<br>
+      {{checkoutService.checkoutForm.paymentMethod.billingAddress.city}}, 
+      {{checkoutService.checkoutForm.paymentMethod.billingAddress.state}} 
+      {{checkoutService.checkoutForm.paymentMethod.billingAddress.zipCode}}<br>
+      {{checkoutService.checkoutForm.paymentMethod.billingAddress.country}}
     </ng-template>
     <button (click)="submitForm()" [disabled]="disabledButton">Confirm & Place Order</button>
   </div>

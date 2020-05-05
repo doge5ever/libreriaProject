@@ -7,13 +7,11 @@ import { CheckoutService } from '../checkout.service';
   styleUrls: ['./checkout-place-order.component.scss']
 })
 export class CheckoutPlaceOrderComponent implements OnInit {
-  checkoutForm;
   disabledButton;
   
   constructor(
-    private checkoutService: CheckoutService
+    public checkoutService: CheckoutService
   ) {
-    this.checkoutForm = checkoutService.checkoutForm
     this.checkoutService.formIsValid.subscribe((isValid) => {
       this.disabledButton = !isValid;
     })
