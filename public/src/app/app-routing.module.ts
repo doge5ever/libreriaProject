@@ -26,15 +26,14 @@ const routes: Routes = [
       { path: '', redirectTo: 'login', pathMatch: 'prefix'}
     ]}
   ]},
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent},
-  
   { path: '', component: MainComponent, children: [
     { path: '', component: LandingComponent },
     { path: 'search', component: SearchComponent },
     { path: 'book/:product_id', component: BookComponent },
     { path: 'cart', component: CartComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
+    { path: 'profile', component: ProfileComponent},
     { path: '**', component: PagenotfoundComponent}
   ]}
   
