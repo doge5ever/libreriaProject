@@ -72,7 +72,7 @@ module.exports = {
       .then((output) => {
         res.json(output)
         console.log('Received the following query parameters: ', req.query)
-        console.log(`Found ${output.total} matches for '${req.query.keywords}'. Sent data.`)
+        console.log(`Found ${output.total} matches for keyword '${req.query.keywords}' and category '${req.query.tag}'. Sent data.`)
       })
       .catch((err) => {
         console.log(err)
