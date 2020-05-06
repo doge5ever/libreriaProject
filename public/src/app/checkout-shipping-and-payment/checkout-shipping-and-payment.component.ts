@@ -211,11 +211,6 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     })
   }
 
-  onSubmit = () => {
-    this.checkoutService.updateForm(this.checkoutFormControl.getRawValue());
-    this.router.navigate(['/checkout','place-order'])
-  }
-
   getFormControl = (str1: string, str2: string, str3?: string): FormGroup => {
     if (str3) {
       return this.checkoutFormControl.get(str1).get(str2).get(str3) as FormGroup;
@@ -223,6 +218,9 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
       return this.checkoutFormControl.get(str1).get(str2) as FormGroup;
     }
   }
-
-
+  
+  onSubmit = () => {
+    this.checkoutService.updateForm(this.checkoutFormControl.getRawValue());
+    this.router.navigate(['/checkout','place-order'])
+  }
 }

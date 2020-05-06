@@ -1,11 +1,11 @@
 <form>
   <div id="product-summary">
     <h2>Items:</h2>
-      <div class="item">
-        <img src="../../assets/book_covers/0072b94dfa30608e.jpg">
+      <div class="item" *ngFor="let book of cartService.cartItems">
+        <img src="../../assets/book_covers/{{book.UPC}}.jpg">
         <div class="text">
-          <span>This is the title</span>
-          <span>$12.12</span>
+          <span>{{book.title}}</span>
+          <span>{{book.price_USD}}</span>
         </div>
       </div>
   </div>
