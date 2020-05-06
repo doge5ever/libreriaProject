@@ -25,7 +25,6 @@ import { CheckoutShippingAndPaymentComponent } from './checkout-shipping-and-pay
 import { CheckoutPlaceOrderComponent } from './checkout-place-order/checkout-place-order.component';
 import { CheckoutService } from './checkout.service';
 import { CartService } from './cart.service';
-import { FieldErrorsComponent } from './field-errors/field-errors.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -48,7 +47,6 @@ import { ProfileComponent } from './profile/profile.component';
     CheckoutLogInComponent,
     CheckoutShippingAndPaymentComponent,
     CheckoutPlaceOrderComponent,
-    FieldErrorsComponent,
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
