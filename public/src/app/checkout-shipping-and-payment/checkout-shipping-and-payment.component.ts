@@ -218,7 +218,7 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
       return this.checkoutFormControl.get(str1).get(str2) as FormGroup;
     }
   }
-  
+
   onSubmit = () => {
     this.checkoutService.updateForm(this.checkoutFormControl.getRawValue());
     this.router.navigate(['/checkout','place-order'])

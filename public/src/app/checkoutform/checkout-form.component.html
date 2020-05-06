@@ -6,13 +6,13 @@
     [style.text-decoration]="logInDisabled ? 'none' : 'underline'">
       Log In
     </a> /
-    <a routerLink="['/checkout', 'shipping-and-payment']"
+    <a [routerLink]="['/checkout', 'shipping-and-payment']"
     routerLinkActive="active-link"
     [style.pointer-events]="shippingAndPaymentDisabled ? 'none' : 'auto'"
     [style.text-decoration]="shippingAndPaymentDisabled ? 'none' : 'underline'">
       Shipping & Payment
     </a> / 
-    <a routerLink="['/checkout', 'place-order']"
+    <a [routerLink]="['/checkout', 'place-order']"
     routerLinkActive="active-link"
     [style.pointer-events]="placeOrderDisabled ? 'none' : 'auto'"
     [style.text-decoration]="placeOrderDisabled ? 'none' : 'underline'">
