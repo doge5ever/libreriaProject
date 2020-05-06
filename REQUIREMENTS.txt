@@ -16,4 +16,5 @@ Purchasing books:
 
 Other features:
 	- Should recommend books based on recent purchases.
+	- Should recommend tags to explore.
 	- Should be able to track user activity for analytics.
