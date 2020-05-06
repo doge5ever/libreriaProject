@@ -17,6 +17,6 @@ require('./server/config/passport')(app);
 
 require('./server/config/routes')(app);
 
-app.listen(process.env.PORT, function() {
-  console.log(`Listening on port ${process.env.PORT}`);
+app.listen(process.env.PORT || 8000, function() {
+  console.log(`Listening on port ${process.env.PORT || 8000}`);
 })
