@@ -9,7 +9,6 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MainComponent } from './main/main.component';
 
-import { CheckoutNavComponent } from './checkout-nav/checkout-nav.component';
 import { CheckoutLogInComponent } from './checkout-login/checkout-login.component';
 import { CheckoutShippingAndPaymentComponent } from './checkout-shipping-and-payment/checkout-shipping-and-payment.component';
 import { CheckoutPlaceOrderComponent } from './checkout-place-order/checkout-place-order.component'
