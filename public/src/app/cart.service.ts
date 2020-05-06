@@ -14,7 +14,7 @@ export class CartService {
     private http: HttpService
   ) {
 
-    this.itemsId = new BehaviorSubject([69, 420]);
+    this.itemsId = new BehaviorSubject([]);
 
     this.itemsId.subscribe((arr) => {
       let params = {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from './auth.service';
+import { CartService } from './cart.service';
 
 interface CheckoutInterface {
   contactDetails: {
@@ -46,7 +47,8 @@ export class CheckoutService {
 
   constructor(
     private http: HttpService,
-    private auth: AuthService
+    private auth: AuthService,
+    private cart: CartService
   ) {
       this.checkoutForm = {
         contactDetails: {
@@ -95,15 +97,17 @@ export class CheckoutService {
   }
 
   postForm = (): void => {
-    this.processCheckoutForm();
-    this.http.postOrder(this.checkoutForm).subscribe((res) => {
+    this.sanitizeCheckoutForm();
+    let orderForm = Object.assign({}, this.checkoutForm, {items: this.cart.itemsId.value});
+
+    this.http.postOrder(orderForm).subscribe((res) => {
       console.log('Sent the form to the server: ', this.checkoutForm)
       console.log(res);
     });
 
   }
 
-  processCheckoutForm = (): void => {
+  sanitizeCheckoutForm = (): void => {
     if (this.checkoutForm.paymentMethod.billingAddress.isSameAddress) {
       this.checkoutForm.paymentMethod.billingAddress.streetAddress = this.checkoutForm.shippingAddress.streetAddress;
       this.checkoutForm.paymentMethod.billingAddress.city = this.checkoutForm.shippingAddress.city;
@@ -112,5 +116,7 @@ export class CheckoutService {
       this.checkoutForm.paymentMethod.billingAddress.country = this.checkoutForm.shippingAddress.country;
     }
     delete this.checkoutForm.paymentMethod.billingAddress.isSameAddress;
+
+    this.checkoutForm.paymentMethod.creditCardNumber = this.checkoutForm.paymentMethod.creditCardNumber.replace(/\D/g, '')
   }
 }

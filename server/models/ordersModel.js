@@ -3,6 +3,7 @@ const mongoosePaginate = require('mongoose-paginate');
 
 module.exports = function() {
     var orderSchema = new mongoose.Schema({
+      items: { type: [Number], required: [true, 'Items are required.'] },
       contactDetails: {
         firstName: { type: String, required: [true, 'First Name is required.'] },
         lastName: { type: String, required: [true, 'Last Name is required.'] },
