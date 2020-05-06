@@ -4,10 +4,11 @@
       <div class="item" *ngFor="let book of cartService.cartItems">
         <img src="../../assets/book_covers/{{book.UPC}}.jpg">
         <div class="text">
-          <span>{{book.title}}</span>
-          <span>{{book.price_USD}}</span>
+          <span class="title">{{book.title}}</span><br>
+          <span class="price"><b>{{book.price_USD | currency}}</b></span>
         </div>
       </div>
+      <span id="total"><b>Total: {{cartService.total | currency}}</b></span>
   </div>
 </form>
 <div>

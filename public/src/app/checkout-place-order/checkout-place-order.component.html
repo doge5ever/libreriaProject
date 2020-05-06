@@ -2,7 +2,13 @@
 <form>
   <div class="item-details flat-card">
     <h1>Your Cart</h1>
-    Insert all the items here.
+    <ol>
+      <li *ngFor="let book of cartService.cartItems">
+        <span class="title">{{book.title}}</span>
+        <span class="price">{{book.price_USD | currency}}</span>
+      </li>
+    </ol>
+    <span id="total"><b>Total: {{cartService.total | currency}}</b></span>
   </div>
   <div id="contact-details" class="flat-card">
     <h1>Contact Details</h1>
