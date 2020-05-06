@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "bookstoreProject": {
+    "libreriaProject": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/bookstoreProject",
+            "outputPath": "dist/libreriaProject",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "bookstoreProject:build"
+            "browserTarget": "libreriaProject:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "bookstoreProject:build:production"
+              "browserTarget": "libreriaProject:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "bookstoreProject:build"
+            "browserTarget": "libreriaProject:build"
           }
         },
         "test": {
@@ -110,18 +110,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "bookstoreProject:serve"
+            "devServerTarget": "libreriaProject:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "bookstoreProject:serve:production"
+              "devServerTarget": "libreriaProject:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "bookstoreProject",
+  "defaultProject": "libreriaProject",
   "cli": {
     "analytics": "be139338-86d7-4016-b2a5-d8075e00a0c5"
   },

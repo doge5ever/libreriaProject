@@ -51,8 +51,8 @@ module.exports = function(app) {
   })
 
   // app.all("*", (req, res, next) => {
-  //   console.log(__dirname + "../../../public/dist/bookstoreProject/index.html")
-  //   res.sendFile(path.resolve(__dirname + "../../../public/dist/bookstoreProject/index.html"))
+  //   console.log(__dirname + "../../../public/dist/libreriaProject/index.html")
+  //   res.sendFile(path.resolve(__dirname + "../../../public/dist/libreriaProject/index.html"))
   // }); 
 };
 
