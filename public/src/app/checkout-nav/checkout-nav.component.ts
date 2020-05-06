@@ -3,11 +3,11 @@ import { CheckoutService } from '../checkout.service';
 import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'app-checkout-form',
-  templateUrl: './checkout-form.component.html',
-  styleUrls: ['./checkout-form.component.scss']
+  selector: 'app-checkout-nav',
+  templateUrl: './checkout-nav.component.html',
+  styleUrls: ['./checkout-nav.component.scss']
 })
-export class CheckoutformComponent implements OnInit {
+export class CheckoutNavComponent implements OnInit {
   logInDisabled: boolean;
   shippingAndPaymentDisabled: boolean;
   placeOrderDisabled: boolean;

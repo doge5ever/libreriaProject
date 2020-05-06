@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CheckoutformComponent } from './checkout-form.component';
+import { CheckoutNavComponent } from './checkout-nav.component';
 
 describe('CheckoutformComponent', () => {
-  let component: CheckoutformComponent;
-  let fixture: ComponentFixture<CheckoutformComponent>;
+  let component: CheckoutNavComponent;
+  let fixture: ComponentFixture<CheckoutNavComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CheckoutformComponent ]
+      declarations: [ CheckoutNavComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CheckoutformComponent);
+    fixture = TestBed.createComponent(CheckoutNavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
