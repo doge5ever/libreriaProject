@@ -19,13 +19,12 @@ export class CheckoutPlaceOrderComponent implements OnInit {
     if (!checkoutService.formIsValid) {
       router.navigate(['/checkout', 'shipping-and-payment'])
     }
-
-    checkoutService.formIsValid.subscribe((isValid) => {
-      this.disabledButton = !isValid;
-    })
   }
 
   ngOnInit(): void {
+    this.checkoutService.formIsValid.subscribe((isValid) => {
+      this.disabledButton = !isValid;
+    })
   }
 
   submitForm = () => {

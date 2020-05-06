@@ -16,19 +16,19 @@ export class CheckoutNavComponent implements OnInit {
     private checkoutService: CheckoutService,
     private auth: AuthService
   ) { 
-    this.logInDisabled = auth.isLoggedIn;
-    this.shippingAndPaymentDisabled = false;
-
-    checkoutService.formIsValid.subscribe((isValid) => {
-      this.placeOrderDisabled = !isValid;
-    })
-
-    checkoutService.canCheckout.subscribe((bool) => {
-      this.logInDisabled = bool;
-      this.shippingAndPaymentDisabled = !bool;
-    })
   }
   
   ngOnInit(): void {
+    this.logInDisabled = this.auth.isLoggedIn;
+    this.shippingAndPaymentDisabled = false;
+
+    this.checkoutService.formIsValid.subscribe((isValid) => {
+      this.placeOrderDisabled = !isValid;
+    })
+
+    this.checkoutService.canCheckout.subscribe((bool) => {
+      this.logInDisabled = bool;
+      this.shippingAndPaymentDisabled = !bool;
+    })
   }
 }

@@ -21,7 +21,11 @@ export class LandingComponent implements OnInit {
       'Politics',
       'Autobiography'
     ];
-    
+  }
+
+  ngOnInit(): void {
+    window.scroll(0,0)
+
     let params = {
       random: true,
       limit: 5,
@@ -44,10 +48,6 @@ export class LandingComponent implements OnInit {
     } else {
     this.booksYouMightLike = JSON.parse(sessionStorage.getItem('randomBooks'));
     }
-  }
-
-  ngOnInit(): void {
-    window.scroll(0,0)
   }
 
 }

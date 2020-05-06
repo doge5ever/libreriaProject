@@ -56,13 +56,12 @@ export class CheckoutShippingAndPaymentComponent implements OnInit {
     if (!checkoutService.canCheckout.value) {
       router.navigate(['/checkout', 'login'])
     }
-
-    this.initializeCheckoutFormControl();
-    this.getErrorMessageObservers();
-    this.disableBillingAddressWhenSame();
   };
   
   ngOnInit(): void {
+    this.initializeCheckoutFormControl();
+    this.getErrorMessageObservers();
+    this.disableBillingAddressWhenSame();
   }
 
   initializeCheckoutFormControl = () => {
