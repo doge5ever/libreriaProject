@@ -1,0 +1,12 @@
+.price {
+  float: right;
+}
+
+.item-details {
+  display: grid;
+
+  #total {
+    justify-self: flex-end;
+    font-size: 25px;
+  }
+}

@@ -1,23 +1,13 @@
 #product-summary {
   background: burlywood;
-  padding-left: 20px;
   float: right;
   border-radius: 5px;
+  padding: 20px 10px 20px 20px;
+  margin: 0px -5px 0px 0px;
   .item {
     display: grid;
-    grid-template-columns: 50px 100px 200px;
-    // align-items: center;
-
-    .quantity {
-      font-size: 20px;
-      align-self: center;
-      input {
-        width: 25px;
-        font-size: 20px;
-        padding: 5px 0px;
-        margin-right: 3px;
-      }
-    }
+    grid-template-columns: 100px 225px;
+    margin: 20px 0px;
 
     img {
       width: 100px;
@@ -25,10 +15,16 @@
 
     .text {
       margin-left: 8px;
-      span {
-        display: block;
+
+      .price {
+        margin-top: 10px;
       }
+      
     }
+  }
+  
+  #total {
+    float: right;
   }
 }
 
